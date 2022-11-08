@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = 3000;
 const dbLinkRouter = require('./routes/dbLink');
@@ -27,6 +28,8 @@ app.use((err, req, res, next) => {
     console.log(errorObj.log);
     return res.status(errorObj.status).json(errorObj.message);
 })
+
+app.use(express.static(path.resolve(__dirname, '../client')));
 
 app.listen(port, () => console.log('server listening on port ' + port));
 module.exports = app;
