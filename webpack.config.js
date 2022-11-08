@@ -4,7 +4,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-
 const config = {
   entry: './client/index.js',
   output: {
@@ -19,7 +18,7 @@ const config = {
       publicPath: '/',
     },
     proxy: {
-      '/api/**': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     },
   },
   module: {
@@ -49,7 +48,10 @@ const config = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
-  plugins: [new HtmlWebpackPlugin({ template: './client/index.html' }), new MiniCssExtractPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({ template: './client/index.html' }),
+    new MiniCssExtractPlugin(),
+  ],
 };
 
 module.exports = config;
