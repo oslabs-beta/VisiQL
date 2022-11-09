@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import '_variables';
 
-* {
+import * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,4 +9,21 @@
 
 #navbar {
   font-family: 'Kumbh Sans', sans-serif;
+  display: flex;
+  flex-direction: row;
+  background-color: $yellow;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+li {
+  list-style: none;
+  font-size: 30px;
+  margin-right: 2rem;
 }
