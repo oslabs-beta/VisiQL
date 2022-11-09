@@ -21,11 +21,11 @@ const DBInput = () => {
       },
       body: JSON.stringify(body),
     })
-      .then((resp) => resp.json())
+      .then((data) => data.json())
       .then((data) => {
         console.log(data);
       })
-      .catch((err) => console.log('dbLink fetch /db: ERROR: ', err));
+      .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
   };
   return (
     <div className='db-input'>

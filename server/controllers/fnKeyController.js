@@ -1,4 +1,4 @@
-fnKeyController = {};
+const fnKeyController = {};
 
 fnKeyController.parseFnKeyData = async (req, res, next) => {
   try {
@@ -15,9 +15,8 @@ fnKeyController.parseFnKeyData = async (req, res, next) => {
     });
 
     res.locals.parsedFnKeys = foreignKeys;
-    console.log('res.locals.parsedFnKeys: ', res.locals.parsedFnKeys)
+    console.log('res.locals.parsedFnKeys: ', res.locals.parsedFnKeys);
     next();
-
   } catch (err) {
     return next({
       error: err,
@@ -25,6 +24,6 @@ fnKeyController.parseFnKeyData = async (req, res, next) => {
       status: 400,
     });
   }
-}
+};
 
 module.exports = fnKeyController;
