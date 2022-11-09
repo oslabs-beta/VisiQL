@@ -6,7 +6,7 @@ const VisualizerContainer = () => {
   return (
     <div id='vis-container'>
       <DBInput />
-      {/* <Diagram /> */}
+      <Diagram />
     </div>
   );
 };
