@@ -14,11 +14,11 @@ dbLinkController.connectDb = async (req, res, next) => {
   }
 };
 
-dbLinkController.test = async (req, res, next) => {
+dbLinkController.extractFnKeys = async (req, res, next) => {
   try {
     const fKQuery = 'SELECT conrelid::regclass AS table_name, pg_get_constraintdef(oid) FROM   pg_constraint WHERE  contype = \'f\' AND    connamespace = \'public\'::regnamespace   ORDER  BY conrelid::regclass::text, contype DESC;';
     const { rows: data } = await db.query(fKQuery);
-    res.locals.fK = data;
+    res.locals.fnKeys = data;
     return next();
 
   } catch (err) {

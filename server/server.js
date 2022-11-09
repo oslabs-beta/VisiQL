@@ -8,6 +8,8 @@ const dbLinkRouter = require('./routes/dbLink');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static(path.resolve(__dirname, '../client')));
+
 // send database link to appropriate router
 app.use('/db', dbLinkRouter);
 
@@ -28,18 +30,6 @@ app.use((err, req, res, next) => {
     console.log(errorObj.log);
     return res.status(errorObj.status).json(errorObj.message);
 })
-
-app.use(express.static(path.resolve(__dirname, '../client')));
-
-const controller = require('./controller');
-
-
-
-app.post('/dbConnect', controller.getDbStructure, (req, res, next) => {
-    res.status(200).send(res.locals.parsed)
-});
-
-
 
 
 
