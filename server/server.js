@@ -8,6 +8,8 @@ const dbLinkRouter = require('./routes/dbLink');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.static(path.resolve(__dirname, '../client')));
+
 // send database link to appropriate router
 app.use('/db', dbLinkRouter);
 
@@ -29,7 +31,9 @@ app.use((err, req, res, next) => {
     return res.status(errorObj.status).json(errorObj.message);
 })
 
-app.use(express.static(path.resolve(__dirname, '../client')));
+
+
+
 
 app.listen(port, () => console.log('server listening on port ' + port));
 module.exports = app;
