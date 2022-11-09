@@ -31,5 +31,19 @@ app.use((err, req, res, next) => {
 
 app.use(express.static(path.resolve(__dirname, '../client')));
 
+const controller = require('./controller');
+
+
+
+app.post('/dbConnect', controller.getDbStructure, (req, res, next) => {
+    res.status(200).send(res.locals.parsed)
+});
+
+
+
+
+
+
+
 app.listen(port, () => console.log('server listening on port ' + port));
 module.exports = app;
