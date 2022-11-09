@@ -1,17 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import '_variables';
 
-import * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  margin: 0;
 }
 
 #navbar {
   font-family: 'Kumbh Sans', sans-serif;
   display: flex;
   flex-direction: row;
-  background-color: $yellow;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  background-color: $paleteal;
   justify-content: space-between;
   align-items: center;
 }
@@ -26,4 +33,13 @@ li {
   list-style: none;
   font-size: 30px;
   margin-right: 2rem;
+}
+
+.db-input {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3rem;
 }
