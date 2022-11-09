@@ -26,7 +26,7 @@ controller.getDbStructure = {
 //                 episode_id: 'integer'
 //             },
                 foreignKeys: {
-                    
+
                 }
 //         },
 //         people: {
@@ -42,8 +42,8 @@ controller.getDbStructure = {
 
 
 
-const parseDB = (database) => {
-
+const parseDB = (data) => {
+const database = data.rows;
 const db = {
  db_name: database[0].table_schema,
  tables: {},
@@ -72,6 +72,22 @@ if (!db.tables[table].columns) db.tables[table].columns = {};
 const tableNames = Array.from(tableSet);
 return [db, tableNames];
 };
+
+const cavinsAlgo = 
+data.forEach(ele => {
+    if (!foreignKeys[ele.table_name]) foreignKeys[ele.table_name] = {};
+    const arr = ele.pg_get_constraintdef.split(' ');
+    const fnKey = arr[2].slice(1, -1);
+    foreignKeys[ele.table_name][fnKey] = {};
+    const rawRef = arr[4].split('(');
+    const refTable = rawRef[0];
+    const refKey = rawRef[1].slice(0, -1);
+    foreignKeys[ele.table_name][fnKey][refTable] = refKey;
+  //   foreignKeys[ele.table_name][fnKey] = arr[4];
+  //   console.log(refKey);
+  })
+  
+  console.log('foreign key ob', foreignKeys);
 
 const db = parseDB(testDB)[0];
 const tableNames = (parseDB(testDB))[1];
