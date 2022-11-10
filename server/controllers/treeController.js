@@ -1,16 +1,20 @@
-
-
 const treeController = {};
 
 treeController.treeSchema = (req, res, next) => {
 const db = res.locals.dbSchema;
-
+if (!db) {
+    return next({
+        error: err,
+        message: 'error occured in treeController.treeSchema',
+        status: 400,
+      });
+};
 const tree = {
     name: db.db_name,
     children: [],
 };
 const tables = db.tables;
-for (const table in db.tables) { //--need to iterate over so children isn't getting over written each time
+for (const table in db.tables) { 
     const obj = {
         name: table,
         children: [],
@@ -24,7 +28,7 @@ for (const table in db.tables) { //--need to iterate over so children isn't gett
     tree.children.push(obj);
 };
 res.locals.tree = tree;
-console.log(tree);
+console.log(res.locals.tree);
 console.log(tree.children[2]);
 
 return next();
