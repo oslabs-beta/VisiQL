@@ -1,10 +1,11 @@
 import React from 'react';
 import Navbar from './Navbar';
 import VisualizerContainer from './VisualizerContainer';
+import SchemaContainer from './SchemaContainer';
 
 const Homepage = () => {
   return (
-    <div>
+    <div id='homepage-container'>
       <Navbar />
       <VisualizerContainer />
     </div>

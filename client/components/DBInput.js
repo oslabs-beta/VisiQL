@@ -1,6 +1,8 @@
 import React from 'react';
 import { TextField, Button } from '@mui/material';
+import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
+import SchemaContainer from './SchemaContainer';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -12,6 +14,9 @@ const useInput = (init) => {
 
 const DBInput = () => {
   const [dbLink, dbLinkOnChange] = useInput('');
+  const [dbSchemaData, dbSchemaDataOnChange] = useState('placeholderObj');
+  const [dataReceived, setDataReceived] = useState(false);
+
   const saveDBLink = (event) => {
     const body = { dbLink };
     fetch('/db', {
@@ -21,29 +26,43 @@ const DBInput = () => {
       },
       body: JSON.stringify(body),
     })
-      .then((resp) => resp.json())
+      .then((data) => data.json())
       .then((data) => {
         console.log(data);
+        dbSchemaDataOnChange(
+          JSON.stringify(data.dbSchema.tables).replaceAll('"', ' ')
+        );
+
+        setDataReceived(true);
+        console.log(dbSchemaData);
       })
-      .catch((err) => console.log('dbLink fetch /db: ERROR: ', err));
+      .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
   };
   return (
-    <div className='db-input'>
-      <form className='db-input'>
-        <TextField
-          className='db-textfield'
-          placeholder='Enter a Postgres DB link...'
-          style={{ width: 900 }}
-          inputProps={{ style: { fontSize: 30 } }}
-          variant='outlined'
-          value={dbLink}
-          onChange={dbLinkOnChange}
+    <div className='input-and-visualizer'>
+      <div className='db-input'>
+        <form className='db-input'>
+          <TextField
+            className='db-textfield'
+            placeholder='Enter a Postgres DB link...'
+            style={{ width: 900 }}
+            inputProps={{ style: { fontSize: 30 } }}
+            variant='outlined'
+            value={dbLink}
+            onChange={dbLinkOnChange}
+          />
+          <Button variant='contained' onClick={saveDBLink}>
+            {' '}
+            Submit{' '}
+          </Button>
+        </form>
+      </div>
+      <div>
+        <SchemaContainer
+          dataReceived={dataReceived}
+          dbSchemaData={dbSchemaData}
         />
-        <Button variant='contained' onClick={saveDBLink}>
-          {' '}
-          Submit{' '}
-        </Button>
-      </form>
+      </div>
     </div>
   );
 };

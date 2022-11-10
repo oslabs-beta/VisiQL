@@ -13,25 +13,29 @@ const config = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    historyApiFallback: true,
+    hot: true,
     static: {
       directory: path.join(__dirname, './build'),
       publicPath: '/',
     },
     proxy: {
-      '/api': 'http://localhost:3000',
+      '/': 'http://localhost:3000',
     },
+    compress: true,
+    port: 8080,
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
-        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
@@ -43,6 +47,7 @@ const config = {
       },
       {
         test: /\.png|svg|jpg|gif$/,
+        exclude: /node_modules/,
         use: ['file-loader'],
       },
     ],

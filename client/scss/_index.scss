@@ -58,3 +58,19 @@ li {
   margin-left: auto;
   margin-top: 3rem;
 }
+
+#homepage {
+  display: flex;
+  flex-direction: row;
+}
+
+.schema-editor {
+  height: 50vh;
+  overflow: scroll;
+  width: 50%;
+  margin-top: 2rem;
+  border: 5px;
+  border-color: black;
+  background-color: rgb(74, 74, 74);
+  margin: 10px;
+}
