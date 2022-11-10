@@ -5,7 +5,7 @@ import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-okaidia.css';
 import { Box } from '@mui/system';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const SchemaContainer = (props) => {
@@ -13,6 +13,7 @@ const SchemaContainer = (props) => {
     <div>
       <Box>
         <Editor
+          padding='20'
           className='schema-editor'
           value={props.dbSchemaData}
           // onValueChange={(code) => setCode(code)}
@@ -22,14 +23,17 @@ const SchemaContainer = (props) => {
             fontSize: 40,
           }}
         />
-        <Button
+        <IconButton
+          className='copy-button'
+          style={{ fontSize: 100 }}
+          size='inherit'
           variant='contained'
           onClick={() => {
             navigator.clipboard.writeText(props.dbSchemaData);
           }}
         >
-          Copy
-        </Button>
+          <ContentCopyIcon sx={{ fontSize: 40 }} />
+        </IconButton>
       </Box>
     </div>
   );
