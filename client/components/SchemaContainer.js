@@ -8,17 +8,14 @@ import { Box } from '@mui/system';
 import { Button } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
-const SchemaContainer = () => {
-  const [code, setCode] = React.useState(
-    `function add(a, b) {\n  return a + b;\n}`
-  );
+const SchemaContainer = (props) => {
   return (
     <div>
       <Box>
         <Editor
           className='schema-editor'
-          value={code}
-          onValueChange={(code) => setCode(code)}
+          value={props.dbSchemaData}
+          // onValueChange={(code) => setCode(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
@@ -28,7 +25,7 @@ const SchemaContainer = () => {
         <Button
           variant='contained'
           onClick={() => {
-            navigator.clipboard.writeText(code);
+            navigator.clipboard.writeText(props.dbSchemaData);
           }}
         >
           Copy
