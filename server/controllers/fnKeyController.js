@@ -13,10 +13,9 @@ fnKeyController.parseFnKeyData = async (req, res, next) => {
       const refKey = rawRef[1].slice(0, -1);
       foreignKeys[ele.table_name][fnKey][refTable] = refKey;
     });
-
     res.locals.parsedFnKeys = foreignKeys;
-    console.log('res.locals.parsedFnKeys: ', res.locals.parsedFnKeys);
     next();
+    
   } catch (err) {
     return next({
       error: err,

@@ -1,13 +1,12 @@
 import React from 'react';
 import Navbar from './Navbar';
-import VisualizerContainer from './VisualizerContainer';
-import SchemaContainer from './SchemaContainer';
+import DBInput from './DBInput';
 
 const Homepage = () => {
   return (
     <div id='homepage-container'>
       <Navbar />
-      <VisualizerContainer />
+      <DBInput />
     </div>
   );
 };

@@ -11,12 +11,12 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 const SchemaContainer = (props) => {
   return (
     <div>
-      <Box>
+      <Box className='editor-container'>
         <Editor
           padding='20'
           className='schema-editor'
           value={props.dbSchemaData}
-          // onValueChange={(code) => setCode(code)}
+          onValueChange={(code) => props.dbSchemaDataOnChange(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',

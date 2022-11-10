@@ -3,6 +3,7 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 const dbLinkRouter = require('./routes/dbLink');
+const userRouter = require('./routes/userRouter');
 
 // parse incoming request body
 app.use(express.json());
@@ -23,6 +24,8 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 // });
 
 // send database link to appropriate router
+
+app.use('/user', userRouter);
 
 app.use('/db', dbLinkRouter, (req, res) => {
   console.log('got to initial router');

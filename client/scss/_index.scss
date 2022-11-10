@@ -35,6 +35,20 @@ li {
   margin-right: 2rem;
 }
 
+#vis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-content: center;
+  justify-content: center;
+}
+
+#tree-svg {
+  width: 600px;
+  height: 400px;
+  align-self: center;
+  justify-self: center;
+}
 .db-input {
   display: flex;
   flex-direction: row;
@@ -51,6 +65,7 @@ li {
 
 .schema-editor {
   height: 70vh;
+  border-radius: 10px;
   overflow: scroll;
   width: 30vw;
   margin-top: 2rem;
@@ -59,5 +74,28 @@ li {
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  margin: 10px;
+}
+
+#diagram {
+  border-radius: 10px;
+  height: 70vh;
+  width: 30vw;
+  margin-top: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.schema-vis-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+
+.copy-button {
+  position: absolute;
+  float: right;
+  border-radius: 50%;
+  z-index: inherit;
 }

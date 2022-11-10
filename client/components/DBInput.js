@@ -3,6 +3,7 @@ import { TextField, Button } from '@mui/material';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
+import VisualizerContainer from './VisualizerContainer';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -57,11 +58,13 @@ const DBInput = () => {
           </Button>
         </form>
       </div>
-      <div>
+      <div className='schema-vis-container'>
         <SchemaContainer
           dataReceived={dataReceived}
           dbSchemaData={dbSchemaData}
+          dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
+        <VisualizerContainer />
       </div>
     </div>
   );
