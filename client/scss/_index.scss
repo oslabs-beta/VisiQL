@@ -35,6 +35,21 @@ li {
   margin-right: 2rem;
 }
 
+#vis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-content: center;
+  justify-content: center;
+}
+
+#tree-svg {
+  width: 600px;
+  height: 400px;
+  align-self: center;
+  justify-self: center;
+
+}
 .db-input {
   display: flex;
   flex-direction: row;
