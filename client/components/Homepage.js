@@ -8,7 +8,6 @@ const Homepage = () => {
     <div id='homepage-container'>
       <Navbar />
       <VisualizerContainer />
-      <SchemaContainer />
     </div>
   );
 };
