@@ -3,6 +3,7 @@ import { TextField, Button } from '@mui/material';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
+import VisualizerContainer from './VisualizerContainer';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -14,7 +15,9 @@ const useInput = (init) => {
 
 const DBInput = () => {
   const [dbLink, dbLinkOnChange] = useInput('');
-  const [dbSchemaData, dbSchemaDataOnChange] = useState('placeholderObj');
+  const [dbSchemaData, dbSchemaDataOnChange] = useState(
+    'Enter a Postgres DB link to generate your schema...'
+  );
   const [dataReceived, setDataReceived] = useState(false);
 
   const saveDBLink = (event) => {
@@ -51,17 +54,27 @@ const DBInput = () => {
             value={dbLink}
             onChange={dbLinkOnChange}
           />
-          <Button variant='contained' onClick={saveDBLink}>
+          <Button
+            className='submit-button'
+            variant='contained'
+            onClick={saveDBLink}
+            sx={{
+              backgroundColor: '#ed6a5a',
+              ':hover': { backgroundColor: '#f1887b' },
+            }}
+          >
             {' '}
             Submit{' '}
           </Button>
         </form>
       </div>
-      <div>
+      <div className='schema-vis-container'>
         <SchemaContainer
           dataReceived={dataReceived}
           dbSchemaData={dbSchemaData}
+          dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
+        <VisualizerContainer />
       </div>
     </div>
   );

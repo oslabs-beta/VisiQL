@@ -1,34 +1,35 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import DBInput from './DBInput';
 import Diagram from './Diagram';
 
 const initialData = {
   name: 'Database',
   children: [
-    {name: 'Table-1',
+    {
+      name: 'Table-1',
       children: [
         {
-          name: 'Column-1'
+          name: 'Column-1',
         },
         {
-          name: 'Column-2'
+          name: 'Column-2',
         },
         {
-          name: 'Column-3'
-        }
+          name: 'Column-3',
+        },
       ],
     },
     {
-      name: 'Table-2'
-    }
-  ]
+      name: 'Table-2',
+    },
+  ],
 };
 
 const VisualizerContainer = () => {
   const [data, setData] = useState(initialData);
   return (
-    <div id='vis-container'>
-      <DBInput />
+    <div className='schema-vis-container'>
+
       <Diagram data={data} />
     </div>
   );
