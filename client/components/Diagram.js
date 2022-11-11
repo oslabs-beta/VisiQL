@@ -1,13 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import {
-  select,
-  line,
-  selectAll,
-  curveCardinal,
-  hierarchy,
-  tree,
-  linkHorizontal,
-} from 'd3'; //npm install d3 and then require in the select module
+import { select, line, selectAll, curveCardinal, hierarchy, tree, linkHorizontal } from 'd3'; //npm install d3 and then require in the select module
+
 
 const Diagram = ({ data }) => {
   const svgRef = useRef(); //this returns an obj with a property 'current' it will be undefined until the svg dom element is rendered. We can trigger the rendering with a useEffect hook.
