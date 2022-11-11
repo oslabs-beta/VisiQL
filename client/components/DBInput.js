@@ -15,7 +15,9 @@ const useInput = (init) => {
 
 const DBInput = () => {
   const [dbLink, dbLinkOnChange] = useInput('');
-  const [dbSchemaData, dbSchemaDataOnChange] = useState('placeholderObj');
+  const [dbSchemaData, dbSchemaDataOnChange] = useState(
+    'Enter a Postgres DB link to generate your schema...'
+  );
   const [dataReceived, setDataReceived] = useState(false);
 
   const saveDBLink = (event) => {
@@ -52,7 +54,15 @@ const DBInput = () => {
             value={dbLink}
             onChange={dbLinkOnChange}
           />
-          <Button variant='contained' onClick={saveDBLink}>
+          <Button
+            className='submit-button'
+            variant='contained'
+            onClick={saveDBLink}
+            sx={{
+              backgroundColor: '#ed6a5a',
+              ':hover': { backgroundColor: '#f1887b' },
+            }}
+          >
             {' '}
             Submit{' '}
           </Button>
