@@ -42,6 +42,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^6.4.2",
     "react-simple-code-editor": "^0.13.1",
+    "resize-observer-polyfill": "^1.5.1",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
