@@ -1,15 +1,28 @@
-const express = require('express');
+import express, {
+  Request,
+  Response,
+  NextFunction,
+  RequestHandler,
+} from 'express';
 const path = require('path');
 const app = express();
 const PORT = 3000;
 const dbLinkRouter = require('./routes/dbLink');
 const userRouter = require('./routes/userRouter');
 
+type ServerError = {
+  log: string;
+  status: number;
+  message: {
+    err: string;
+  };
+};
+
 // parse incoming request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, './src/client')));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -36,7 +49,7 @@ app.use('/db', dbLinkRouter, (req, res) => {
 app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // global error handler
-app.use((err, req, res, next) => {
+app.use((err:ServerError, req:Request, res:Response, next:NextFunction) => {
   const defaultErr = {
     log: 'Global Error handler triggered',
     status: 500,

@@ -1,4 +1,7 @@
-const express = require('express');
+import express, {
+  Request,
+  Response,
+} from 'express';
 const router = express.Router();
 const dbLinkController = require('../controllers/dbLinkController');
 const dbSchemaController = require('../controllers/dbSchemaController');

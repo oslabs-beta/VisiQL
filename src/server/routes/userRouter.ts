@@ -1,5 +1,9 @@
-const express = require('express');
-const router = express.Router();
+import express, {
+  Request,
+  Response,
+  Router,
+} from 'express';
+const router: Router = express.Router();
 const userController = require('../controllers/userController');
 
 router.post('/check', userController.checkUsernameExistence, (req, res) => {
@@ -12,7 +16,7 @@ router.post('/signup', userController.signUp, (req, res) => {
   }
 );
 
-router.post('/login', userController.login, (req, res) => {
+router.post('/login', userController.login, (req: Request, res: Response) => {
   return res.status(200).json(res.locals.loggedIn);
 }
 );

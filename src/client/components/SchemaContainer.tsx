@@ -9,7 +9,12 @@ import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
-const SchemaContainer = (props) => {
+type SchemaContainerProps ={
+  dbSchemaData: string;
+  dbSchemaDataOnChange: Function
+}
+
+const SchemaContainer = ({dbSchemaData, dbSchemaDataOnChange}:SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
   );
@@ -22,7 +27,7 @@ const SchemaContainer = (props) => {
     setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
   };
 
-  function delay(callback, waitTime) {
+  function delay(callback:Function, waitTime:number) {
     return function delayedFunction() {
       return setTimeout(callback, waitTime);
     };
@@ -30,7 +35,7 @@ const SchemaContainer = (props) => {
   const delayedFunc = delay(() => resetIcons(), 3000);
 
   const handleClick = () => {
-    navigator.clipboard.writeText(props.dbSchemaData);
+    navigator.clipboard.writeText(dbSchemaData);
     setCurrTooltip(<h1>Copied</h1>);
     setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
     delayedFunc();
@@ -41,8 +46,8 @@ const SchemaContainer = (props) => {
       <div className='schema-editor-container'>
         <Editor
           padding='20'
-          value={props.dbSchemaData}
-          onValueChange={(code) => props.dbSchemaDataOnChange(code)}
+          value={dbSchemaData}
+          onValueChange={(code) => dbSchemaDataOnChange(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
