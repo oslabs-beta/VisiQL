@@ -20,7 +20,8 @@ const config = {
       publicPath: '/',
     },
     proxy: {
-      '/': 'http://localhost:3000',
+      '/user': 'http://localhost:3000',
+      '/db': 'http://localhost:3000',
     },
     compress: true,
     port: 8080,

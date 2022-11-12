@@ -6,13 +6,13 @@ const dbSchemaController = {};
 dbSchemaController.getSchema = async (req, res, next) => {
   try {
     const queryStr =
-      "SELECT table_schema, table_name, ordinal_position as position, column_name, data_type, column_default as default_value FROM information_schema.columns WHERE table_schema NOT IN ('information_schema', 'pg_catalog') AND table_name != 'pg_stat_statements' ORDER BY table_schema, table_name, ordinal_position;";
+      "SELECT current_database(), table_schema, table_name, ordinal_position as position, column_name, data_type, column_default as default_value FROM information_schema.columns WHERE table_schema NOT IN ('information_schema', 'pg_catalog') AND table_name != 'pg_stat_statements' ORDER BY table_schema, table_name, ordinal_position;";
     const data = await db.query(queryStr);
 
     const database = data.rows;
 
     const dbSchema = {
-      db_name: database[0].table_schema,
+      db_name: database[0].current_database,
       tables: {},
     };
     const tableSet = new Set();
