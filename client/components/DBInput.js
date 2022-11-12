@@ -3,6 +3,30 @@ import { TextField, Button } from '@mui/material';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
+import VisualizerContainer from './VisualizerContainer';
+
+const initialData = {
+  name: 'Database',
+  children: [
+    {
+      name: 'Table-1',
+      children: [
+        {
+          name: 'Column-1',
+        },
+        {
+          name: 'Column-2',
+        },
+        {
+          name: 'Column-3',
+        },
+      ],
+    },
+    {
+      name: 'Table-2',
+    },
+  ],
+};
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -14,8 +38,11 @@ const useInput = (init) => {
 
 const DBInput = () => {
   const [dbLink, dbLinkOnChange] = useInput('');
-  const [dbSchemaData, dbSchemaDataOnChange] = useState('placeholderObj');
+  const [dbSchemaData, dbSchemaDataOnChange] = useState(
+    'Enter a Postgres DB link to generate your schema...'
+  );
   const [dataReceived, setDataReceived] = useState(false);
+  const [treeData, setTreeData] = useState(initialData);
 
   const saveDBLink = (event) => {
     const body = { dbLink };
@@ -34,6 +61,7 @@ const DBInput = () => {
         );
 
         setDataReceived(true);
+        setTreeData(data.tree);
         console.log(dbSchemaData);
       })
       .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
@@ -51,17 +79,27 @@ const DBInput = () => {
             value={dbLink}
             onChange={dbLinkOnChange}
           />
-          <Button variant='contained' onClick={saveDBLink}>
+          <Button
+            className='submit-button'
+            variant='contained'
+            onClick={saveDBLink}
+            sx={{
+              backgroundColor: '#ed6a5a',
+              ':hover': { backgroundColor: '#f1887b' },
+            }}
+          >
             {' '}
             Submit{' '}
           </Button>
         </form>
       </div>
-      <div>
+      <div className='schema-vis-container'>
         <SchemaContainer
           dataReceived={dataReceived}
           dbSchemaData={dbSchemaData}
+          dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
+        <VisualizerContainer data={treeData}/>
       </div>
     </div>
   );
