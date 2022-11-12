@@ -5,6 +5,29 @@ import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
 
+const initialData = {
+  name: 'Database',
+  children: [
+    {
+      name: 'Table-1',
+      children: [
+        {
+          name: 'Column-1',
+        },
+        {
+          name: 'Column-2',
+        },
+        {
+          name: 'Column-3',
+        },
+      ],
+    },
+    {
+      name: 'Table-2',
+    },
+  ],
+};
+
 const useInput = (init) => {
   const [value, setValue] = useState(init);
   const onChange = (e) => {
@@ -19,6 +42,7 @@ const DBInput = () => {
     'Enter a Postgres DB link to generate your schema...'
   );
   const [dataReceived, setDataReceived] = useState(false);
+  const [treeData, setTreeData] = useState(initialData);
 
   const saveDBLink = (event) => {
     const body = { dbLink };
@@ -37,6 +61,7 @@ const DBInput = () => {
         );
 
         setDataReceived(true);
+        setTreeData(data.tree);
         console.log(dbSchemaData);
       })
       .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
@@ -74,7 +99,7 @@ const DBInput = () => {
           dbSchemaData={dbSchemaData}
           dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
-        <VisualizerContainer />
+        <VisualizerContainer data={treeData}/>
       </div>
     </div>
   );
