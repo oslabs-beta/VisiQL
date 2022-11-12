@@ -51,9 +51,14 @@ const config = {
         exclude: /node_modules/,
         use: ['file-loader'],
       },
+      {
+        test: /\.(ts|tsx)$/,
+        exclude: /node_modules/,
+        use: ['ts-loader'],
+      },
     ],
   },
-  resolve: { extensions: ['*', '.js', '.jsx'] },
+  resolve: { extensions: ['*', '.js', '.jsx', '.ts', '.tsx'] },
   plugins: [
     new HtmlWebpackPlugin({ template: './client/index.html' }),
     new MiniCssExtractPlugin(),
