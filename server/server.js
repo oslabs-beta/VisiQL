@@ -23,10 +23,10 @@ app.use(express.static(path.resolve(__dirname, '../client')));
 //   next();
 // });
 
-// send database link to appropriate router
-
+// for login/signup
 app.use('/user', userRouter);
 
+// send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
   console.log('got to initial router');
   res.status(200);

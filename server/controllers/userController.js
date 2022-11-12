@@ -3,11 +3,30 @@ const bcrypt = require('bcrypt');
 
 const userController = {};
 
+userController.checkUsernameExistence = async (req, res, next) => {
+  try {
+    const { username } = req.body;
+    const existenceQuery = 'SELECT * FROM users WHERE username = $1'
+    const value = [username];
+    const { rows } = await userDb.query(existenceQuery, value)
+    if (rows[0]) res.locals.existence = 'exists';
+    else res.locals.existence = 'nonexistent'
+    // console.log('res.locals.existence: ', res.locals.existence);
+    return next();
+  } catch (err) {
+    return next({
+      error: err,
+      message: 'error occured in userController.checkUsernameExistence',
+      status: 400,
+    });
+  }
+}
+
 userController.signUp = async (req, res, next) => {
   try {
     const { name, email, username, password } = req.body;
     // create hash password via bcrypt
-    const salt = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
     // execute query to create new user row in user table
     const textQuery =
