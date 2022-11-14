@@ -28,8 +28,8 @@ for (const table in db.tables) {
     tree.children.push(obj);
 };
 res.locals.tree = tree;
-console.log(res.locals.tree);
-console.log(tree.children[2]);
+// console.log(res.locals.tree);
+// console.log(tree.children[2]);
 
 return next();
 };
