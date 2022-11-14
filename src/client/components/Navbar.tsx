@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/VisiQLLogo.png';
-import styles from '../scss/_index.scss';
+import styles from './scss/_index.scss';
 
 const Navbar = () => {
   return (

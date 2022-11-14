@@ -131,6 +131,7 @@ const Login = () => {
           <header>
             <h1>Log In Here</h1>
           </header>
+          <div className='login-page'>
           <main className='login'>
             <form onSubmit={loginUser}>
               <span>Username: </span>
@@ -147,6 +148,7 @@ const Login = () => {
               <button onClick={showOtherPage}>Sign Up Here</button>
             </div>
           </main>
+          </div>
         </>
       ) : (
         <>
@@ -175,6 +177,7 @@ const Login = () => {
             <br />
             <button className='login-btn' onClick={showOtherPage}>Take Me Back To Login</button>
           </main>
+       
         </>
       )}
     </>

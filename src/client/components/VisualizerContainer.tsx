@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+//@ts-ignore
 import Diagram from './Diagram';
 import TestDiagram from './testDiagram';
 
 
-const VisualizerContainer = (props) => {
+const VisualizerContainer = (props: { data: object; }) => {
   
   return (
     <div className='schema-vis-container'>
