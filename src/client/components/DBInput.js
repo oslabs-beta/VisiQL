@@ -57,7 +57,7 @@ const DBInput = () => {
       .then((data) => {
         console.log(data);
         dbSchemaDataOnChange(
-          JSON.stringify(data.dbSchema.tables).replaceAll('"', ' ')
+          data.schemaString
         );
 
         setDataReceived(true);
