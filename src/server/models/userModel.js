@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 
 let userPool = new Pool({
     connectionString: process.env.USER_URI,
-});;
+});
 
 module.exports = {
     query: (text, params, callback) => {
