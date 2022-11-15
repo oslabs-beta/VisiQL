@@ -16,6 +16,7 @@ router.post(
   dbLinkController.connectDb,
   dbLinkController.extractFnKeys,
   fnKeyController.parseFnKeyData,
+  fnKeyController.parsePrimaryKeyData,
   dbSchemaController.getSchema,
   treeController.treeSchema,
   schemaGen.genSchema,
