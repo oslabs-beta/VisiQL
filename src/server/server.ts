@@ -9,6 +9,8 @@ const app = express();
 const PORT = 3000;
 const dbLinkRouter = require('./routes/dbLink');
 const userRouter = require('./routes/userRouter');
+const authController = require('./controllers/authController');
+const cookieParser = require('cookie-parser');
 
 type ServerError = {
   log: string;
@@ -21,8 +23,9 @@ type ServerError = {
 // parse incoming request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-app.use(express.static(path.resolve(__dirname, './src/client')));
+// app.use(express.static(path.resolve(__dirname, './src/client')));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -38,10 +41,10 @@ app.use(express.static(path.resolve(__dirname, './src/client')));
 
 // for login/signup
 app.use('/user', userRouter);
+app.use('/login', userRouter);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
-  console.log('got to initial router');
   res.status(200);
 });
 
@@ -49,7 +52,7 @@ app.use('/db', dbLinkRouter, (req, res) => {
 app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // global error handler
-app.use((err:ServerError, req:Request, res:Response, next:NextFunction) => {
+app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
   const defaultErr = {
     log: 'Global Error handler triggered',
     status: 500,
@@ -64,4 +67,5 @@ app.use((err:ServerError, req:Request, res:Response, next:NextFunction) => {
 });
 
 app.listen(PORT, () => console.log('server listening on port ' + PORT));
+
 module.exports = app;
