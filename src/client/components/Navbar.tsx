@@ -1,3 +1,4 @@
+import { Button } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/VisiQLLogo.png';
@@ -14,6 +15,11 @@ const Navbar = () => {
           </li>
           <li>
             <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Button variant='outlined' size='large'>
+              Sign Out
+            </Button>
           </li>
         </ul>
       </nav>

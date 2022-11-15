@@ -1,6 +1,5 @@
 import React from 'react';
 import { TextField, Button } from '@mui/material';
-import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
@@ -45,27 +44,32 @@ const DBInput = () => {
   const [treeData, setTreeData] = useState(initialData);
 
   const saveDBLink = (event) => {
-    const body = { dbLink };
-    fetch('/db', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'Application/JSON',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        console.log(data);
-        dbSchemaDataOnChange(
-          data.schemaString
-        );
-
-        setDataReceived(true);
-        setTreeData(data.tree);
-        console.log(dbSchemaData);
+    if (dbLink === '') {
+      return alert('Please enter a database link');
+    } else if (!dbLink.includes('postgres')) {
+      return alert('Please enter a postgres database link');
+    } else {
+      const body = { dbLink };
+      fetch('/db', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/JSON',
+        },
+        body: JSON.stringify(body),
       })
-      .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
+        .then((data) => data.json())
+        .then((data) => {
+          console.log(data);
+          dbSchemaDataOnChange(data.schemaString);
+
+          setDataReceived(true);
+          setTreeData(data.tree);
+          console.log(dbSchemaData);
+        })
+        .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
+    }
   };
+
   return (
     <div className='input-and-visualizer'>
       <div className='db-input'>
@@ -99,7 +103,7 @@ const DBInput = () => {
           dbSchemaData={dbSchemaData}
           dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
-        <VisualizerContainer data={treeData}/>
+        <VisualizerContainer data={treeData} />
       </div>
     </div>
   );
