@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { select, create, event, line, selectAll,curveCardinal, hierarchy, tree, linkHorizontal, link } from 'd3';
 
 
-const Copy = ({ data }) => {
+const Tree = ({ data }) => {
   const svgRef = useRef();
 
   useEffect(() => {
@@ -135,4 +135,4 @@ const Copy = ({ data }) => {
   );
 };
 
-export default Copy;
+export default Tree;

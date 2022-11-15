@@ -29,7 +29,9 @@ for (const table in dbOb){
    string += pascalType + ' {\n';
 
    for (const col in dbOb[table].columns){
-     // if (col === '_id') col = 'id';
+     //    console.log('col is id', col === '_id');
+    //   if (col === '_id') col = col.slice(1);
+    //   console.log(col);
 
      // to change "_id" to "id" and its data type to "ID"
      // hard coded for _id <- is there a better way?
