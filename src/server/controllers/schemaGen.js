@@ -26,6 +26,9 @@ for (const table in dbOb){
    string += pascalType + ' {\n';
 
    for (const col in dbOb[table].columns){
+    //    console.log('col is id', col === '_id');
+    //   if (col === '_id') col = col.slice(1);
+    //   console.log(col);
      string += '  ' + col + ': ' + dbOb[table].columns[col] + '\n';
     };
 string += '} \n\n';
