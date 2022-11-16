@@ -52,7 +52,6 @@ userController.signUp = async (req, res, next) => {
 userController.login = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log('here1');
     // execute query to check if username exists in users table
     const loginQuery = `SELECT * FROM users WHERE username = '${username}'`;
     const { rows } = await userDb.query(loginQuery);

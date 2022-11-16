@@ -9,11 +9,6 @@ const schemaGen = require('../controllers/schemaGen');
 
 router.post(
   '/',
-  authController.checkToken,
-  (req, res) => {
-    if (res.locals.authenticate === 'fail')
-      return res.status(403).redirect('/login');
-  },
   dbLinkController.connectDb,
   dbLinkController.extractFnKeys,
   fnKeyController.parseFnKeyData,

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import '../scss/login.scss';
 
-const Login = () => {
+const Login = (props) => {
   const [state, setState] = useState({ loginPage: true });
   const { loginPage } = state;
   const navigate = useNavigate();
@@ -49,6 +49,7 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       }).then((response) => {
         if (response.status === 200) {
+          props.setLoggedIn(true);
           navigate('/');
         } else alert('Username or password is incorrect.');
         passwordField.current.value = '';
