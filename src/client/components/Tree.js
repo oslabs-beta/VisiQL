@@ -12,8 +12,10 @@ const Tree = ({ data }) => {
     root.descendants().forEach((d, i) => {
       d.id = i;
       d._children = d.children;
+      if (d.depth === 3) {
+        d.children = d.children ? null : d._children;
+      };
     });
-    
 
     const gLink = svg
       .append('g')
@@ -71,7 +73,16 @@ const Tree = ({ data }) => {
         .attr('dy', '0.31em')
         .attr('x', (d) => (d._children ? -6 : 6))
         .attr('text-anchor', (d) => (d._children ? 'end' : 'beginning'))
-        .text((d) => d.data.name)
+        .attr('fill', d => {
+          if (d.data.name.slice(0, 7) === 'primKey') return 'red';
+          return 'black';
+        })
+        .text((d) => {
+          if (d.data.name.slice(0, 7) === 'primKey') {
+            return d.data.name.slice(7);
+          }
+          return d.data.name;
+        })
         .on('click', (event, node) => {
             if (node.children) return
           if (node.data.name[node.data.name.length-1] === '!'){
@@ -126,6 +137,7 @@ const Tree = ({ data }) => {
         d.x0 = d.x;
         d.y0 = d.y;
       });
+
     };
     update(root);
 
