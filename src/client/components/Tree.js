@@ -35,6 +35,8 @@ const Tree = ({ data }) => {
       ]);
       treeLayout(root);
 
+      //make size of diagram div responsive
+      const diagramDiv = document.getElementById('diagram');
 
       svg.attr("viewBox", [document.getElementById('diagram').clientWidth*(-0.11), document.getElementById('diagram').clientHeight*(0.3), document.getElementById('diagram').clientWidth * 1.3, document.getElementById('diagram').clientHeight/2,
       ])
@@ -83,7 +85,8 @@ const Tree = ({ data }) => {
         .clone(true).lower()
         .attr('stroke-linejoin', 'round')
         .attr('stroke-width', 3)
-        .attr('stroke', 'white');
+        // .attr('stroke', 'white')
+        .attr('stroke-opacity', 0);
       
 
       const nodeUpdate = node.merge(nodeEnter).transition(transition)
