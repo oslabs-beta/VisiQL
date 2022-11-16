@@ -38,7 +38,6 @@ fnKeyController.parsePrimaryKeyData = async (req, res, next) => {
       primaryKeys[refTable].push(ele.table_name);
     });
     res.locals.parsedPrimaryKeys = primaryKeys;
-    console.log('res.locals.parsedPrimaryKeys: ', res.locals.parsedPrimaryKeys);
     next();
     
   } catch (err) {
