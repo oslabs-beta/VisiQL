@@ -9,12 +9,15 @@ import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
-type SchemaContainerProps ={
+type SchemaContainerProps = {
   dbSchemaData: string;
-  dbSchemaDataOnChange: Function
-}
+  dbSchemaDataOnChange: Function;
+};
 
-const SchemaContainer = ({dbSchemaData, dbSchemaDataOnChange}:SchemaContainerProps) => {
+const SchemaContainer = ({
+  dbSchemaData,
+  dbSchemaDataOnChange,
+}: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
   );
@@ -27,7 +30,7 @@ const SchemaContainer = ({dbSchemaData, dbSchemaDataOnChange}:SchemaContainerPro
     setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
   };
 
-  function delay(callback:Function, waitTime:number) {
+  function delay(callback: Function, waitTime: number) {
     return function delayedFunction() {
       return setTimeout(callback, waitTime);
     };
@@ -51,7 +54,7 @@ const SchemaContainer = ({dbSchemaData, dbSchemaDataOnChange}:SchemaContainerPro
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 30,
+            fontSize: 20,
           }}
         />
       </div>

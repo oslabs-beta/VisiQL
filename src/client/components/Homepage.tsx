@@ -3,10 +3,14 @@ import Navbar from './Navbar';
 //@ts-ignore
 import DBInput from './DBInput';
 
-const Homepage = () => {
+type HomepageProps = {
+  loggedIn: Boolean;
+};
+
+const Homepage = ({ loggedIn }: HomepageProps) => {
   return (
     <div id='homepage-container'>
-      <Navbar />
+      <Navbar isLoggedIn={loggedIn} />
       <DBInput />
     </div>
   );

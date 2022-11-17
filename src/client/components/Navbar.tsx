@@ -1,10 +1,36 @@
 import { Button } from '@mui/material';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import logo from '../assets/VisiQLLogo.png';
 import styles from './scss/_index.scss';
 
-const Navbar = () => {
+type NavbarProps = {
+  isLoggedIn: Boolean;
+};
+
+const Navbar = ({ isLoggedIn }: NavbarProps) => {
+  const navigate = useNavigate();
+
+  const signOut = async () => {
+    try {
+      document.cookie =
+        'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      navigate('/login');
+    } catch (err) {
+      console.log('error');
+    }
+  };
+  const signInOut = () => {
+    if (!isLoggedIn) {
+      return <Link to='/login'>Sign In</Link>;
+    } else {
+      return (
+        <Link to='/login' onClick={signOut}>
+          Sign Out
+        </Link>
+      );
+    }
+  };
   return (
     <div id='navbar'>
       <img id='logo' src={logo} width='275px' height='92px' />
@@ -17,8 +43,11 @@ const Navbar = () => {
             <Link to='/about'>About</Link>
           </li>
           <li>
+            <Link to='/myprojects'>Projects</Link>
+          </li>
+          <li>
             <Button variant='outlined' size='large'>
-              Sign Out
+              {signInOut()}
             </Button>
           </li>
         </ul>
