@@ -24,7 +24,7 @@ const Tree = ({ data }) => {
       d._children = d.children;
       if (d.depth === 3) {
         d.children = d.children ? null : d._children;
-      };
+      }
     });
 
     const gLink = svg.append('g').attr('fill', 'none');
@@ -84,7 +84,7 @@ const Tree = ({ data }) => {
         .attr('dy', '0.31em')
         .attr('x', (d) => (d._children ? -6 : 6))
         .attr('text-anchor', (d) => (d._children ? 'end' : 'beginning'))
-        .attr('fill', d => {
+        .attr('fill', (d) => {
           if (d.data.name.slice(0, 7) === 'primKey') return 'red';
           return 'black';
         })
@@ -156,13 +156,12 @@ const Tree = ({ data }) => {
         d.x0 = d.x;
         d.y0 = d.y;
       });
-
     };
     update(root);
   }, [data]);
 
   return (
-    <div id='diagram'>
+    <div id='inner-diagram-div'>
       <svg id='tree-svg' ref={svgRef}></svg>
     </div>
   );
