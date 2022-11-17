@@ -19,14 +19,16 @@ const Tree = ({ data }) => {
     const svg = select(svgRef.current);
     const clearAllNodes = svg.selectAll('g').remove();
     const root = hierarchy(data);
+    const cacheReferenceTableNames = {};
     root.descendants().forEach((d, i) => {
       d.id = i;
       d._children = d.children;
       if (d.depth === 3) {
+        cacheReferenceTableNames[d.data.name] = [];
         d.children = d.children ? null : d._children;
       };
     });
-
+    
     const gLink = svg.append('g').attr('fill', 'none');
 
     const gNode = svg
@@ -81,28 +83,44 @@ const Tree = ({ data }) => {
       nodeEnter
         .append('text')
         .attr('class', 'label')
+        .attr('id', d => `aa${d.id}`)
         .attr('dy', '0.31em')
         .attr('x', (d) => (d._children ? -6 : 6))
         .attr('text-anchor', (d) => (d._children ? 'end' : 'beginning'))
         .attr('fill', d => {
-          if (d.data.name.slice(0, 7) === 'primKey') return 'red';
+          if (d.depth === 4 && d.data.name.slice(0, 7) === 'primKey') return 'red';
           return 'black';
         })
         .text((d) => {
           if (d.data.name.slice(0, 7) === 'primKey') {
-            return d.data.name.slice(7);
+            d.data.name = d.data.name.slice(7);
+          }
+          if ((d.depth === 1 || d.depth === 3) && cacheReferenceTableNames[d.data.name]) {
+            cacheReferenceTableNames[d.data.name].push(d.id);
           }
           return d.data.name;
         })
         .on('click', (event, node) => {
-          if (node.children) return;
+          if (node.depth === 0 || node.depth === 1 || node.depth === 3) return;
           if (node.data.name[node.data.name.length - 1] === '!') {
             node.data.name = node.data.name.slice(0, -1);
           } else node.data.name += '!';
           console.log('node.data.name: ', node.data.name);
           svg.selectAll('.label').text((d) => d.data.name);
         })
-        .attr('font-size', 20)
+        .attr('font-size', 25)
+        .on('mouseover', (event, d) => {
+          if (cacheReferenceTableNames[d.data.name]) {
+            cacheReferenceTableNames[d.data.name].forEach(ele => {
+              svg.selectAll(`#aa${ele}`).attr('fill', 'orange')
+            })
+          }
+        })
+        .on('mouseout', (event, d) => {
+          cacheReferenceTableNames[d.data.name].forEach(ele => {
+            svg.selectAll(`#aa${ele}`).attr('fill', 'black')
+          })
+        })
         .clone(true)
         .lower()
         .attr('stroke-linejoin', 'round')
