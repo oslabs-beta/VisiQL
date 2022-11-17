@@ -41,7 +41,6 @@ app.use(cookieParser());
 
 // for login/signup
 app.use('/user', userRouter);
-app.use('/login', userRouter);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
