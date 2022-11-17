@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import About from './components/About';
 import Login from './components/Login';
+import LoginKelly from './components/LoginKelly';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -33,6 +34,10 @@ const App = () => {
         <Route
           path='/login'
           element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+        />
+        <Route
+          path='/logink'
+          element={<LoginKelly loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
       </Routes>
     </div>
