@@ -55,7 +55,7 @@ li {
 
 #tree-svg {
   height: 70vh;
-  width: 30vw;
+  width: 55vw;
   overflow-x: scroll;
   overflow-y: scroll;
   align-self: center;
@@ -80,7 +80,7 @@ li {
   border-radius: 10px;
   margin-top: 2rem;
   height: 70vh;
-  width: 30vw;
+  width: 20vw;
   overflow-x: scroll;
   overflow-y: scroll;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -89,9 +89,10 @@ li {
 }
 
 #diagram {
+  font-family: 'Kumbh Sans', sans-serif;
   border-radius: 10px;
   height: 70vh;
-  width: 30vw;
+  width: 55vw;
   margin-top: 2rem;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
