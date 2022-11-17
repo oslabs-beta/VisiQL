@@ -25,12 +25,41 @@ dbSchemaController.getSchema = async (req, res, next) => {
       if (!dbSchema.tables[table].columns) dbSchema.tables[table].columns = {};
       let type = database[i].data_type;
       switch (type) {
-        case 'bigint':
-        case 'integer':
+        case 'bigint': // signed eight-byte integer
+        case 'integer': // signed four-byte integer
+        case 'bigserial': // autoincrementing eight-byte integer
+        case 'bytea': // binary data (“byte array”)
+        case 'smallint': // signed two-byte integer
+        case 'smallserial': // autoincrementing two-byte integer
+        case 'serial': // autoincrementing four-byte integer
           type = 'Int';
           break;
-        case 'date':
-        case 'character varying':
+        case 'date': // calendar date (year, month, day)
+        case 'character': // fixed-length character string
+          // should have a case for varchar[(n)]/character varying [(n)]?
+        case 'character varying': // variable-length character string
+        case 'bit': // fixed-length bit string
+        case 'bit varying': // variable-length bit string
+        case 'cidr': // IPv4 or IPv6 network address
+        case 'inet': // IPv4 or IPv6 host address
+        case 'json': // textual JSON data
+        case 'jsonb': // binary JSON data, decomposed
+        case 'text': // variable-length character string
+        case 'time': // time of day
+        case 'timestamp': // date and time
+        case 'tsquery': // text search query
+        case 'tsvector': // text search document
+          type = 'String';
+          break;
+        case 'boolean':
+          type = 'Boolean';
+          break;
+        case 'double precision': // double precision floating-point number (8 bytes)
+        case 'numeric': // exact numeric of selectable precision
+        case 'real': // single precision floating-point number (4 bytes)
+          type = 'Float';
+          break;
+        default:
           type = 'String';
           break;
       }
