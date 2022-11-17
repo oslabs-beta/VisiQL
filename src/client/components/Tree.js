@@ -102,7 +102,7 @@ const Tree = ({ data }) => {
           console.log('node.data.name: ', node.data.name);
           svg.selectAll('.label').text((d) => d.data.name);
         })
-        .attr('font-size', 25)
+        .attr('font-size', 20)
         .clone(true)
         .lower()
         .attr('stroke-linejoin', 'round')
