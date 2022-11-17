@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { select, create, event, line, selectAll,curveCardinal, hierarchy, tree, linkHorizontal, link } from 'd3';
+import { select, create, event, line, selectAll,curveCardinal, hierarchy, tree, linkHorizontal, link, zoom } from 'd3';
 
 
 const Tree = ({ data }) => {
@@ -16,6 +16,16 @@ const Tree = ({ data }) => {
         d.children = d.children ? null : d._children;
       };
     });
+
+    //zoom functionality
+    const svgG = svg.append('g').attr('class', 'zoomGroup');
+
+    const handleZoom = e => {
+      
+    }
+
+    let zoom = zoom()
+      .on('zoom', handleZoom);
 
     const gLink = svg
       .append('g')
