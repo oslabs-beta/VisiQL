@@ -9,8 +9,10 @@ import {
   hierarchy,
   tree,
   linkHorizontal,
-  link, zoom,
+  link, zoom, 
+  
 } from 'd3';
+const d3 = require('d3');
 
 const Tree = ({ data }) => {
   const svgRef = useRef();
@@ -27,15 +29,30 @@ const Tree = ({ data }) => {
       };
     });
 
-    //zoom functionality
-    const svgG = svg.append('g').attr('class', 'zoomGroup');
+    // zoom functionality
 
-    const handleZoom = e => {
-      
-    }
+    const svgG = svg.append('g')
+    .attr('class', 'zoomGroup');
+    // svgG.append('circle')
+    // .attr('r', 10);
 
-    let zoom = zoom()
-      .on('zoom', handleZoom);
+    // let zoom = d3.zoom()
+    // .on('zoom', handleZoom);
+
+ const handleZoom = e => {
+  console.log('in handlezoom');
+  //  node
+   svg.selectAll('g')
+   .attr('transform', d3.zoomTransform(this));
+ }
+
+ const initZoom = () => {
+  console.log('in initZoom');
+  //  d3.select('svg').call(zoom);
+   svg.selectAll('g').call(d3.zoom(d3.zoom()
+   .on('zoom', handleZoom())));
+ }
+
 
     const gLink = svg.append('g').attr('fill', 'none');
 
@@ -45,6 +62,15 @@ const Tree = ({ data }) => {
       .attr('pointer-events', 'all');
 
     const update = (source) => {
+
+      // const initZoom = () => {
+      //   console.log('in initZoom');
+      //   //  d3.select('svg').call(zoom);
+      //    svg.selectAll('g').call(zoom(d3.zoom()
+      //    .on('zoom', handleZoom())));
+      //  }
+
+
       const duration = 500;
       const nodes = root.descendants().reverse();
       const links = root.links();
@@ -119,7 +145,6 @@ const Tree = ({ data }) => {
         .lower()
         .attr('stroke-linejoin', 'round')
         .attr('stroke-width', 3)
-        // .attr('stroke', 'white')
         .attr('stroke-opacity', 0);
 
       const nodeUpdate = node
@@ -170,7 +195,21 @@ const Tree = ({ data }) => {
         d.y0 = d.y;
       });
 
+      // const handleZoom = ({ transform }) => {
+      //   console.log('in handlezoom');
+      //    gNode.selectAll('g')
+      //    .attr('transform', transform);
+      //  }
+      //  initZoom();
     };
+    // const handleZoom = ({ transform }) => {
+    //   console.log('in handlezoom');
+    //    gNode.selectAll('g')
+    //    .attr('transform', transform);
+    //  }
+
+    
+    initZoom();
     update(root);
   }, [data]);
 
