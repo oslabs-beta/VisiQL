@@ -28,9 +28,9 @@ const LoginKelly = (props) => {
   //   showPassword: false
   // });
 
-  // const handlePassVis = () => {
-  //   setPasswordVis(!passwordVis)
-  // };
+  const handlePassVis = () => {
+    setPasswordVis(!passwordVis)
+  };
 
   const logInUser = async (e) => {
     try {
@@ -102,21 +102,21 @@ const LoginKelly = (props) => {
                     variant='outlined'
                     value={password}
                     onChange={setPassword}
-                    // InputProps={{
-                    //     endAdornment: (
-                    //       <InputAdornment position='end'>
-                    //         <IconButton onClick={setPasswordVis(!passwordVis)} aria-label='toggle password' edge='end'>
-                    //           {passwordVis? (
-                    //             <VisibilityOffIcon />
-                    //           ) : (
-                    //             <VisibilityIcon />
-                    //           )
-                    //           }    
-                    //         </IconButton>
-                    //       </InputAdornment>
-                    //     ),
+                    InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>
+                            <IconButton onClick={handlePassVis} aria-label='toggle password' edge='end'>
+                              {passwordVis? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )
+                              }    
+                            </IconButton>
+                          </InputAdornment>
+                        ),
 
-                    //   }}
+                      }}
                     />
                 </Grid>
                 <Grid item>
