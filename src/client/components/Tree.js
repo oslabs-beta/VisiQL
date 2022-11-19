@@ -12,7 +12,7 @@ import {
   link, zoom, 
   
 } from 'd3';
-const d3 = require('d3');
+
 
 const Tree = ({ data }) => {
   const svgRef = useRef();
@@ -31,22 +31,25 @@ const Tree = ({ data }) => {
       };
     });
     
-    const gLink = svg.append('g').attr('fill', 'none');
+const zoomG = svg.append('g');
+  //append gLink and gNode to zoomG in order to capture everything rendered for the zoom
+const gLink = zoomG.append('g').attr('fill', 'none');
 
-    const gNode = svg
-      .append('g')
-      .attr('cursor', 'pointer')
-      .attr('pointer-events', 'all');
+const gNode = zoomG.append('g')
+.attr('cursor', 'pointer')
+.attr('pointer-events', 'all');
+
+//handleZoom takes zoom event object
+const  handleZoom = ({transform}) => {
+  zoomG.attr('transform', transform);
+}
+
+const Zoom = zoom()
+.scaleExtent([0.7, 8])
+.on('zoom', handleZoom);
+svg.call(Zoom); 
 
     const update = (source) => {
-
-      // const initZoom = () => {
-      //   console.log('in initZoom');
-      //   //  d3.select('svg').call(zoom);
-      //    svg.selectAll('g').call(zoom(d3.zoom()
-      //    .on('zoom', handleZoom())));
-      //  }
-
 
       const duration = 500;
       const nodes = root.descendants().reverse();
@@ -66,6 +69,7 @@ const Tree = ({ data }) => {
         document.getElementById('diagram').clientWidth * 1.3,
         document.getElementById('diagram').clientHeight / 2,
       ]);
+
 
       const linkGenerator = linkHorizontal()
         .x((node) => node.y)
@@ -188,21 +192,10 @@ const Tree = ({ data }) => {
         d.y0 = d.y;
       });
 
-      // const handleZoom = ({ transform }) => {
-      //   console.log('in handlezoom');
-      //    gNode.selectAll('g')
-      //    .attr('transform', transform);
-      //  }
-      //  initZoom();
-    };
-    // const handleZoom = ({ transform }) => {
-    //   console.log('in handlezoom');
-    //    gNode.selectAll('g')
-    //    .attr('transform', transform);
-    //  }
+         
 
+    };
     
-    initZoom();
     update(root);
   }, [data]);
 
