@@ -9,6 +9,7 @@ const app = express();
 const PORT = 3000;
 const dbLinkRouter = require('./routes/dbLink');
 const userRouter = require('./routes/userRouter');
+const projectRouter = require('./routes/projectRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
 
@@ -41,6 +42,7 @@ app.use(cookieParser());
 
 // for login/signup
 app.use('/user', userRouter);
+app.use('/projects', projectRouter);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {

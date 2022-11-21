@@ -6,13 +6,15 @@ import styles from './scss/_index.scss';
 
 type NavbarProps = {
   isLoggedIn: Boolean;
+  setCurrentUserId: Function;
 };
 
-const Navbar = ({ isLoggedIn }: NavbarProps) => {
+const Navbar = ({ isLoggedIn, setCurrentUserId }: NavbarProps) => {
   const navigate = useNavigate();
 
   const signOut = async () => {
     try {
+      setCurrentUserId('');
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       navigate('/login');

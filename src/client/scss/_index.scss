@@ -163,3 +163,39 @@ li {
   left: 2rem;
   z-index: 100;
 }
+
+.save-project-popover-parent {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.save-project-popover {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  align-content: space-between;
+  gap: 20px;
+  margin-top: 50rem;
+  background-color: rgb(251, 247, 242);
+  height: 15vh;
+  width: 25vw;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: $darkteal;
+  z-index: 1;
+}
+
+.project-save-cancel-buttons {
+  display: flex;
+  gap: 20px;
+}
