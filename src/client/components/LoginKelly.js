@@ -169,7 +169,7 @@ const LoginKelly = (props) => {
     const guestMode = () => {
       navigate('/');
       return;
-    }
+    };
 
   return (
    <>
