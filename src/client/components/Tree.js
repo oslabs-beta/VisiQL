@@ -9,8 +9,10 @@ import {
   hierarchy,
   tree,
   linkHorizontal,
-  link,
+  link, zoom, 
+  
 } from 'd3';
+
 
 const Tree = ({ data }) => {
   const svgRef = useRef();
@@ -28,15 +30,27 @@ const Tree = ({ data }) => {
         d.children = d.children ? null : d._children;
       }
     });
+    
+const zoomG = svg.append('g');
+  //append gLink and gNode to zoomG in order to capture everything rendered for the zoom
+const gLink = zoomG.append('g').attr('fill', 'none');
 
-    const gLink = svg.append('g').attr('fill', 'none');
+const gNode = zoomG.append('g')
+.attr('cursor', 'pointer')
+.attr('pointer-events', 'all');
 
-    const gNode = svg
-      .append('g')
-      .attr('cursor', 'pointer')
-      .attr('pointer-events', 'all');
+//handleZoom takes zoom event object
+const  handleZoom = ({transform}) => {
+  zoomG.attr('transform', transform);
+}
+
+const Zoom = zoom()
+.scaleExtent([0.7, 8])
+.on('zoom', handleZoom);
+svg.call(Zoom); 
 
     const update = (source) => {
+
       const duration = 500;
       const nodes = root.descendants().reverse();
       const links = root.links();
@@ -47,12 +61,15 @@ const Tree = ({ data }) => {
       ]);
       treeLayout(root);
 
+      //make size of diagram div responsive
+      const diagramDiv = document.getElementById('diagram');
       svg.attr('viewBox', [
         document.getElementById('diagram').clientWidth * -0.11,
         document.getElementById('diagram').clientHeight * 0.3,
         document.getElementById('diagram').clientWidth * 1.3,
         document.getElementById('diagram').clientHeight / 2,
       ]);
+
 
       const linkGenerator = linkHorizontal()
         .x((node) => node.y)
@@ -131,7 +148,7 @@ const Tree = ({ data }) => {
         .lower()
         .attr('stroke-linejoin', 'round')
         .attr('stroke-width', 3)
-        .attr('stroke', 'white');
+        .attr('stroke-opacity', 0);
 
       const nodeUpdate = node
         .merge(nodeEnter)
@@ -180,7 +197,11 @@ const Tree = ({ data }) => {
         d.x0 = d.x;
         d.y0 = d.y;
       });
+
+         
+
     };
+    
     update(root);
   }, [data]);
 

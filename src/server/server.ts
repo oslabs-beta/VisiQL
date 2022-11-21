@@ -67,6 +67,6 @@ app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log('server listening on port ' + PORT));
 
+app.listen(PORT, () => console.log('server listening on port ' + PORT));
 module.exports = app;
