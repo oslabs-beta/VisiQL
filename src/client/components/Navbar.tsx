@@ -15,17 +15,17 @@ const Navbar = ({ isLoggedIn }: NavbarProps) => {
     try {
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      navigate('/login');
+      navigate('/logink');
     } catch (err) {
       console.log('error');
     }
   };
   const signInOut = () => {
     if (!isLoggedIn) {
-      return <Link to='/login'>Sign In</Link>;
+      return <Link to='/logink'>Sign In</Link>;
     } else {
       return (
-        <Link to='/login' onClick={signOut}>
+        <Link to='/logink' onClick={signOut}>
           Sign Out
         </Link>
       );
