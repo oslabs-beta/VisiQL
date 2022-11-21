@@ -96,36 +96,32 @@ const LoginKelly = (props) => {
 
 
     // on signup page: as user types into username input field, check if currently typed value is already taken and let user know based on input field background color
-    const checkExistence = async (e) => {
-      //need to possibly pass helper function that calls useInput and then checkExistence for each onChange
+    // const checkExistence = async (e) => {
+    //   //need to possibly pass helper function that calls useInput and then checkExistence for each onChange
   
-      // const username = usernameField.current.value;
-      const checkExistence = await fetch('/user/check', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username }),
-      });
-      const parsedCheckExistence = await checkExistence.json();
-      const inputColor = document.getElementById('username-input');
-      console.log('username: ', username);
-      if (parsedCheckExistence === 'exists') {
-        inputColor.style.backgroundColor = 'red';
-      } else if (username === '') {
-        inputColor.style.backgroundColor = 'white';
-      } else {
-        inputColor.style.backgroundColor = 'green';
-      }
-      // console.log('checkExistence: ', parsedCheckExistence)
-    };
+    //   // const username = usernameField.current.value;
+    //   const checkExistence = await fetch('/user/check', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ username }),
+    //   });
+    //   const parsedCheckExistence = await checkExistence.json();
+    //   const inputColor = document.getElementById('username-input');
+    //   console.log('username: ', username);
+    //   if (parsedCheckExistence === 'exists') {
+    //     inputColor.style.backgroundColor = 'red';
+    //   } else if (username === '') {
+    //     inputColor.style.backgroundColor = 'white';
+    //   } else {
+    //     inputColor.style.backgroundColor = 'green';
+    //   }
+    //   // console.log('checkExistence: ', parsedCheckExistence)
+    // };
   
     const signUserUp = async (e) => {
       try {
         e.preventDefault();
-        // const name = nameField.current.value;
-        // const email = emailField.current.value;
-        // const username = usernameField.current.value;
-        // const password = passwordField.current.value;
-        // const password2 = password2Field.current.value;
+    
         // catch invalid inputs
         if (
           firstName === '' ||
@@ -169,6 +165,11 @@ const LoginKelly = (props) => {
         console.log('err: ', err);
       }
     };
+
+    const guestMode = () => {
+      navigate('/');
+      return;
+    }
 
   return (
    <>
@@ -250,6 +251,17 @@ const LoginKelly = (props) => {
                       }}
                         fullWidth
                        >Sign Up</Button>
+                </Grid>
+                <Grid item>
+                      <Button
+                      onClick={guestMode}
+                       variant="contained"
+                       sx={{
+                        backgroundColor: '#9bc1bc',
+                        ':hover': { backgroundColor: '#e6ebe0' },
+                      }}
+                        fullWidth
+                       >Continue As Guest</Button>
                 </Grid>
               </Grid>
             </Paper>
@@ -397,6 +409,17 @@ const LoginKelly = (props) => {
                       fullWidth
                      >Return to Login</Button>
               </Grid>
+              <Grid item>
+                      <Button
+                      onClick={guestMode}
+                       variant="contained"
+                       sx={{
+                        backgroundColor: '#9bc1bc',
+                        ':hover': { backgroundColor: '#e6ebe0' },
+                      }}
+                        fullWidth
+                       >Continue As Guest</Button>
+                </Grid>
             </Grid>
           </Paper>
         </Grid>
