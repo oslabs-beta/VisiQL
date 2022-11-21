@@ -8,6 +8,7 @@ import '../scss/loginkelly.scss';
 
 
 
+
 const useInput = (init) => {
   const [value, setValue] = useState(init);
   const reset = () => {
@@ -17,30 +18,37 @@ const useInput = (init) => {
     value,
     console.log(e.target.value);
     setValue(e.target.value);
+    
   };
+
   return [value, set, reset];
 };
+
+
 
 const LoginKelly = (props) => {
   const [state, setState] = useState({ loginPage: true });
   const { loginPage } = state;
   const navigate = useNavigate();
-  const [username, setUserName, resetUserName] = useInput('');
+  const [username, setUsername, resetUsername] = useInput('');
   const [password, setPassword, resetPassword] = useInput('');
-  const [name, setName, resetName] = useInput('');
+  const [firstName, setFirstName, resetFirstName] = useInput('');
+  const [lastName, setLastName, resetLastName] = useInput('');
   const [email, setEmail, resetEmail] = useInput('');
   const [password2, setPassword2, resetPassword2] = useInput('');
-  const [passwordVis, setPasswordVis] = useState(false)
-
+  const [passwordVis, setPasswordVis] = useState(false);
+ 
+  // const checkUserExist = [setUsername, checkExistence];
   // changes the boolean value of the variable that the conditional rendering depends on
  const showOtherPage = () => {
   console.log(!loginPage)
   // if text is in input boxes, clear it
-    resetUserName();
+    resetUsername();
     resetPassword();
   if (!loginPage) {
     resetPassword2();
-    resetName();
+    resetFirstName();
+    resetLastName();
     resetEmail();
   }
   setState((prevState) => {
@@ -75,9 +83,8 @@ const LoginKelly = (props) => {
           props.setLoggedIn(true);
           navigate('/');
         } else alert('Username or password is incorrect.');
-        // passwordField.current.value = '';
-       resetUserName();
-       resetPassword();
+        resetUsername();
+        resetPassword();
         return;
       });
   
@@ -85,6 +92,83 @@ const LoginKelly = (props) => {
       console.log('err: ', err);
     }
   };
+
+
+
+    // on signup page: as user types into username input field, check if currently typed value is already taken and let user know based on input field background color
+    const checkExistence = async (e) => {
+      //need to possibly pass helper function that calls useInput and then checkExistence for each onChange
+  
+      // const username = usernameField.current.value;
+      const checkExistence = await fetch('/user/check', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username }),
+      });
+      const parsedCheckExistence = await checkExistence.json();
+      const inputColor = document.getElementById('username-input');
+      console.log('username: ', username);
+      if (parsedCheckExistence === 'exists') {
+        inputColor.style.backgroundColor = 'red';
+      } else if (username === '') {
+        inputColor.style.backgroundColor = 'white';
+      } else {
+        inputColor.style.backgroundColor = 'green';
+      }
+      // console.log('checkExistence: ', parsedCheckExistence)
+    };
+  
+    const signUserUp = async (e) => {
+      try {
+        e.preventDefault();
+        // const name = nameField.current.value;
+        // const email = emailField.current.value;
+        // const username = usernameField.current.value;
+        // const password = passwordField.current.value;
+        // const password2 = password2Field.current.value;
+        // catch invalid inputs
+        if (
+          firstName === '' ||
+          lastName === '' ||
+          email === '' ||
+          username === '' ||
+          password === '' ||
+          password !== password2
+        )
+          return;
+        // check if username is already taken prior to sign up attempt
+        const checkExistence = await fetch('/user/check', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username }),
+        });
+        const parsedCheckExistence = await checkExistence.json();
+        if (parsedCheckExistence === 'exists') {
+          alert('Username is already taken.');
+          return;
+        }
+  
+        // create new username account
+        const createdUser = await fetch('/user/signup', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ firstName, lastName, email, username, password }),
+        });
+        const parsedUserInfo = await createdUser.json();
+        // if user sign up is successful: alert user and redirect to login screen
+        showOtherPage();
+        alert('Sign Up Successful!');
+        resetFirstName();
+        resetLastName();
+        resetEmail();
+        resetUsername();
+        resetPassword();
+        resetPassword2();
+       
+      } catch (err) {
+        console.log('err: ', err);
+      }
+    };
 
   return (
    <>
@@ -113,8 +197,7 @@ const LoginKelly = (props) => {
                     placeholder='Username' 
                     variant='outlined'
                     value={username}
-                    onChange={setUserName}
-                    // value={...setUserName}
+                    onChange={setUsername}
                     ></TextField>
                      </Grid>
                 <Grid item>
@@ -179,7 +262,7 @@ const LoginKelly = (props) => {
     <>
     <div className='signin-body'>
     <header className='login-logo'>
-    <img id='signin-img' src={logo} width='275px' height='92px' marginBottom='1vh'/>
+    <img id='signin-img' src={logo} width='275px' height='92px' marginbottom='1vh'/>
      <h2>Welcome - Let's Get VisiQL!</h2>
     </header>
      
@@ -192,28 +275,40 @@ const LoginKelly = (props) => {
         >
           <Paper elevation={3} sx={{padding: 5}}>
             <Grid container direction='column' spacing={2}>
-            <Grid item>
-                  <TextField 
-                  type='email' 
-                  fullWidth 
-                  label='Email' 
-                  placeholder='Email' 
-                  variant='outlined'
-                  value={email}
-                  onChange={setEmail}
+                <Grid item>
+                    <TextField 
+                      type='firstName' 
+                      fullWidth 
+                      label='First Name' 
+                      placeholder='First Name' 
+                      variant='outlined'
+                      value={firstName}
+                      onChange={setFirstName}
                   ></TextField>
                    </Grid>
                    <Grid item>
-                  <TextField 
-                  type='name' 
-                  fullWidth 
-                  label='Name' 
-                  placeholder='Name' 
-                  variant='outlined'
-                  value={name}
-                  onChange={setName}
+                    <TextField 
+                      type='lastName' 
+                      fullWidth 
+                      label='Last Name' 
+                      placeholder='Last Name' 
+                      variant='outlined'
+                      value={lastName}
+                      onChange={setLastName}
                   ></TextField>
                    </Grid>
+                <Grid item>
+                    <TextField 
+                      type='email' 
+                      fullWidth 
+                      label='Email' 
+                      placeholder='Email' 
+                      variant='outlined'
+                      value={email}
+                      onChange={setEmail}
+                   ></TextField>
+                   </Grid>
+                   
               <Grid item>
                   <TextField 
                   type='username' 
@@ -222,7 +317,7 @@ const LoginKelly = (props) => {
                   placeholder='Username' 
                   variant='outlined'
                   value={username}
-                  onChange={setUserName}
+                  onChange={setUsername}
                   ></TextField>
                    </Grid>
               <Grid item>
@@ -254,14 +349,14 @@ const LoginKelly = (props) => {
               </Grid>
               <Grid item>
                   <TextField
-                  id='password'
+                  id='password2'
                   type={passwordVis? 'text' : 'password'}
                   fullWidth 
                   label='Retype Your Password'
                   placeholder='Password2'
                   variant='outlined'
-                  value={password}
-                  onChange={setPassword}
+                  value={password2}
+                  onChange={setPassword2}
                   InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -281,7 +376,7 @@ const LoginKelly = (props) => {
               </Grid>
               <Grid item>
                     <Button
-                     onClick={logInUser}
+                     onClick={signUserUp}
                      variant="contained"
                      sx={{
                       backgroundColor: '#5ca4a9',

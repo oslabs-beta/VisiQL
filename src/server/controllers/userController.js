@@ -28,13 +28,13 @@ userController.checkUsernameExistence = async (req, res, next) => {
 
 userController.signUp = async (req, res, next) => {
   try {
-    const { name, email, username, password } = req.body;
+    const { firstName, lastName, email, username, password } = req.body;
     // create hash password via bcrypt
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
     // execute query to create new user row in user table
-    const textQuery = `INSERT INTO users VALUES ($1, $2, $3, $4) RETURNING *`;
-    const values = [name, email, username, hashed];
+    const textQuery = `INSERT INTO users(firstname, lastname, email, username, password) VALUES ($1, $2, $3, $4, $5) RETURNING *`;
+    const values = [firstName, lastName, email, username, hashed];
     const { rows } = await userDb.query(textQuery, values);
     // send back data of newly created account to client-side
     res.locals.signedUp = rows[0];
