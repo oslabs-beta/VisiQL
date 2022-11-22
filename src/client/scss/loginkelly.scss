@@ -7,7 +7,7 @@
   box-sizing: border-box;
 }
 
- .login-body {
+ .login-body, .signin-body {
   background-color: $paleteal;
   min-height: 100vh;
 }
@@ -20,16 +20,26 @@
  
 }
 #login-img {
-margin-top: 15vh;
+  margin-top: 10vh;
+
+}
+
+#signin-img {
+  margin-top: 5vh;
 
 }
 
 h2 {
   color: $orange;
   font-size: 3rem;
-  margin-top: 40px;
+  margin-top: 25px;
   margin-bottom: 0;
   font-family: 'Kumbh Sans', sans-serif;
+}
+
+.signin-body h2 {
+  margin-bottom: 20px;
+  margin-top: 5px;
 }
 
 .sign-up-message {
@@ -39,3 +49,4 @@ h2 {
   margin-top: 2rem;
   color: rgb(78, 74, 74);
 }
+
