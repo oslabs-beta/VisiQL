@@ -57,7 +57,8 @@ userController.login = async (req, res, next) => {
 
     // compare inputted password to stored hashed password
     if (await bcrypt.compare(password, rows[0].password)) {
-      const user = { name: username };
+      // console.log('id', rows[0]._id);
+      const user = { name: username, id: rows[0]._id };
       const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SERVER);
       console.log(accessToken);
       res.cookie('token', accessToken);

@@ -3,6 +3,7 @@ import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
+import ProjectToolbar from './ProjectToolbar';
 
 const initialData = {
   name: 'Database',
@@ -35,7 +36,7 @@ const useInput = (init) => {
   return [value, onChange];
 };
 
-const DBInput = () => {
+const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dbSchemaData, dbSchemaDataOnChange] = useState(
     'Enter a Postgres DB link to generate your schema...'
@@ -104,6 +105,11 @@ const DBInput = () => {
           dbSchemaDataOnChange={dbSchemaDataOnChange}
         />
         <VisualizerContainer data={treeData} />
+        <ProjectToolbar
+          schemaData={dbSchemaData}
+          treeData={treeData}
+          currentUserId={props.currentUserId}
+        />
       </div>
     </div>
   );

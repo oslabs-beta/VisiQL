@@ -7,6 +7,7 @@ import LoginKelly from './components/LoginKelly';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [currentUserId, setCurrentUserId] = useState('');
 
   const tokenChecker = async () => {
     try {
@@ -16,8 +17,10 @@ const App = () => {
       console.log('fetching in tokenChecker');
       const tokenCheck = await token.json();
       console.log('tokenCheck:', tokenCheck);
-      if (tokenCheck === 'success') {
+      if (tokenCheck.status === 'success') {
+        console.log('tokenCheck.id', tokenCheck.id);
         setLoggedIn(true);
+        setCurrentUserId(tokenCheck.id);
       } else {
         setLoggedIn(false);
       }
@@ -29,7 +32,16 @@ const App = () => {
   return (
     <div className='router'>
       <Routes>
-        <Route path='/' element={<Homepage loggedIn={loggedIn} />} />
+        <Route
+          path='/'
+          element={
+            <Homepage
+              loggedIn={loggedIn}
+              setCurrentUserId={setCurrentUserId}
+              currentUserId={currentUserId}
+            />
+          }
+        />
         <Route path='/about' element={<About />} />
         <Route
           path='/login'
