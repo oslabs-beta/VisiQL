@@ -43,13 +43,10 @@ const App = () => {
             />
           }
         />
+
         <Route path='/about' element={<About />} />
         <Route
           path='/login'
-          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
-        />
-        <Route
-          path='/logink'
           element={<LoginKelly loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
         <Route path='/resolver' element={<Resolver />} />
