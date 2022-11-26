@@ -2,6 +2,7 @@ import React from 'react';
 import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
+import SchemaContainerKelly from './SchemaContainerKelly';
 import VisualizerContainer from './VisualizerContainer';
 import ProjectToolbar from './ProjectToolbar';
 
@@ -99,7 +100,7 @@ const DBInput = (props) => {
         </form>
       </div>
       <div className='schema-vis-container'>
-        <SchemaContainer
+        <SchemaContainerKelly
           dataReceived={dataReceived}
           dbSchemaData={dbSchemaData}
           dbSchemaDataOnChange={dbSchemaDataOnChange}
