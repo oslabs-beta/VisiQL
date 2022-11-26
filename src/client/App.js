@@ -4,6 +4,7 @@ import Homepage from './components/Homepage';
 import About from './components/About';
 import Login from './components/Login';
 import LoginKelly from './components/LoginKelly';
+import Resolver from './components/Resolver';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -48,6 +49,7 @@ const App = () => {
           path='/login'
           element={<LoginKelly loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
+        <Route path='/resolver' element={<Resolver />} />
       </Routes>
     </div>
   );
