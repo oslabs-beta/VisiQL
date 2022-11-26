@@ -131,7 +131,10 @@ svg.call(Zoom);
           console.log('node.data.name: ', node.data.name);
           svg.selectAll('.label').text((d) => d.data.name);
         })
-        .attr('font-size', 20)
+        .attr('font-size', () => {
+          if (root.descendants().length > 60) return 12;
+          return 20;
+        })
         .on('mouseover', (event, d) => {
           if (cacheReferenceTableNames[d.data.name]) {
             cacheReferenceTableNames[d.data.name].forEach((ele) => {
