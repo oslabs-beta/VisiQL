@@ -5,8 +5,6 @@ const app = require('../../src/server/server');
 
 describe('server tests', () => {
 
-  // after each statement or before all statement
-
   describe('#user-router testing', () => {
     it('logs in with correct credentials', async () => {
       const response = await request(app)
@@ -15,7 +13,7 @@ describe('server tests', () => {
           username: 'aa',
           password: 'aa',
         })
-        // .set('Accept', 'application/json');
+        .set('Accept', 'application/json');
       expect(response.status).toEqual(200);
       expect(response.body).toHaveProperty('accessToken');
     });
@@ -32,37 +30,29 @@ describe('server tests', () => {
       expect(response.body).not.toHaveProperty('accessToken');
     });
 
-    it('checks if username exists', async () => {
+    // check if username exists
+    it.each`
+      username           | whatResponseEquals
+      ${'aa'}            | ${'exists'}
+      ${'a'.repeat(200)} | ${'nonexistent'}
+    ` ('returns $whatResponseEquals if username equals $username', async ({ username, whatResponseEquals }) => {
       const response = await request(app)
         .post('/user/check')
-        .send({ username: 'aa' })
+        .send({ username })
         .set('Accept', 'application/json');
       expect(response.status).toEqual(200);
-      expect(response.body).toEqual('exists');
-    })
-
-    it('checks if username does not exist', async () => {
-      const response = await request(app)
-        .post('/user/check')
-        .send({ username: 'fdksla;fhasedbfiwaeffhed' })
-        .set('Accept', 'application/json');
-      expect(response.status).toEqual(200);
-      expect(response.body).toEqual('nonexistent');
-    })
+      expect(response.body).toEqual(whatResponseEquals);
+    });
 
     it('checks if signup works', async () => {
-      const characters = 'abcdefghijklmnopqrstuvwxyz1234567890,./;!@#$%^&*-=<>?_'
-      const charsArr = characters.split('');
-      let randomUsername = '';
-      for (let i = 0; i < 200; i++) {
-        randomUsername += charsArr[Math.floor(Math.random()*54)];
-      }
+      const randomUsername = 'a'.repeat(200);
 
       const response = await request(app)
         .post('/user/signup')
         .send({
           username: randomUsername,
-          name: 'name',
+          firstName: 'first',
+          lastName: 'last',
           password: 'password',
           email: 'test@test.com',
         })
