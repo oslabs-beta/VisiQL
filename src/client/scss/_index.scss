@@ -54,6 +54,7 @@ li {
 }
 
 #tree-svg {
+  font-family: 'Kumbh Sans', sans-serif;
   height: 70vh;
   width: 55vw;
   overflow-x: scroll;
@@ -88,6 +89,21 @@ li {
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
+// below is for resolver component
+.schema-editor-container2 {
+  background-color: rgb(127, 127, 127);
+  border-radius: 10px;
+  margin-top: 2rem;
+  height: 100%;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+// above is for resolver component
+
 #diagram {
   font-family: 'Kumbh Sans', sans-serif;
   border-radius: 10px;
@@ -119,4 +135,82 @@ li {
   float: right;
   top: -100px;
   left: -30px;
+}
+
+.expand-button {
+  position: absolute;
+  float: right;
+  top: -100px;
+  left: -30px;
+}
+.tree-pop-out {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tree-pop-out-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+  gap: 20px;
+  margin-top: 50px;
+  background-color: rgb(251, 247, 242);
+  height: 80vh;
+  width: 80vw;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.tree-pop-out-close {
+  position: absolute;
+  z-index: 999;
+  top: 1rem;
+  right: 48rem;
+  color: #fff;
+}
+
+.save-project-popover-parent {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.save-project-popover {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  align-content: space-between;
+  gap: 20px;
+  margin-top: 50rem;
+  background-color: rgb(251, 247, 242);
+  height: 15vh;
+  width: 25vw;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: $darkteal;
+  z-index: 1;
+}
+
+.project-save-cancel-buttons {
+  display: flex;
+  gap: 20px;
 }

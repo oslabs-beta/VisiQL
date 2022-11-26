@@ -5,7 +5,51 @@ schemaGen.genSchema = (req, res, next) => {
     const primKeys = res.locals.parsedPrimaryKeys;
     const dbOb = res.locals.dbSchema.tables;
 
-let schemaString = '';
+let schemaString = 'type Query {\n';
+
+  for (let table in dbOb) {
+     //logic to format table name type
+    const changeCase = Array.from(table);
+    for (let i = 0; i < changeCase.length; i++){
+      // table names: make snake case into camel case
+      if (changeCase[i] === '_' && changeCase[i+1]) {
+          changeCase[i+1] = changeCase[i+1].toUpperCase();
+          changeCase[i] = '';
+       } else if (changeCase[i] === '_' && !changeCase[i+1]) {
+          changeCase[i] = ''
+      };
+      // table names: changing plural to singular
+          if( /[^aeiou]/i.test(changeCase[changeCase.length-2]) && /s/i.test(changeCase[changeCase.length-1])){
+           changeCase[changeCase.length-1] = '';
+          };
+      }
+      changeCase[0] = changeCase[0].toUpperCase();
+      //final version of formatted table type
+      const camelCaseTable = changeCase.join('');
+      //logic to get singleular form of table for keys
+      let tableSingular;
+      if (/[^aeiou]/i.test(table[table.length - 2]) && /s/i.test(table[table.length - 1])) {
+        tableSingular = table.slice(0, -1);
+       
+      }
+      // accounting for if table name is people
+      else if (table === 'people') {
+        tableSingular = 'person';
+      
+      }
+      // accounting for if table name ends in "ies" like "species"
+      else if (table.slice(table.length - 3) === 'ies') {
+        tableSingular = table.slice(0, -1);
+      
+      } else {
+        tableSingular = table + "(single)";
+      }
+      schemaString += `  ${table}: [${camelCaseTable}]\n`;
+      schemaString += `  ${tableSingular}(id: ID): ${camelCaseTable}\n`;
+  }
+ schemaString += '}\n\n';
+// added "type Query" above
+
 for (const table in dbOb){
     let string = 'type ';
     let tableName = String(table);
@@ -113,8 +157,6 @@ string += '} \n\n';
 schemaString += string;
 };
 // console.log(schemaString);
-
-// now check for foreign keys, maybe that should go inside one of the loops?
 
 res.locals.schemaString = schemaString;
 return next();
