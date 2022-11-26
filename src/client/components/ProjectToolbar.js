@@ -10,6 +10,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import SaveProject from './SaveProject';
+import ProjectSaved from './ProjectSaved';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -22,8 +23,16 @@ const useInput = (init) => {
 const ProjectToolbar = (props) => {
   const [projectName, setProjectName] = useInput('');
   const [saveProjExpand, setSaveProjExpand] = useState(false);
+  const [projectSaved, setProjectSaved] = useState(false);
 
   const saveProjectFunc = () => {
+    if (projectName === '') return alert('Please enter a project name');
+    if (
+      props.schemaData === 'Enter a Postgres DB link to generate your schema...'
+    )
+      return alert('Please enter a database link to start your project');
+    if (!props.currentUserId)
+      return alert('You must be signed in to save a project');
     const body = {
       user: props.currentUserId,
       projectName: projectName,
@@ -43,6 +52,8 @@ const ProjectToolbar = (props) => {
         console.log(data);
       })
       .catch((err) => console.log('dbLink fetch /project/save: ERROR:', err));
+    setProjectSaved(true);
+    setSaveProjExpand(false);
   };
   const actions = [
     { icon: <DownloadIcon fontSize='large' />, name: 'Download' },
@@ -102,6 +113,7 @@ const ProjectToolbar = (props) => {
         projectName={projectName}
         setProjectName={setProjectName}
       />
+      <ProjectSaved trigger={projectSaved} close={setProjectSaved} />
     </div>
   );
 };

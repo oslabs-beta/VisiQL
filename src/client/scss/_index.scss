@@ -158,10 +158,10 @@ li {
 
 .tree-pop-out-close {
   position: absolute;
-  float: right;
-  top: -93rem;
-  left: 2rem;
-  z-index: 100;
+  z-index: 999;
+  top: 1rem;
+  right: 48rem;
+  color: #fff;
 }
 
 .save-project-popover-parent {
