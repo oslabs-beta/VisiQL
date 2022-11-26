@@ -1,3 +1,4 @@
+import { ElevatorSharp } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import React from 'react';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -7,10 +8,29 @@ import styles from './scss/_index.scss';
 type NavbarProps = {
   isLoggedIn: Boolean;
   setCurrentUserId: Function;
+  notSignedInPop: Boolean;
+  setNotSignedInPop: Function;
 };
 
-const Navbar = ({ isLoggedIn, setCurrentUserId }: NavbarProps) => {
+const Navbar = ({
+  isLoggedIn,
+  setCurrentUserId,
+  notSignedInPop,
+  setNotSignedInPop,
+}: NavbarProps) => {
   const navigate = useNavigate();
+
+  const thisOrThat = () => {
+    if (isLoggedIn) {
+      return <Link to='/myprojects'>Projects</Link>;
+    } else {
+      return (
+        <Link onClick={() => setNotSignedInPop(true)} to='/'>
+          Projects
+        </Link>
+      );
+    }
+  };
 
   const signOut = async () => {
     try {
@@ -24,15 +44,16 @@ const Navbar = ({ isLoggedIn, setCurrentUserId }: NavbarProps) => {
   };
   const signInOut = () => {
     if (!isLoggedIn) {
-      return <Link to='/logink'>Sign In</Link>;
+      return <Link to='/login'>Sign In</Link>;
     } else {
       return (
-        <Link to='/logink' onClick={signOut}>
+        <Link to='/login' onClick={signOut}>
           Sign Out
         </Link>
       );
     }
   };
+  // thisOrThat();
   return (
     <div id='navbar'>
       <img id='logo' src={logo} width='275px' height='92px' />
@@ -44,9 +65,7 @@ const Navbar = ({ isLoggedIn, setCurrentUserId }: NavbarProps) => {
           <li>
             <Link to='/about'>About</Link>
           </li>
-          <li>
-            <Link to='/myprojects'>Projects</Link>
-          </li>
+          <li>{thisOrThat()}</li>
           <li>
             <Button variant='outlined' size='large'>
               {signInOut()}
