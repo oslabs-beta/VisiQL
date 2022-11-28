@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import About from './components/About';
 import Login from './components/Login';
-import LoginKelly from './components/LoginKelly';
 import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
 
@@ -93,7 +92,7 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route
           path='/login'
-          element={<LoginKelly loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
         <Route path='/resolver' element={<Resolver />} />
         <Route path='/myprojects' element={<ProjectsPage id={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange}/>} />
