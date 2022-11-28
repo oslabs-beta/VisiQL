@@ -25,8 +25,6 @@ const SchemaContainer = ({
 
   const [currClick, setCurrClick] = useState(false);
 
-  const [view, setView] = useState()
-
   const resetIcons = () => {
     setCurrTooltip(<h1>Copy</h1>);
     setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
@@ -46,12 +44,8 @@ const SchemaContainer = ({
     delayedFunc();
   };
 
-  const changeView = () => {
-    setView()
-  }
   return (
     <div>
-      
       <div className='schema-editor-container'>
         <Editor
           padding='20'
@@ -73,13 +67,6 @@ const SchemaContainer = ({
           {currIcon}
         </IconButton>
       </Tooltip>
-      <div><Button  className='submit-button'
-            variant='contained'
-            onClick={changeView}
-            sx={{
-              backgroundColor: '#ed6a5a',
-              ':hover': { backgroundColor: '#f1887b' },
-            }}>Resolvers</Button></div>
     </div>
   );
 };

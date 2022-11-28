@@ -9,18 +9,22 @@ import { Button, IconButton, Tooltip, Typography, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import Resolver from './Resolver';
+
+
 
 type SchemaContainerProps = {
   dbSchemaData: string;
   dbSchemaDataOnChange: Function;
-  value: string;
+  resolverData: string;
 };
+
+
 
 const SchemaContainerKelly = ({
   dbSchemaData,
   dbSchemaDataOnChange,
-  value,
+  resolverData,
+  
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
@@ -59,9 +63,11 @@ const SchemaContainerKelly = ({
   return (
     <div>
       <TabContext value={tab} >
-        <TabList className='tab-list' aria-label='Tabs' onChange={handleChange}>
-          <Tab className='tab' label='Schema' value='1'/>
-          <Tab className='tab'label='Resolvers' value='2'/>
+        <TabList className='tab-list' aria-label='Tabs' onChange={handleChange} centered >
+          <Tab className='tab' label='Schema' value='1' sx={{color: '#ed6a5a', '& .MuiTabs-indicator': {bgcolor: '#5ca4a9'}, '& .Mui-selected': {color: '#5ca4a9', 
+
+          },}}/>
+          <Tab className='tab'label='Resolvers' value='2'sx={{color: '#ed6a5a'}}/>
         </TabList>
         <TabPanel value='1'>
         <div className='schema-editor-container'>
@@ -85,20 +91,20 @@ const SchemaContainerKelly = ({
           {currIcon}
         </IconButton>
       </Tooltip>
+      
         </TabPanel>
         <TabPanel value='2'>
         <div className='schema-editor-container'>
-          <Resolver value={value} />
-        {/* <Editor
+        <Editor
           padding='20'
-          value={dbSchemaData}
+          value={resolverData}
           onValueChange={(code) => dbSchemaDataOnChange(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 20,
           }}
-        /> */}
+        />
       </div>
       <Tooltip title={currTooltip} placement='top' arrow>
         <IconButton

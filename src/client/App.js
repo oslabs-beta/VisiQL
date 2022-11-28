@@ -7,8 +7,38 @@ import LoginKelly from './components/LoginKelly';
 import Resolver from './components/Resolver';
 
 const App = () => {
+
+  const initialData = {
+    name: 'Database',
+    children: [
+      {
+        name: 'Table-1',
+        children: [
+          {
+            name: 'Column-1',
+          },
+          {
+            name: 'Column-2',
+          },
+          {
+            name: 'Column-3',
+          },
+        ],
+      },
+      {
+        name: 'Table-2',
+      },
+    ],
+  };
+  
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState('');
+
+  const [dbSchemaData, dbSchemaDataOnChange] = useState(
+    'Enter a Postgres DB link to generate your schema...'
+  );
+  const [treeData, setTreeData] = useState(initialData);
+  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...')
 
   const tokenChecker = async () => {
     try {
@@ -40,6 +70,11 @@ const App = () => {
               loggedIn={loggedIn}
               setCurrentUserId={setCurrentUserId}
               currentUserId={currentUserId}
+              dbSchemaData={dbSchemaData}
+              dbSchemaDataOnChange={dbSchemaDataOnChange}
+              resolverData={resolverData}
+              treeData={treeData}
+              setTreeData={setTreeData}
             />
           }
         />
