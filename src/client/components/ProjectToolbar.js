@@ -33,11 +33,14 @@ const ProjectToolbar = (props) => {
       return alert('Please enter a database link to start your project');
     if (!props.currentUserId)
       return alert('You must be signed in to save a project');
+
+    const date = (new Date()).toString();//date variable 
     const body = {
       user: props.currentUserId,
       projectName: projectName,
       schemaData: props.schemaData,
       treeData: props.treeData,
+      date: date //add date column to table
     };
     console.log('post body', body);
     fetch('/projects/save', {

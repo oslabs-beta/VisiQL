@@ -14,7 +14,7 @@ const ProjectSaved = (props) => {
             backgroundColor: '#ed6a5a',
             ':hover': { backgroundColor: '#f1887b' },
           }}
-          onClick={() => navigate('/projects')}
+          onClick={() => navigate('/myprojects')}
         >
           View Your Saved Projects
         </Button>
