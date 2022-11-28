@@ -41,24 +41,24 @@ const SchemaContainer = ({
     setTab(newValue);
   };
 
-//   const resetIcons = () => {
-//     setCurrTooltip(<h1>Copy</h1>);
-//     setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
-//   };
+  const resetIcons = () => {
+    setCurrTooltip(<h1>Copy</h1>);
+    setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
+  };
 
-//   function delay(callback: Function, waitTime: number) {
-//     return function delayedFunction() {
-//       return setTimeout(callback, waitTime);
-//     };
-//   }
-//   const delayedFunc = delay(() => resetIcons(), 3000);
+  function delay(callback: Function, waitTime: number) {
+    return function delayedFunction() {
+      return setTimeout(callback, waitTime);
+    };
+  }
+  const delayedFunc = delay(() => resetIcons(), 3000);
 
-//   const handleClick = () => {
-//     navigator.clipboard.writeText(dbSchemaData);
-//     setCurrTooltip(<h1>Copied</h1>);
-//     setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
-//     delayedFunc();
-//   };
+  const handleClick = () => {
+    navigator.clipboard.writeText(dbSchemaData);
+    setCurrTooltip(<h1>Copied</h1>);
+    setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
+    delayedFunc();
+  };
 
   return (
     <div>
