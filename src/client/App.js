@@ -73,6 +73,7 @@ const App = () => {
               dbSchemaData={dbSchemaData}
               dbSchemaDataOnChange={dbSchemaDataOnChange}
               resolverData={resolverData}
+              setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
             />

@@ -81,7 +81,6 @@ const DBInput = (props) => {
           dbSchemaData={dbSchemaData}
           dbSchemaDataOnChange={dbSchemaDataOnChange}
           resolverData={resolverData}
-          setResolverData={setResolverData}
         />
         <VisualizerContainer data={treeData} />
         <ProjectToolbar

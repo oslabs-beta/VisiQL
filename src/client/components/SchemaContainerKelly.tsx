@@ -23,7 +23,7 @@ type SchemaContainerProps = {
 const SchemaContainerKelly = ({
   dbSchemaData,
   dbSchemaDataOnChange,
-  resolverData,
+  resolverData
   
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
