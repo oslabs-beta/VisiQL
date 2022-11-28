@@ -5,6 +5,7 @@ import Navbar from './Navbar';
 import DBInput from './DBInput';
 //@ts-ignore
 import NotSignedIn from './NotSignedIn';
+import ProjectSide from './ProjectSide';
 
 type HomepageProps = {
   loggedIn: Boolean;
@@ -40,6 +41,7 @@ const Homepage = ({
       />
       <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} />
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
+      {/* <ProjectSide /> */}
     </div>
   );
 };

@@ -31,26 +31,26 @@ const Tree = ({ data }) => {
       }
     });
     
-const zoomG = svg.append('g');
-  //append gLink and gNode to zoomG in order to capture everything rendered for the zoom
-const gLink = zoomG.append('g').attr('fill', 'none');
+    const zoomG = svg.append('g');
+      //append gLink and gNode to zoomG in order to capture everything rendered for the zoom
+    const gLink = zoomG.append('g').attr('fill', 'none');
 
-const gNode = zoomG.append('g')
-.attr('cursor', 'pointer')
-.attr('pointer-events', 'all');
+    const gNode = zoomG.append('g')
+    .attr('cursor', 'pointer')
+    .attr('pointer-events', 'all')
+    .attr('id', 'node-parent');
 
-//handleZoom takes zoom event object
-const  handleZoom = ({transform}) => {
-  zoomG.attr('transform', transform);
-}
+    //handleZoom takes zoom event object
+    const  handleZoom = ({transform}) => {
+      zoomG.attr('transform', transform);
+    }
 
-const Zoom = zoom()
-.scaleExtent([0.7, 8])
-.on('zoom', handleZoom);
-svg.call(Zoom); 
+    const Zoom = zoom()
+    .scaleExtent([0.7, 8])
+    .on('zoom', handleZoom);
+    svg.call(Zoom); 
 
     const update = (source) => {
-
       const duration = 500;
       const nodes = root.descendants().reverse();
       const links = root.links();
@@ -89,17 +89,42 @@ svg.call(Zoom);
 
       nodeEnter
         .append('circle')
-        .attr('r', 3)
+        .attr('class', (d) => {
+          if (d.depth === 2 || d.depth === 4) return 'circle column-circle';
+          return 'circle';
+        })
+        .attr('r', (d) => {
+          const nodeCountCircleSizeRatio = (document.getElementById('diagram').clientHeight) / (document.getElementById('node-parent').childElementCount) / 2;
+          if (nodeCountCircleSizeRatio < 3 && (d.depth === 2 || d.depth === 4)) {
+            return nodeCountCircleSizeRatio;
+          }
+          return 3;
+        })
         .attr('fill', (d) => (d._children ? '#ed6a5a' : '#5ca4a9'))
         .attr('stroke-width', 10)
         .on('click', (event, d) => {
           d.children = d.children ? null : d._children;
           update(d);
+          const nodeCountfontSizeRatio = (document.getElementById('diagram').clientHeight) / (document.getElementById('node-parent').childElementCount) * 1.35;
+          if (nodeCountfontSizeRatio < 16) {
+            svg.selectAll('.column-node').attr('font-size', nodeCountfontSizeRatio);
+          } else {
+            svg.selectAll('.column-node').attr('font-size', 16);
+          }
+          const nodeCountCircleSizeRatio = (document.getElementById('diagram').clientHeight) / (document.getElementById('node-parent').childElementCount) / 2;
+          if (nodeCountCircleSizeRatio < 3) {
+            svg.selectAll('.column-circle').attr('r', nodeCountCircleSizeRatio);
+          } else {
+            svg.selectAll('.column-circle').attr('r', 3);
+          }
         });
 
       nodeEnter
         .append('text')
-        .attr('class', 'label')
+        .attr('class', (d) => {
+          if (d.depth === 2 || d.depth === 4) return 'label column-node'
+          return 'label';
+        })
         .attr('id', (d) => `aa${d.id}`)
         .attr('dy', '0.31em')
         .attr('x', (d) => (d._children ? -6 : 6))
@@ -131,9 +156,12 @@ svg.call(Zoom);
           console.log('node.data.name: ', node.data.name);
           svg.selectAll('.label').text((d) => d.data.name);
         })
-        .attr('font-size', () => {
-          if (root.descendants().length > 60) return 12;
-          return 20;
+        .attr('font-size', d => {
+          const nodeCountfontSizeRatio = (document.getElementById('diagram').clientHeight) / (document.getElementById('node-parent').childElementCount) * 1.35;
+          if (nodeCountfontSizeRatio <= 16 && (d.depth === 2 || d.depth === 4)) {
+            return nodeCountfontSizeRatio;
+          };
+          return 16;
         })
         .on('mouseover', (event, d) => {
           if (cacheReferenceTableNames[d.data.name]) {
