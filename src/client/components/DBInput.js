@@ -5,28 +5,29 @@ import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
 import ProjectToolbar from './ProjectToolbar';
 
-const initialData = {
-  name: 'Database',
-  children: [
-    {
-      name: 'Table-1',
-      children: [
-        {
-          name: 'Column-1',
-        },
-        {
-          name: 'Column-2',
-        },
-        {
-          name: 'Column-3',
-        },
-      ],
-    },
-    {
-      name: 'Table-2',
-    },
-  ],
-};
+
+// const initialData = {
+//   name: 'Database',
+//   children: [
+//     {
+//       name: 'Table-1',
+//       children: [
+//         {
+//           name: 'Column-1',
+//         },
+//         {
+//           name: 'Column-2',
+//         },
+//         {
+//           name: 'Column-3',
+//         },
+//       ],
+//     },
+//     {
+//       name: 'Table-2',
+//     },
+//   ],
+// };
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -38,11 +39,13 @@ const useInput = (init) => {
 
 const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
-  const [dbSchemaData, dbSchemaDataOnChange] = useState(
-    'Enter a Postgres DB link to generate your schema...'
-  );
+  
   const [dataReceived, setDataReceived] = useState(false);
-  const [treeData, setTreeData] = useState(initialData);
+  
+
+//get treeData and dbSchemaData from props
+const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData } = props;
+
 
   const saveDBLink = (event) => {
     if (dbLink === '') {

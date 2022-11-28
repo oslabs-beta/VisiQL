@@ -28,6 +28,7 @@
     "@mui/icons-material": "^5.10.14",
     "@mui/material": "^5.10.13",
     "@mui/styled-engine-sc": "^5.10.6",
+    "@mui/x-data-grid": "^5.17.13",
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
