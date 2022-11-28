@@ -2,32 +2,10 @@ import React from 'react';
 import { TextField, Button } from '@mui/material';
 import { useState } from 'react';
 import SchemaContainer from './SchemaContainer';
+import SchemaContainerKelly from './SchemaContainerKelly';
 import VisualizerContainer from './VisualizerContainer';
 import ProjectToolbar from './ProjectToolbar';
 
-
-// const initialData = {
-//   name: 'Database',
-//   children: [
-//     {
-//       name: 'Table-1',
-//       children: [
-//         {
-//           name: 'Column-1',
-//         },
-//         {
-//           name: 'Column-2',
-//         },
-//         {
-//           name: 'Column-3',
-//         },
-//       ],
-//     },
-//     {
-//       name: 'Table-2',
-//     },
-//   ],
-// };
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -39,13 +17,9 @@ const useInput = (init) => {
 
 const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
-  
   const [dataReceived, setDataReceived] = useState(false);
   
-
-//get treeData and dbSchemaData from props
-const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData } = props;
-
+  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, resolverData, setResolverData } = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {
@@ -65,7 +39,7 @@ const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData } = props;
         .then((data) => {
           console.log(data);
           dbSchemaDataOnChange(data.schemaString);
-
+          setResolverData(data.resolverString);
           setDataReceived(true);
           setTreeData(data.tree);
           console.log(dbSchemaData);
@@ -102,10 +76,11 @@ const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData } = props;
         </form>
       </div>
       <div className='schema-vis-container'>
-        <SchemaContainer
+        <SchemaContainerKelly
           dataReceived={dataReceived}
           dbSchemaData={dbSchemaData}
           dbSchemaDataOnChange={dbSchemaDataOnChange}
+          resolverData={resolverData}
         />
         <VisualizerContainer data={treeData} />
         <ProjectToolbar

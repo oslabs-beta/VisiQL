@@ -39,6 +39,14 @@ const App = () => {
   );
   const [treeData, setTreeData] = useState(initialData);
 
+  
+  
+  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...')
+
+
+  
+  
+
   const tokenChecker = async () => {
     try {
       const token = await fetch('/user/checkToken', {
@@ -74,6 +82,8 @@ const App = () => {
               currentUserId={currentUserId}
               dbSchemaData={dbSchemaData}
               dbSchemaDataOnChange={dbSchemaDataOnChange}
+              resolverData={resolverData}
+              setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
             />

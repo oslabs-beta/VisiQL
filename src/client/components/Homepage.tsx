@@ -15,7 +15,8 @@ type HomepageProps = {
   dbSchemaDataOnChange: Function;
   treeData: Object;
   setTreeData: Function;
-  //add treeData and dbSchemaData states to homepageprops
+  resolverData: String;
+  setResolverData: Function;
 };
 
 const Homepage = ({
@@ -25,7 +26,9 @@ const Homepage = ({
   dbSchemaData,
   dbSchemaDataOnChange,
   treeData,
-  setTreeData
+  setTreeData,
+  resolverData,
+  setResolverData
 }: HomepageProps) => {
   const [notSignedInPop, setNotSignedInPop] = useState(false);
   return (
@@ -36,8 +39,7 @@ const Homepage = ({
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
       />
-      <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange}
-      treeData={treeData} setTreeData={setTreeData} /> 
+      <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} />
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
       {/* <ProjectSide /> */}
     </div>
