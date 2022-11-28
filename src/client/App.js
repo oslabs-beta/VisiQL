@@ -7,6 +7,7 @@ import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
 
 const App = () => {
+  
   const initialData = {
     name: 'Database',
     children: [
@@ -95,7 +96,7 @@ const App = () => {
           element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
         <Route path='/resolver' element={<Resolver />} />
-        <Route path='/myprojects' element={<ProjectsPage id={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange}/>} />
+        <Route path='/myprojects' element={<ProjectsPage id={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} setResolverData={setResolverData}/>} />
       </Routes>
     </div>
   );
