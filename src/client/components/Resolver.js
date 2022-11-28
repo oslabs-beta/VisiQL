@@ -9,6 +9,7 @@ import { Button, IconButton, Tooltip, Typography } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 
+
 const Resolver = (props) => {
   const [show, changeShow] = useState('');
 
@@ -39,7 +40,8 @@ const Resolver = (props) => {
         <Editor
           padding='20'
           value={show}
-          onValueChange={(code) => dbSchemaDataOnChange(code)}
+          //this is for custom edits within the editor
+          // onValueChange={(code) => dbSchemaDataOnChange(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',

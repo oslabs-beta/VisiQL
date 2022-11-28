@@ -25,6 +25,7 @@ router.post(
   dbSchemaController.getSchema,
   treeController.treeSchema,
   schemaGen.genSchema,
+  resolverController.genResolver,
   (req, res) => {
     return res.status(202).json(res.locals);
   }

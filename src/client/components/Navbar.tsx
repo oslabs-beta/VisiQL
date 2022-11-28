@@ -5,6 +5,8 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import logo from '../assets/VisiQLLogo.png';
 import styles from './scss/_index.scss';
 
+const ProjectsPage = require('./ProjectsPage');
+
 type NavbarProps = {
   isLoggedIn: Boolean;
   setCurrentUserId: Function;
