@@ -6,11 +6,11 @@ const SaveProject = (props) => {
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
         <h1>Save Your Project</h1>
-        <TextField
+        <TextField 
           placeholder='Enter your project name...'
           style={{ width: 300 }}
           value={props.projectName}
-          onChange={props.setProjectName}
+          onChange={props.useInput}
         />
         <div className='project-save-cancel-buttons'>
           <Button

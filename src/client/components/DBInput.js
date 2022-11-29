@@ -18,7 +18,8 @@ const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
   
-  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, resolverData, setResolverData } = props;
+  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, 
+    resolverData, setResolverData, projectId, setProjectId, projectName, setProjectName } = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {
@@ -87,6 +88,10 @@ const DBInput = (props) => {
           treeData={treeData}
           currentUserId={props.currentUserId}
           resolverData={resolverData}
+          projectId={projectId}
+          setProjectId={setProjectId}
+          projectName={projectName}
+          setProjectName={setProjectName}
         />
       </div>
     </div>

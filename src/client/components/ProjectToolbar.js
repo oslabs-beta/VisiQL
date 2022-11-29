@@ -12,18 +12,17 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
 
-const useInput = (init) => {
-  const [value, setValue] = useState(init);
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-  return [value, onChange];
-};
+
 
 const ProjectToolbar = (props) => {
-  const [projectName, setProjectName] = useInput('');
+  const { currentUserId, schemaData, treeData, resolverData, projectId, projectName, setProjectName } = props;
+
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
+
+const useInput = e => {
+  setProjectName(e.target.value);
+};
 
   const saveProjectFunc = () => {
     if (projectName === '') return alert('Please enter a project name');
@@ -34,14 +33,14 @@ const ProjectToolbar = (props) => {
     if (!props.currentUserId)
       return alert('You must be signed in to save a project');
 
-    const date = (new Date()).toString();//date variable 
+    const date = (new Date()).toString(); 
     const body = {
-      user: props.currentUserId,
+      user: currentUserId,
       projectName: projectName,
-      schemaData: props.schemaData,
-      treeData: props.treeData,
-      date: date, //add date column to table
-      resolverData: props.resolverData
+      schemaData: schemaData,
+      treeData: treeData,
+      date: date, 
+      resolverData: resolverData,
     };
     console.log('post body', body);
     fetch('/projects/save', {
@@ -58,7 +57,22 @@ const ProjectToolbar = (props) => {
       .catch((err) => console.log('dbLink fetch /project/save: ERROR:', err));
     setProjectSaved(true);
     setSaveProjExpand(false);
+    setProjectName('');
   };
+const updateProjectFunc = () => {
+  if (!projectId) return alert('Please load a saved project.')
+  const date = (new Date()).toString();
+  const body = {
+    id: projectId,
+    user: currentUserId,
+    projectName: projectName,
+    schemaData: schemaData,
+    treeData: treeData,
+    date: date, 
+    resolverData: resolverData,
+  };
+}
+
   const actions = [
     { icon: <DownloadIcon fontSize='large' />, name: 'Download' },
     {
@@ -115,7 +129,7 @@ const ProjectToolbar = (props) => {
         close={setSaveProjExpand}
         saveProjectFunc={saveProjectFunc}
         projectName={projectName}
-        setProjectName={setProjectName}
+        useInput={useInput}
       />
       <ProjectSaved trigger={projectSaved} close={setProjectSaved} />
     </div>

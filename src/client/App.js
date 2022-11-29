@@ -31,17 +31,17 @@ const App = () => {
     ],
   };
   const [loggedIn, setLoggedIn] = useState(false);
-  const [currentUserId, setCurrentUserId] = useState(''); //should we set this to null to by typesafe?
+  const [currentUserId, setCurrentUserId] = useState(''); //should we set this to null to be typesafe?
 
-  //starting treedata from top
   const [dbSchemaData, dbSchemaDataOnChange] = useState(
     'Enter a Postgres DB link to generate your schema...'
   );
   const [treeData, setTreeData] = useState(initialData);
+  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...');
+  const [projectId, setProjectId] = useState(null);
 
+  const [projectName, setProjectName] = useState('');
   
-  
-  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...')
 
 
   
@@ -87,17 +87,25 @@ const App = () => {
               treeData={treeData}
               setTreeData={setTreeData}
               blankTree={initialData}
+              projectId={projectId}
+              setProjectId={setProjectId}
+              projectName={projectName}
+              setProjectName={setProjectName}
             />
           }
         />
 
-        <Route path='/about' element={<About />} />
+        <Route 
+        path='/about' element={<About />} />
         <Route
           path='/login'
-          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} tokenChecker={tokenChecker}/>}
-        />
-        <Route path='/resolver' element={<Resolver />} />
-        <Route path='/myprojects' element={<ProjectsPage userId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} setResolverData={setResolverData}/>} />
+          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} tokenChecker={tokenChecker}/>}/>
+        <Route 
+        path='/resolver' element={<Resolver />} />
+        <Route 
+        path='/myprojects' element={<ProjectsPage currentUserId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
+        setResolverData={setResolverData} setProjectId={setProjectId} setProjectName={setProjectName}/>} />
+
       </Routes>
     </div>
   );

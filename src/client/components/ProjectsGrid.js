@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ProjectsGrid = props => {
 
-    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData } = props;
+    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, setProjectId, setProjectName } = props;
     const navigate = useNavigate();
 const columns = [
   
@@ -25,6 +25,8 @@ const columns = [
         setTreeData(JSON.parse(params.row.tree));
         dbSchemaDataOnChange(params.row.schema);
         setResolverData(params.row.resolver);
+        setProjectId(params.row.id);
+        setProjectName(params.row.name);
         navigate('/'); 
         
       };
