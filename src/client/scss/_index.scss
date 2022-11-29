@@ -104,6 +104,7 @@ li {
 }
 // above is for resolver component
 
+
 #diagram {
   font-family: 'Kumbh Sans', sans-serif;
   border-radius: 10px;
@@ -214,3 +215,14 @@ li {
   display: flex;
   gap: 20px;
 }
+
+#projectTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+
