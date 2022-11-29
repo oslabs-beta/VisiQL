@@ -67,6 +67,9 @@ const Navbar = ({
           <li>
             <Link to='/about'>About</Link>
           </li>
+          <li>
+            <Link to='/gqlplayground'>GraphiQL Playground</Link>
+          </li>
           <li>{thisOrThat()}</li>
           <li>
             <Button variant='outlined' size='large'>

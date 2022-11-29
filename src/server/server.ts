@@ -12,6 +12,7 @@ const userRouter = require('./routes/userRouter');
 const projectRouter = require('./routes/projectRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
+const graphqlHTTP = require('express-graphql');
 
 type ServerError = {
   log: string;
@@ -43,6 +44,7 @@ app.use(cookieParser());
 // for login/signup
 app.use('/user', userRouter);
 app.use('/projects', projectRouter);
+app.use('/graphql', graphqlHTTP);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
@@ -66,7 +68,6 @@ app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
 
 app.listen(PORT, () => console.log('server listening on port ' + PORT));
 module.exports = app;

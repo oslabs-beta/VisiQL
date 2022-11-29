@@ -23,6 +23,7 @@ const config = {
       '/user': 'http://localhost:3000',
       '/db': 'http://localhost:3000',
       '/projects': 'http://localhost:3000',
+      '/api': 'http://localhost:3000',
     },
     compress: true,
     port: 8080,

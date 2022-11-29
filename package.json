@@ -25,6 +25,8 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@graphiql/react": "^0.15.0",
+    "@graphiql/toolkit": "^0.8.0",
     "@mui/icons-material": "^5.10.14",
     "@mui/lab": "^5.0.0-alpha.109",
     "@mui/material": "^5.10.13",
@@ -41,6 +43,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "file-loader": "^6.2.0",
+    "graphiql": "^2.2.0",
+    "graphql": "^16.6.0",
+    "graphql-ws": "^5.11.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "prismjs": "^1.29.0",
