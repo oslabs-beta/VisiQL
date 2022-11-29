@@ -86,6 +86,7 @@ const DBInput = (props) => {
           schemaData={dbSchemaData}
           treeData={treeData}
           currentUserId={props.currentUserId}
+          resolverData={resolverData}
         />
       </div>
     </div>

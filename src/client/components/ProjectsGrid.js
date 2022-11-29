@@ -5,14 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 const ProjectsGrid = props => {
 
-    const {projects, setTreeData, dbSchemaDataOnChange } = props;
+    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData } = props;
     const navigate = useNavigate();
 const columns = [
   
   { field: 'name', headerName: 'Project Name', minWidth: 250 },
   { field: 'date', headerName: 'Last Updated', minWidth: 500 },
   {
-    field: 'action',
+    field: 'open',
     headerName: '',
     sortable: false,
     width: 250,
@@ -24,6 +24,7 @@ const columns = [
         // console.log('tree', JSON.parse(params.row.tree))
         setTreeData(JSON.parse(params.row.tree));
         dbSchemaDataOnChange(params.row.schema);
+        setResolverData(params.row.resolver);
         navigate('/'); 
         
       };
@@ -41,7 +42,8 @@ function makeData(project) {
     const id = project.id;
     const name = project.project_name;
     const date = project.last_updated;
-    return { id, name, date, schema, tree }
+    const resolver = project.resolver_data;
+    return { id, name, date, schema, tree, resolver }
   }
 projects.forEach(proj => {
     rows.push(makeData(proj))

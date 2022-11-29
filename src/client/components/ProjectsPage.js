@@ -5,12 +5,12 @@ import ProjectsGrid from './ProjectsGrid';
 
 const ProjectsPage = (props) => {
     const [projects, updateProjects] = useState([])
-    const {id, setTreeData, dbSchemaDataOnChange} = props;
+    const {userId, setTreeData, dbSchemaDataOnChange, setResolverData} = props;
   
     useEffect(() =>{
     const fetchData = async () => {
-        console.log('id:', id)
-    const data = await fetch(`/projects/${id}`, {
+        console.log('id:', userId)
+    const data = await fetch(`/projects/${userId}`, {
         headers: {'Content-Type': 'application/json'},
     });
     const projectList = await data.json();
@@ -24,7 +24,7 @@ console.log('projects:', projects);
         
         <div id='projectTable'>
         
-            <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange}/>
+            <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} setResolverData={setResolverData}/>
         </div>
        
       

@@ -86,6 +86,7 @@ const App = () => {
               setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
+              blankTree={initialData}
             />
           }
         />
@@ -93,10 +94,10 @@ const App = () => {
         <Route path='/about' element={<About />} />
         <Route
           path='/login'
-          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} tokenChecker={tokenChecker}/>}
         />
         <Route path='/resolver' element={<Resolver />} />
-        <Route path='/myprojects' element={<ProjectsPage id={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} setResolverData={setResolverData}/>} />
+        <Route path='/myprojects' element={<ProjectsPage userId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} setResolverData={setResolverData}/>} />
       </Routes>
     </div>
   );

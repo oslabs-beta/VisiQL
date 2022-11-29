@@ -4,12 +4,12 @@ const projectController = {};
 
 projectController.saveProject = async (req, res, next) => {
   try {
-    const { user, projectName, schemaData, treeData, date } = req.body; //added date
+    const { user, projectName, schemaData, treeData, date, resolverData } = req.body; 
     console.log('date:', date)
     const saveQuery =
-      'INSERT INTO projects(project_name, schema_data, tree_data, user_id, last_updated) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+      'INSERT INTO projects(project_name, schema_data, tree_data, user_id, last_updated, resolver_data) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
 
-    const values = [projectName, schemaData, treeData, user, date]; //added date
+    const values = [projectName, schemaData, treeData, user, date, resolverData]; 
     console.log(values);
     const { rows } = await userDb.query(saveQuery, values);
     console.log('rows0',rows[0]);

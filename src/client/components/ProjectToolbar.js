@@ -40,7 +40,8 @@ const ProjectToolbar = (props) => {
       projectName: projectName,
       schemaData: props.schemaData,
       treeData: props.treeData,
-      date: date //add date column to table
+      date: date, //add date column to table
+      resolverData: props.resolverData
     };
     console.log('post body', body);
     fetch('/projects/save', {

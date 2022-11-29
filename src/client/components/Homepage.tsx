@@ -17,6 +17,7 @@ type HomepageProps = {
   setTreeData: Function;
   resolverData: String;
   setResolverData: Function;
+  blankTree: Object;
 };
 
 const Homepage = ({
@@ -28,7 +29,8 @@ const Homepage = ({
   treeData,
   setTreeData,
   resolverData,
-  setResolverData
+  setResolverData,
+  blankTree
 }: HomepageProps) => {
   const [notSignedInPop, setNotSignedInPop] = useState(false);
   return (
@@ -38,6 +40,10 @@ const Homepage = ({
         setCurrentUserId={setCurrentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
+        setTreeData={setTreeData}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        blankTree={blankTree}
       />
       <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} />
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />

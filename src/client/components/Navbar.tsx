@@ -12,6 +12,10 @@ type NavbarProps = {
   setCurrentUserId: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
+  dbSchemaDataOnChange: Function;
+  setTreeData: Function;
+  blankTree: Object;
+  setResolverData: Function;
 };
 
 const Navbar = ({
@@ -19,8 +23,12 @@ const Navbar = ({
   setCurrentUserId,
   notSignedInPop,
   setNotSignedInPop,
+  dbSchemaDataOnChange,
+  setTreeData,
+  blankTree,
+  setResolverData
 }: NavbarProps) => {
-  const navigate = useNavigate();
+
 
   const thisOrThat = () => {
     if (isLoggedIn) {
@@ -39,7 +47,9 @@ const Navbar = ({
       setCurrentUserId('');
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      navigate('/logink');
+      setResolverData('Enter a Postgres DB link to generate your resolvers...');
+      dbSchemaDataOnChange('Enter a Postgres DB link to generate your schema...');
+      setTreeData(blankTree);
     } catch (err) {
       console.log('error');
     }
