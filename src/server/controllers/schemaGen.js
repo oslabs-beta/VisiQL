@@ -42,10 +42,10 @@ let schemaString = 'type Query {\n';
         tableSingular = table.slice(0, -1);
       
       } else {
-        tableSingular = table + "(single)";
+        tableSingular = table + "_single";
       }
       schemaString += `  ${table}: [${camelCaseTable}]\n`;
-      schemaString += `  ${tableSingular}(id: ID): ${camelCaseTable}\n`;
+      schemaString += `  ${tableSingular}(_id: ID): ${camelCaseTable}\n`;
   }
  schemaString += '}\n\n';
 // added "type Query" above
@@ -79,11 +79,11 @@ for (const table in dbOb){
 
      // to change "_id" to "id" and its data type to "ID"
      // hard coded for _id <- is there a better way?
-     if (col.toLowerCase() === '_id' || col.toLowerCase() === 'id') {
-        string += '  id: ID\n';
-       } else {
+    //  if (col.toLowerCase() === '_id' || col.toLowerCase() === 'id') {
+    //     string += '  id: ID\n';
+    //    } else {
         string += '  ' + col + ': ' + dbOb[table].columns[col] + '\n';
-     }
+    //  }
     };
 
 
