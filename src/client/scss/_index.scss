@@ -126,6 +126,16 @@ li {
   top: 0;
   left: 0;
 }
+
+.tree-vis-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+  position: relative;
+  top: 48px;
+  left: 0;
+}
 .editor-container {
   position: relative;
   top: 0;

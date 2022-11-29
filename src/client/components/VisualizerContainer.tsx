@@ -12,7 +12,7 @@ const VisualizerContainer = (props: { data: object }) => {
 
   return (
     <div>
-      <div className='schema-vis-container'>
+      <div className='tree-vis-container'>
         <div id='diagram'>
           <Tree data={props.data} />
         </div>
