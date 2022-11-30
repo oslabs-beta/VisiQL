@@ -4,6 +4,7 @@ resolverController.genResolver = (req, res, next) => {
   const fnKeys = res.locals.parsedFnKeys;
   const primKeys = { ...res.locals.parsedPrimaryKeys };
   const databaseInfo = res.locals.dbSchema.tables;
+  let exportString = 'module.exports = { Query,';
   let resolverString = 'Query: {\n';
   let databaseName = res.locals.databaseName || 'dbModelName';
 
@@ -55,7 +56,8 @@ resolverController.genResolver = (req, res, next) => {
   for (const foreignTable in fnKeys) {
     // console.log('foreignTable: ', foreignTable);
     //logic to format table name type
-    const upperCamelCase = (table) => {const changeCase = Array.from(table);
+    const upperCamelCase = (table) => {
+      const changeCase = Array.from(table);
     for (let i = 0; i < changeCase.length; i++){
       // table names: make snake case into camel case
       if (changeCase[i] === '_' && changeCase[i+1]) {
@@ -73,7 +75,7 @@ resolverController.genResolver = (req, res, next) => {
       //final version of formatted table type
       return changeCase.join('');
     }
-
+    exportString += ` ${upperCamelCase(foreignTable)},`
     resolverString += `${upperCamelCase(foreignTable)}: {\n`;
     for (const foreignKey in fnKeys[foreignTable]) {
       const primaryTable = Object.keys(fnKeys[foreignTable][foreignKey]);
@@ -85,8 +87,8 @@ resolverController.genResolver = (req, res, next) => {
       if (primKeys.hasOwnProperty(foreignTable)) {
         primKeys[foreignTable].forEach(ele => {
           const fnColumns = Object.keys(fnKeys[ele]);
-          console.log('fnColumns: ', fnColumns);
-          console.log('foreignTable: ', foreignTable);
+          // console.log('fnColumns: ', fnColumns);
+          // console.log('foreignTable: ', foreignTable);
           let fnColumnName = '';
           for (let i = 0; i < fnColumns.length; i++) {
             // console.log('foreignRefTable: ', Object.keys(fnKeys[ele][fnColumns[i]])[0])
@@ -128,6 +130,7 @@ resolverController.genResolver = (req, res, next) => {
       return changeCase.join('');
     };
 
+    exportString += ` ${upperCamelCase(prim)},`
     resolverString += `${upperCamelCase(prim)}: {\n`;
 
     
@@ -145,9 +148,10 @@ resolverController.genResolver = (req, res, next) => {
 
       resolverString += `  ${ele}: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${ele} WHERE ${fnColumnName || '_id'} = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
     });
-    resolverString += '},\n';
+    resolverString += '},\n\n';
   }
-
+  exportString += ' Mutation }';
+  res.locals.exportString = exportString;
   res.locals.resolverString = resolverString || 'Resolver Creation Error';
   return next();
 }
