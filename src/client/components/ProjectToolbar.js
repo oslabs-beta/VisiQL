@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import UpgradeIcon from '@mui/icons-material/Upgrade' //for update 
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
 
@@ -20,7 +21,7 @@ const ProjectToolbar = (props) => {
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
 
-const useInput = e => {
+const useInput = e => { //click event from saveproject
   setProjectName(e.target.value);
 };
 
@@ -57,20 +58,26 @@ const useInput = e => {
       .catch((err) => console.log('dbLink fetch /project/save: ERROR:', err));
     setProjectSaved(true);
     setSaveProjExpand(false);
-    setProjectName('');
+    setProjectName(''); //clear projectname after save
   };
-const updateProjectFunc = () => {
+const updateProjectFunc = async () => {
   if (!projectId) return alert('Please load a saved project.')
   const date = (new Date()).toString();
   const body = {
     id: projectId,
-    user: currentUserId,
-    projectName: projectName,
-    schemaData: schemaData,
-    treeData: treeData,
+    // user: currentUserId,
+    name: projectName,
+    schema: schemaData,
+    // tree: treeData,
     date: date, 
-    resolverData: resolverData,
+    resolver: resolverData,
   };
+  const request = await fetch('/projects/update', {
+    method: 'PATCH',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body),
+  });
+  const response = request.json();
 }
 
   const actions = [
@@ -80,6 +87,7 @@ const updateProjectFunc = () => {
       name: 'Save Project',
     },
     { icon: <FolderOpenIcon fontSize='large' />, name: 'View Projects' },
+    { icon: <UpgradeIcon fontSize='large' />, name: 'Update Project'}, //figure out how to add save project func to this
   ];
   const actionSize = {
     width: 90,

@@ -1,11 +1,13 @@
 import { dividerClasses } from '@mui/material';
 import React, { useEffect, useState} from 'react';
+import DeleteProject from './DeleteProject';
 import Navbar from './Navbar';
 import ProjectsGrid from './ProjectsGrid';
 
 const ProjectsPage = (props) => {
-    const [projects, updateProjects] = useState([])
-    const {currentUserId, setTreeData, dbSchemaDataOnChange, setResolverData, setProjectId, setProjectName} = props;
+    const [projects, updateProjects] = useState([]);
+    const [deletePopup, setDeletePopup] = useState(false);
+    const {currentUserId, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName} = props;
   
     useEffect(() =>{
     const fetchData = async () => {
@@ -14,21 +16,29 @@ const ProjectsPage = (props) => {
         headers: {'Content-Type': 'application/json'},
     });
     const projectList = await data.json();
-    updateProjects(projectList);
-  
+    updateProjects(projectList);  
 };
 fetchData();
 }, []);
-console.log('projects:', projects);
+
+console.log('projects:', projects); //need to pass navbar props?
+
     return (
-        
-        <div id='projectTable'>
-        
-            <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
-            setResolverData={setResolverData} setProjectId={setProjectId} setProjectName={setProjectName}/>
-        </div>
        
-      
+           
+        <div id='project-page'> 
+            <Navbar /> 
+          <div>
+          {/* <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} deleteProjectFunc={deleteProjectFunc} id={projectId}/> */}
+          </div>
+          <div id='projectTable'>
+          
+            <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
+            setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName}
+            deletePopup={deletePopup} setDeletePopup={setDeletePopup}/>
+          </div>
+        </div>  
+       
     )
 };
 

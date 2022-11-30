@@ -8,5 +8,14 @@ router.post('/save', projectController.saveProject, (req, res) => {
 
 router.get('/:id', projectController.getProjects, (req, res) => {
   return res.status(200).json(res.locals.projects);
-})
+});
+
+router.patch('/update', projectController.updateProject, (req, res) => {
+  return res.status(200).json(res.locals);
+});
+
+router.delete('/delete/:id', projectController.deleteProject, (req, res) => {
+  return res.status(200).json(res.locals.deleted);
+});
+
 module.exports = router;

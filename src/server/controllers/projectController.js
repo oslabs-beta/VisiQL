@@ -18,9 +18,9 @@ projectController.saveProject = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in projectController.saveProject',
+      log: `error occurred in projectController.saveProject: ${err}`,
       status: 400,
+      message: {err: 'Couldn\'t save project.'},
     });
   }
 };
@@ -38,11 +38,51 @@ projectController.getProjects = async (req, res, next) => {
   }
   catch(err){
     return next({
-      error: err,
-      message: 'couldn\'t get projects',
+      log: `error occurred in projectController.getProjects: ${err}`,
       status: 400,
+      message: {err: 'couldn\'t get projects'},
     });
   }
-}
+};
+
+projectController.updateProject = async (req, res, next) => {
+  const { id, name, schema, date, resolver } = req.body;
+  const updateQuery = `UPDATE projects SET project_name=$1, schema_data=$2, last_updated=$3, resolver_data=$4 WHERE id=${id} RETURNING *`;
+  const values = [name, schema, date, resolver];
+  try{
+    const { rowCount, rows } = await userDb.query(updateQuery, values);
+    // console.log(rowCount);
+    // console.log(rows[0]);
+    res.locals.updated = rows[0];
+    res.locals.success = rowCount === 1 ? 'succesfully updated project' : 'did not update';
+    return next();
+  }
+  catch(err){
+    console.log('error in updateproj:', err);
+    return next({
+      log: `error occurred in projectController.updateProject: ${err}`,
+      status: 400,
+      message: {err: 'couldn\'t update project'},
+    });
+  }
+};
+
+projectController.deleteProject = async (req, res, next) => {
+  const { id } = req.params;
+  const deleteQuery = `DELETE FROM projects WHERE id=${id}`;
+  try{
+    const { rowCount } = await userDb.query(deleteQuery);
+    res.locals.deleted = `${rowCount} project(s) deleted.`
+    console.log(res.locals.deleted)
+    return next();
+  }
+  catch(err){
+    return next({
+      log: `error occurred in projectController.deleteProject: ${err}`,
+      status: 400,
+      message: {err: 'couldn\'t delete project'},
+    });
+  }
+};
 
 module.exports = projectController;

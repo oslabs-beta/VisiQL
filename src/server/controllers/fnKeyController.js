@@ -18,9 +18,9 @@ fnKeyController.parseFnKeyData = async (req, res, next) => {
     
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in fnKeyController.parseFnKeyData',
+      log: `error occured in fnKeyController.parseFnKeyData: ${err}`,
       status: 400,
+      message: {err: 'error parsing foreign keys'},
     });
   }
 };
@@ -42,9 +42,9 @@ fnKeyController.parsePrimaryKeyData = async (req, res, next) => {
     
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in fnKeyController.parsePrimaryKeyData',
+      log: `error occured in fnKeyController.parsePrimaryKeyData: ${err}`,
       status: 400,
+      message: {err: 'error getting primary keys'},
     });
   }
 };

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
-
+import DeleteProject from './DeleteProject';
 const ProjectsGrid = props => {
 
-    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, setProjectId, setProjectName } = props;
+    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName, deletePopup, setDeletePopup } = props;
     const navigate = useNavigate();
+    // const [deletePopup, setDeletePopup] = useState(false);
+
 const columns = [
-  
   { field: 'name', headerName: 'Project Name', minWidth: 250 },
   { field: 'date', headerName: 'Last Updated', minWidth: 500 },
   {
@@ -18,7 +19,7 @@ const columns = [
     width: 250,
     renderCell: (params) => {
         console.log(params);
-      const onClick = (e) => {
+      const openProject = (e) => {
         e.stopPropagation(); // don't select this row after clicking
         // console.log('schema', params.row.schema)
         // console.log('tree', JSON.parse(params.row.tree))
@@ -31,7 +32,26 @@ const columns = [
         
       };
 
-      return <Button onClick={onClick}>Open Project</Button>;
+      return <Button onClick={openProject}>Open Project</Button>;
+    },
+  },
+  {
+    field: 'delete',
+    headerName: '',
+    sortable: false,
+    width: 250,
+    renderCell: (params) => {
+        console.log(params);
+      const deletePop = (e) => {
+        e.stopPropagation(); // don't select this row after clicking
+        const id = params.row.id;
+        setDeletePopup(true);
+        // return (
+        //   <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} id={id} />
+        // )
+      };
+
+      return <Button onClick={deletePop}>Delete Project</Button>;
     },
   },
 ];
@@ -52,9 +72,12 @@ projects.forEach(proj => {
    });
 
   return (
-    <div style={{ height: 1000, width: '90%' }}>
-      <DataGrid rows={rows} columns={columns} pageSize={20} />
+   
+    <div>
+      <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} id={projectId}/>
+      <DataGrid sx={{ height: 1000, width: '90%' }} rows={rows} columns={columns} pageSize={20} />
     </div>
+    
   );
   };
   export default ProjectsGrid;

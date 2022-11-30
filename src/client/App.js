@@ -104,7 +104,7 @@ const App = () => {
         path='/resolver' element={<Resolver />} />
         <Route 
         path='/myprojects' element={<ProjectsPage currentUserId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
-        setResolverData={setResolverData} setProjectId={setProjectId} setProjectName={setProjectName}/>} />
+        setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName}/>} />
 
       </Routes>
     </div>
