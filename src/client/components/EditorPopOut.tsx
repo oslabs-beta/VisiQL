@@ -58,22 +58,18 @@ const EditorPopOut = ({
   };
 
   return(
-    
-    <div className='combined-editor-container'>
-      
-      <div>
-        <Editor
-          padding='20'
-          value={dbSchemaData}
-          onValueChange={(code) => dbSchemaDataOnChange(code)}
-          highlight={(code) => highlight(code, languages.js)}
-          style={{
-            fontFamily: '"Fira code", "Fira Mono", monospace',
-            fontSize: 20,
-          }}
-        />
-      </div>
-      <Tooltip title={currTooltip} placement='top' arrow>
+        <>
+        
+      <Editor
+      className='schema'
+        padding='20'
+        value={dbSchemaData}
+        onValueChange={(code) => dbSchemaDataOnChange(code)}
+        highlight={(code) => highlight(code, languages.js)}
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+          fontSize: 20,
+        }} /><Tooltip title={currTooltip} placement='top' arrow>
         <IconButton
           className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
@@ -81,9 +77,9 @@ const EditorPopOut = ({
         >
           {currIcon}
         </IconButton>
-      </Tooltip>
-      <div>
+      </Tooltip><div>
         <Editor
+        className='resolver'
           padding='20'
           value={resolverData}
           onValueChange={(code) => setResolverData(code)}
@@ -91,10 +87,8 @@ const EditorPopOut = ({
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 20,
-          }}
-        />
-      </div>
-      <Tooltip title={currTooltip} placement='top' arrow>
+          }} />
+      </div><Tooltip title={currTooltip} placement='top' arrow>
         <IconButton
           className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
@@ -103,9 +97,8 @@ const EditorPopOut = ({
           {currIcon}
         </IconButton>
       </Tooltip>
-      
-    </div>
-   
+     
+      </>
   )
 };
 

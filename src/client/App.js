@@ -42,7 +42,7 @@ const App = () => {
   
   const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...')
 
-
+  const [showTree, setShowTree] = useState(true);
   
   
 
@@ -85,6 +85,8 @@ const App = () => {
               setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
+              showTree={showTree}
+              setShowTree={setShowTree}
             />
           }
         />

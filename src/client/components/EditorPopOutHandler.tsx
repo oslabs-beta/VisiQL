@@ -11,6 +11,7 @@ type EditorPopOutHandlerProps = {
   trigger: boolean;
   dbSchemaDataOnChange: Function;
   setResolverData: Function;
+  setShowTree: Function;
 }
 
 const EditorPopOutHandler = ({
@@ -19,7 +20,13 @@ const EditorPopOutHandler = ({
   resolverData,
   dbSchemaDataOnChange,
   setResolverData,
-  trigger, }: EditorPopOutHandlerProps) => {
+  trigger,
+  setShowTree, }: EditorPopOutHandlerProps) => {
+
+  const handleClick = () => {
+    close(false);
+    setShowTree(true);
+  }
   return trigger ? (
     <div className='editor-pop-out'>
     <div className='combined-editor-container'>
@@ -30,10 +37,11 @@ const EditorPopOutHandler = ({
               ':hover': { backgroundColor: '#f1887b' },
             }}
             variant='contained'
-            className='tree-pop-out-close'
-            onClick={() => {
-              close(false);
-            }}
+            className='editor-pop-out-close'
+            onClick={handleClick}
+            // onClick={() => {
+            //   close(false);
+            // }}
           >
             Close
           </Button>

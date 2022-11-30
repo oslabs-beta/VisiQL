@@ -19,6 +19,8 @@ type SchemaContainerProps = {
   dbSchemaDataOnChange: Function;
   resolverData: string;
   setResolverData: Function;
+  showTree: boolean;
+  setShowTree: Function;
 };
 
 
@@ -28,7 +30,8 @@ const SchemaContainer = ({
   dbSchemaDataOnChange,
   resolverData,
   setResolverData,
-  
+  showTree,
+  setShowTree
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
@@ -39,6 +42,12 @@ const SchemaContainer = ({
 //handle state of current tab
   const [tab, setTab] = useState('1');
   const [editorExpand, setEditorExpand] = useState(false);
+  
+
+  const changeDisplay = () => { 
+    setEditorExpand(true);
+    setShowTree(false);
+  }
 
 //handle changing of tabs
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -100,11 +109,9 @@ const SchemaContainer = ({
       <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
         <IconButton
           className='expand-button'
-          onClick={() => {
-            setEditorExpand(true);
-          }}
+          onClick={changeDisplay}
         >
-          {<OpenInNewIcon style={{ fontSize: 50 }} />}
+          {<OpenInNewIcon style={{ fontSize: 45 }} />}
         </IconButton>
       </Tooltip>
       <EditorPopOutHandler
@@ -114,6 +121,7 @@ const SchemaContainer = ({
         trigger={editorExpand}
         dbSchemaDataOnChange={dbSchemaDataOnChange}
         setResolverData={setResolverData}
+        setShowTree={setShowTree}
       />
       
         </TabPanel>
@@ -142,9 +150,7 @@ const SchemaContainer = ({
       <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
         <IconButton
           className='expand-button'
-          onClick={() => {
-            setEditorExpand(true);
-          }}
+          onClick={changeDisplay}
         >
           {<OpenInNewIcon style={{ fontSize: 50 }} />}
         </IconButton>
@@ -156,6 +162,7 @@ const SchemaContainer = ({
         trigger={editorExpand}
         dbSchemaDataOnChange={dbSchemaDataOnChange}
         setResolverData={setResolverData}
+        setShowTree={setShowTree}
       />
         </TabPanel>
      

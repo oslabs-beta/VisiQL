@@ -7,13 +7,13 @@ import { IconButton, Tooltip } from '@mui/material';
 //@ts-ignore
 import TreePopOutHandler from './TreePopOutHandler';
 
-const VisualizerContainer = (props: { data: object }) => {
+const VisualizerContainer = (props: { data: object, showTree: boolean}) => {
   const [treeExpand, setTreeExpand] = useState(false);
-
-  return (
+  
+  return props.showTree? (
     <div>
-      <div className='tree-vis-container'>
-        <div id='diagram'>
+      <div className='tree-vis-container' >
+        <div id='diagram' >
           <Tree data={props.data} />
         </div>
       </div>
@@ -33,6 +33,8 @@ const VisualizerContainer = (props: { data: object }) => {
         trigger={treeExpand}
       />
     </div>
+  ) : (
+    null
   );
 };
 
