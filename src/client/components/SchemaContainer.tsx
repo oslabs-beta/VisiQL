@@ -16,6 +16,7 @@ type SchemaContainerProps = {
   dbSchemaData: string;
   dbSchemaDataOnChange: Function;
   resolverData: string;
+  setResolverData: Function;
 };
 
 
@@ -23,7 +24,8 @@ type SchemaContainerProps = {
 const SchemaContainer = ({
   dbSchemaData,
   dbSchemaDataOnChange,
-  resolverData
+  resolverData,
+  setResolverData,
   
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
@@ -36,7 +38,6 @@ const SchemaContainer = ({
   const [tab, setTab] = useState('1');
 
 //handle changing of tabs
-
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setTab(newValue);
   };
@@ -54,7 +55,9 @@ const SchemaContainer = ({
   const delayedFunc = delay(() => resetIcons(), 3000);
 
   const handleClick = () => {
-    navigator.clipboard.writeText(dbSchemaData);
+   
+    if(tab === '1') navigator.clipboard.writeText(dbSchemaData);
+    else navigator.clipboard.writeText(resolverData);
     setCurrTooltip(<h1>Copied</h1>);
     setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
     delayedFunc();
@@ -69,7 +72,7 @@ const SchemaContainer = ({
           },}}/>
           <Tab className='tab'label='Resolvers' value='2'sx={{color: '#ed6a5a'}}/>
         </TabList>
-        <TabPanel value='1'>
+        <TabPanel value='1' sx={{paddingTop: '0'}}>
         <div className='schema-editor-container'>
         <Editor
           padding='20'
@@ -93,12 +96,12 @@ const SchemaContainer = ({
       </Tooltip>
       
         </TabPanel>
-        <TabPanel value='2'>
+        <TabPanel value='2' sx={{paddingTop: '0'}}>
         <div className='schema-editor-container'>
         <Editor
           padding='20'
           value={resolverData}
-          onValueChange={(code) => dbSchemaDataOnChange(code)}
+          onValueChange={(code) => setResolverData(code)}
           highlight={(code) => highlight(code, languages.js)}
           style={{
             fontFamily: '"Fira code", "Fira Mono", monospace',

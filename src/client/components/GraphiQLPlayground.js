@@ -1,17 +1,34 @@
 import React from 'react';
 import { GraphiQLInterface, GraphiQL } from 'graphiql';
-import { GraphiQLProvider } from '@graphiql/react';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 
-const GraphiQLPlayground = () => {
+import 'graphiql/graphiql.css';
+import Navbar from './Navbar';
+
+const GraphiQLPlayground = ({ dbSchemaData, resolverData }) => {
   const fetcher = createGraphiQLFetcher({
-    url: '/graphql',
+    url: '/request',
   });
+
+  // const generatedGQL = () => {
+  //   // const body = { dbSchemaData, resolverData };
+  //   fetch('/graphql', {
+  //     headers: {
+  //       'Content-Type': 'Application/JSON',
+  //       // Connection: 'Upgrade',
+  //     },
+  //     // body: JSON.stringify(body),
+  //   })
+  //     .then((data) => data.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //     })
+  //     .catch((err) => console.log('dbLink fetch /graphql: ERROR:', err));
+  // };
+  // generatedGQL();
   return (
     <div className='graphiql-container'>
-      <GraphiQLProvider fetcher={fetcher}>
-        <div className='graphiql-container'>Hello GraphQL</div>
-      </GraphiQLProvider>
+      <GraphiQL fetcher={fetcher} />
     </div>
   );
 };

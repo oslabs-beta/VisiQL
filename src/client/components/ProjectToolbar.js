@@ -61,13 +61,13 @@ const ProjectToolbar = (props) => {
     setSaveProjExpand(false);
   };
   const actions = [
-    {
-      icon: <DownloadIcon fontSize='large' />,
-      name: 'Download',
-      function: function () {
-        setSaveProjExpand(true);
-      },
-    },
+    // {
+    //   icon: <DownloadIcon fontSize='large' />,
+    //   name: 'Download',
+    //   function: function () {
+    //     insert download functionality
+    //   },
+    // },
     {
       icon: <SaveIcon fontSize='large' />,
       name: 'Save Project',

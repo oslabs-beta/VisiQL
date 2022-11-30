@@ -104,7 +104,12 @@ const App = () => {
         <Route
           path='/gqlplayground'
           element={
-            <GraphiQLPlayground loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <GraphiQLPlayground
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              resolverData={resolverData}
+              dbSchemaData={dbSchemaData}
+            />
           }
         />
       </Routes>

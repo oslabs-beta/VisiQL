@@ -8,13 +8,17 @@ const treeController = require('../controllers/treeController');
 const schemaGen = require('../controllers/schemaGen');
 const resolverController = require('../controllers/resolverController');
 
-router.post('/resolver', dbLinkController.connectDb,
-dbLinkController.extractFnKeys,
-fnKeyController.parseFnKeyData,
-fnKeyController.parsePrimaryKeyData,
-dbSchemaController.getSchema,
-resolverController.genResolver, 
-(req, res) => res.status(200).json(res.locals.resolverString));
+router.post(
+  '/resolver',
+  dbLinkController.connectDb,
+  dbLinkController.extractFnKeys,
+  fnKeyController.parseFnKeyData,
+  fnKeyController.parsePrimaryKeyData,
+  dbSchemaController.getSchema,
+  resolverController.genResolver,
+  // start the 4000 server
+  (req, res) => res.status(200).json(res.locals.resolverString)
+);
 
 router.post(
   '/',
