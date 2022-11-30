@@ -7,6 +7,7 @@ const authController = require('../controllers/authController');
 const treeController = require('../controllers/treeController');
 const schemaGen = require('../controllers/schemaGen');
 const resolverController = require('../controllers/resolverController');
+const mutationController = require('../controllers/mutationController');
 
 router.post('/resolver', dbLinkController.connectDb,
 dbLinkController.extractFnKeys,
@@ -14,6 +15,7 @@ fnKeyController.parseFnKeyData,
 fnKeyController.parsePrimaryKeyData,
 dbSchemaController.getSchema,
 resolverController.genResolver, 
+mutationController.mutationResolver, 
 (req, res) => res.status(200).json(res.locals.resolverString));
 
 router.post(
@@ -26,6 +28,7 @@ router.post(
   treeController.treeSchema,
   schemaGen.genSchema,
   resolverController.genResolver,
+  mutationController.mutationSchema, 
   (req, res) => {
     return res.status(202).json(res.locals);
   }
