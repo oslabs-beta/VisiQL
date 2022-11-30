@@ -19,7 +19,7 @@ const VisualizerContainer = (props: { data: object }) => {
       </div>
       <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
         <IconButton
-          className='expand-button'
+          className='tree-expand-button'
           onClick={() => {
             setTreeExpand(true);
           }}
@@ -32,7 +32,6 @@ const VisualizerContainer = (props: { data: object }) => {
         close={setTreeExpand}
         trigger={treeExpand}
       />
-      {/* <Diagram data={props.data} /> */}
     </div>
   );
 };

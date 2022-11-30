@@ -12,39 +12,25 @@ import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import EditorPopOutHandler from './EditorPopOutHandler';
 
-
-
-type SchemaContainerProps = {
+type EditorPopOutProps = {
   dbSchemaData: string;
   dbSchemaDataOnChange: Function;
   resolverData: string;
   setResolverData: Function;
+  close: Function;
 };
 
-
-
-const SchemaContainer = ({
+const EditorPopOut = ({
   dbSchemaData,
-  dbSchemaDataOnChange,
+  dbSchemaDataOnChange, 
   resolverData,
-  setResolverData,
-  
-}: SchemaContainerProps) => {
+  setResolverData, 
+  close,
+}: EditorPopOutProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
   );
   const [currTooltip, setCurrTooltip] = useState(<h1>Copy</h1>);
-
-  const [currClick, setCurrClick] = useState(false);
-//handle state of current tab
-  const [tab, setTab] = useState('1');
-  const [editorExpand, setEditorExpand] = useState(false);
-
-//handle changing of tabs
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-    setTab(newValue);
-  };
-
   const resetIcons = () => {
     setCurrTooltip(<h1>Copy</h1>);
     setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
@@ -57,26 +43,25 @@ const SchemaContainer = ({
   }
   const delayedFunc = delay(() => resetIcons(), 3000);
 
-  const handleClick = () => {
-   
-    if(tab === '1') navigator.clipboard.writeText(dbSchemaData);
-    else navigator.clipboard.writeText(resolverData);
+  const handleClickSch = () => {
+    navigator.clipboard.writeText(dbSchemaData);
     setCurrTooltip(<h1>Copied</h1>);
     setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
     delayedFunc();
   };
 
-  return (
-    <div>
-      <TabContext value={tab} >
-        <TabList className='tab-list' aria-label='Tabs' onChange={handleChange} centered >
-          <Tab className='tab' label='Schema' value='1' sx={{color: '#ed6a5a', '& .MuiTabs-indicator': {bgcolor: '#5ca4a9'}, '& .Mui-selected': {color: '#5ca4a9', 
+  const handleClickRes = () => {
+    navigator.clipboard.writeText(resolverData);
+    setCurrTooltip(<h1>Copied</h1>);
+    setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
+    delayedFunc();
+  };
 
-          },}}/>
-          <Tab className='tab'label='Resolvers' value='2'sx={{color: '#ed6a5a'}}/>
-        </TabList>
-        <TabPanel value='1' sx={{paddingTop: '0'}}>
-        <div className='schema-editor-container'>
+  return(
+    
+    <div className='combined-editor-container'>
+      
+      <div>
         <Editor
           padding='20'
           value={dbSchemaData}
@@ -92,33 +77,12 @@ const SchemaContainer = ({
         <IconButton
           className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
-          onClick={handleClick}
+          onClick={handleClickSch}
         >
           {currIcon}
         </IconButton>
       </Tooltip>
-      <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
-        <IconButton
-          className='expand-button'
-          onClick={() => {
-            setEditorExpand(true);
-          }}
-        >
-          {<OpenInNewIcon style={{ fontSize: 50 }} />}
-        </IconButton>
-      </Tooltip>
-      <EditorPopOutHandler
-        dbSchemaData={dbSchemaData}
-        resolverData={resolverData}
-        close={setEditorExpand}
-        trigger={editorExpand}
-        dbSchemaDataOnChange={dbSchemaDataOnChange}
-        setResolverData={setResolverData}
-      />
-      
-        </TabPanel>
-        <TabPanel value='2' sx={{paddingTop: '0'}}>
-        <div className='schema-editor-container'>
+      <div>
         <Editor
           padding='20'
           value={resolverData}
@@ -134,35 +98,15 @@ const SchemaContainer = ({
         <IconButton
           className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
-          onClick={handleClick}
+          onClick={handleClickRes}
         >
           {currIcon}
         </IconButton>
       </Tooltip>
-      <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
-        <IconButton
-          className='expand-button'
-          onClick={() => {
-            setEditorExpand(true);
-          }}
-        >
-          {<OpenInNewIcon style={{ fontSize: 50 }} />}
-        </IconButton>
-      </Tooltip>
-      <EditorPopOutHandler
-        dbSchemaData={dbSchemaData}
-        resolverData={resolverData}
-        close={setEditorExpand}
-        trigger={editorExpand}
-        dbSchemaDataOnChange={dbSchemaDataOnChange}
-        setResolverData={setResolverData}
-      />
-        </TabPanel>
-     
-      </TabContext>
       
     </div>
-  );
+   
+  )
 };
 
-export default SchemaContainer;
+export default EditorPopOut;
