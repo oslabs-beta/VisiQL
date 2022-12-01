@@ -1,6 +1,6 @@
 # VisiQL
 
-GraphQL is a query language for APIs that allows for engineers to customize their requests to ensure the data delivered is exactly what they need for their projects and nothing more. VisiQL was created by a small team of engineers who are passionate about encouraging other developers to get started with using GraphQL’s powerful abilities in their own projects. VisiQL accomplishes this by abstracting away the heavy lifting of creating the necessary schemas and resolvers for querying PostgresQL databases with GraphQL, and providing sophisticated visualization tools to allow developers to easily customize and add to VisiQL’s generated code to save time standing up the rest of their queries.
+GraphQL is a query language for APIs that allows for engineers to customize their requests to ensure the data delivered is exactly what they need for their projects and nothing more. VisiQL was created by a small team of engineers who are passionate about encouraging other developers to get started with using GraphQL’s powerful abilities in their own projects. VisiQL accomplishes this by abstracting away the heavy lifting of creating the necessary schemas and resolvers for querying PostgreSQL databases with GraphQL, and providing sophisticated visualization tools to allow developers to easily customize and add to VisiQL’s generated code to save time standing up the rest of their queries.
 
 Getting started with VisiQL is easy. Simply fork our repo, clone to your local machine, and install all dependencies.
 From there run:
