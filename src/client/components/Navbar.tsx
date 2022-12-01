@@ -1,7 +1,6 @@
-import { ElevatorSharp } from '@mui/icons-material';
 import { Button } from '@mui/material';
 import React from 'react';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/VisiQLLogo.png';
 import styles from './scss/_index.scss';
 
@@ -21,7 +20,6 @@ type NavbarProps = {
 const Navbar = ({
   loggedIn,
   setCurrentUserId,
-  notSignedInPop,
   setNotSignedInPop,
   dbSchemaDataOnChange,
   setTreeData,

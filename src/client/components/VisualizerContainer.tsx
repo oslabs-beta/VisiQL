@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 //@ts-ignore
 import Tree from './Tree';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';

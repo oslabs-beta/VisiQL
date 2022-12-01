@@ -1,16 +1,10 @@
 import React, { useRef, useEffect, useState } from 'react';
 import {
   select,
-  create,
-  event,
-  line,
-  selectAll,
-  curveCardinal,
   hierarchy,
   tree,
   linkHorizontal,
-  link, zoom, 
-  
+  zoom,  
 } from 'd3';
 
 

@@ -1,7 +1,4 @@
-import { dividerClasses } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import DeleteProject from './DeleteProject';
-import Navbar from './Navbar';
+import React, { useState } from 'react';
 import ProjectsGrid from './ProjectsGrid';
 
 const ProjectsPage = (props) => {
@@ -30,8 +27,6 @@ const ProjectsPage = (props) => {
   };
 
   fetchData();
-  // setProjectId(null); //reset projectid and projectname each time the projects page is loaded
-  // setProjectName(null);
 
   return (
     <div id='project-page'>
