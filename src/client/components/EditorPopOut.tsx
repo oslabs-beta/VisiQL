@@ -4,13 +4,9 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-okaidia.css';
-import { Box } from '@mui/system';
-import { Button, IconButton, Tooltip, Typography, Tab } from '@mui/material';
-import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { IconButton, Tooltip } from '@mui/material'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import EditorPopOutHandler from './EditorPopOutHandler';
 
 type EditorPopOutProps = {
   dbSchemaData: string;
@@ -25,7 +21,7 @@ const EditorPopOut = ({
   dbSchemaDataOnChange, 
   resolverData,
   setResolverData, 
-  close,
+  // close,
 }: EditorPopOutProps) => {
   const [currSchIcon, setCurrSchIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />

@@ -4,8 +4,7 @@ import { highlight, languages } from 'prismjs/components/prism-core';
 import 'prismjs/components/prism-clike';
 import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-okaidia.css';
-import { Box } from '@mui/system';
-import { Button, IconButton, Tooltip, Typography, Tab } from '@mui/material';
+import { IconButton, Tooltip, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
@@ -30,7 +29,6 @@ const SchemaContainer = ({
   dbSchemaDataOnChange,
   resolverData,
   setResolverData,
-  showTree,
   setShowTree
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
@@ -38,7 +36,7 @@ const SchemaContainer = ({
   );
   const [currTooltip, setCurrTooltip] = useState(<h1>Copy</h1>);
 
-  const [currClick, setCurrClick] = useState(false);
+  // const [currClick, setCurrClick] = useState(false);
 //handle state of current tab
   const [tab, setTab] = useState('1');
   const [editorExpand, setEditorExpand] = useState(false);

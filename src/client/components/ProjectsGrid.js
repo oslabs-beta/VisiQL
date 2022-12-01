@@ -9,7 +9,7 @@ const ProjectsGrid = props => {
     const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName, deletePopup, setDeletePopup, setGetData } = props;
     const [projectDeleted, setProjectDeleted ] = useState(false);
     const navigate = useNavigate();
-    // const [deletePopup, setDeletePopup] = useState(false);
+    
 
     const deleteProjectFunc = async () => {
       console.log('projectid in deletefunc', projectId);

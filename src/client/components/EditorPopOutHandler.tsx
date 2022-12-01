@@ -1,7 +1,5 @@
 import React from 'react';
 import { Button } from '@mui/material';
-import { useState, useEffect } from 'react';
-import SchemaContainer from './SchemaContainer';
 import EditorPopOut from './EditorPopOut';
 
 type EditorPopOutHandlerProps = {

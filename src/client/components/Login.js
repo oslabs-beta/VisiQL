@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Grid, Paper, TextField, InputAdornment, Button, Input, IconButton, imageListItemBarClasses } from '@mui/material';
+import { Container, Grid, Paper, TextField, InputAdornment, Button, IconButton } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import logo from '../assets/VisiQLLogo.png';
