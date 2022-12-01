@@ -5,7 +5,6 @@ import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
 import ProjectToolbar from './ProjectToolbar';
 
-
 const useInput = (init) => {
   const [value, setValue] = useState(init);
   const onChange = (e) => {

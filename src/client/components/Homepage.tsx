@@ -19,6 +19,8 @@ type HomepageProps = {
   setResolverData: Function;
   showTree: boolean;
   setShowTree: Function;
+  notSignedInPop: Boolean;
+  setNotSignedInPop: Function;
 };
 
 const Homepage = ({
@@ -32,13 +34,14 @@ const Homepage = ({
   resolverData,
   setResolverData,
   showTree,
-  setShowTree
+  setShowTree,
+  notSignedInPop,
+  setNotSignedInPop,
 }: HomepageProps) => {
-  const [notSignedInPop, setNotSignedInPop] = useState(false);
   return (
     <div id='homepage-container'>
       <Navbar
-        isLoggedIn={loggedIn}
+        loggedIn={loggedIn}
         setCurrentUserId={setCurrentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}

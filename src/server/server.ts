@@ -10,6 +10,7 @@ const PORT = 3000;
 const dbLinkRouter = require('./routes/dbLink');
 const userRouter = require('./routes/userRouter');
 const projectRouter = require('./routes/projectRouter');
+const graphqlController = require('./routes/graphqlRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
 
@@ -46,7 +47,7 @@ app.use('/projects', projectRouter);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
-  res.status(200);
+  res.status(200).json('success');
 });
 
 // catch all error handler
@@ -66,7 +67,6 @@ app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
-
 
 app.listen(PORT, () => console.log('server listening on port ' + PORT));
 module.exports = app;

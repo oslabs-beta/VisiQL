@@ -10,7 +10,6 @@ authController.checkToken = (req, res, next) => {
     return next();
   } else {
     jwt.verify(authCookie, process.env.ACCESS_TOKEN_SERVER, (err, user) => {
-      console.log('test name and id', user.name, user.id);
       if (err) {
         res.locals.authenticate = 'fail';
         return next();

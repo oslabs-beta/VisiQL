@@ -7,7 +7,7 @@
   "scripts": {
     "start": "NODE_ENV=production node src/server/server.ts",
     "build": "NODE_ENV=production webpack",
-    "dev": "NODE_ENV=development webpack serve --open --hot & nodemon src/server/server.ts",
+    "dev": "NODE_ENV=development webpack serve --open --hot & nodemon src/server/server.ts src/server/routes/graphqlRouter.ts",
     "test": "jest --forceExit",
     "tsc": "tsc"
   },
@@ -23,8 +23,11 @@
   },
   "homepage": "https://github.com/oslabs-beta/VisiQL#readme",
   "dependencies": {
+    "@apollo/server": "^4.2.2",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
+    "@graphiql/react": "^0.15.0",
+    "@graphiql/toolkit": "^0.8.0",
     "@mui/icons-material": "^5.10.14",
     "@mui/lab": "^5.0.0-alpha.109",
     "@mui/material": "^5.10.13",
@@ -34,6 +37,7 @@
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
+    "apollo-server": "^3.11.1",
     "bcrypt": "^5.1.0",
     "bootstrap": "^5.2.2",
     "cookie-parser": "^1.4.6",
@@ -41,6 +45,9 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "file-loader": "^6.2.0",
+    "graphiql": "^2.2.0",
+    "graphql": "^16.6.0",
+    "graphql-ws": "^5.11.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "prismjs": "^1.29.0",
@@ -56,7 +63,8 @@
     "ts-node": "^10.9.1",
     "tsc": "^2.0.4",
     "tsc-loader": "^1.0.4",
-    "typescript": "^4.8.4"
+    "typescript": "^4.8.4",
+    "ws": "^8.11.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
