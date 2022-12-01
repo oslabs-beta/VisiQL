@@ -12,14 +12,14 @@ Upon logging in or continuing as a guest, enter your desired PostgresQL database
 
 Toggle on the left hand side between the Schema and Resolvers tabs to review the code, or click the open button on the code editor to see both the generated Schema and Resolver in one view. You can also edit this generated code, right from within the editors and easily copy your changes.
 
-![SchemaEditors Step 2](https://user-images.githubusercontent.com/13178363/205095993-02de2679-af3b-4985-aaf8-396a6d8d343b.gif)
+![SchemaEditor Step2](https://user-images.githubusercontent.com/13178363/205098399-44baabca-8828-4c57-8ca5-b388cee5879a.gif)
+
 
 Visualize your Database
 
 On the left hand side, you will see a tree graph generated from your PostgresQL database. Click on the nodes to collapse and expand the table data and focus on only one part of your database. Or, use your trackpad or mouse to zoom in on your tree graph, clicking and dragging to view different parts of your database in finer detail. Hover over foreign keys to highlight relationships with primary keys and associated table data. If you need a bigger space to work with your database visualization, click the open button on the bottom right side of the visualizer panel. The same zoom, pan, and highlighting functionality is available in this larger view.
 
-![Visualizer Step 3](https://user-images.githubusercontent.com/13178363/205096055-4a42eea5-7fa1-485e-9338-ac0d4e4d6eed.gif)
-
+![Visualizer Step 3](https://user-images.githubusercontent.com/13178363/205099466-7b426d96-dca6-4107-987e-60add8674f26.gif)
 
 Saving your Project
 
