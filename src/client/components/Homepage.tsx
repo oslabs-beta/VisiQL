@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import DBInput from './DBInput';
 //@ts-ignore
 import NotSignedIn from './NotSignedIn';
-import ProjectSide from './ProjectSide';
+
 
 type HomepageProps = {
   loggedIn: Boolean;
