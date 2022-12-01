@@ -6,7 +6,7 @@ import DeleteProject from './DeleteProject';
 import ProjectDeleted from './ProjectDeleted';
 const ProjectsGrid = props => {
 
-    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName, deletePopup, setDeletePopup } = props;
+    const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName, deletePopup, setDeletePopup, setGetData } = props;
     const [projectDeleted, setProjectDeleted ] = useState(false);
     const navigate = useNavigate();
     // const [deletePopup, setDeletePopup] = useState(false);
@@ -83,9 +83,13 @@ projects.forEach(proj => {
    
     <div>
       <h1 id='projectTitle'>My Projects</h1>
-      <DeleteProject trigger={deletePopup} close={setDeletePopup} id={projectId} deleteProjectFunc={deleteProjectFunc} />
-      <ProjectDeleted trigger={projectDeleted} close={setProjectDeleted} />
+      <div>
       <DataGrid sx={{ m: 2, border: 2, width:'100em', borderColor: '#ed6a5a', height: 1000, }} rows={rows} columns={columns} pageSize={20} />
+      </div>
+       <div id='deletePopup'>
+         <DeleteProject trigger={deletePopup} close={setDeletePopup} projectId={projectId} deleteProjectFunc={deleteProjectFunc} />
+         <ProjectDeleted trigger={projectDeleted} close={setProjectDeleted} setGetData={setGetData}/>
+        </div>
     </div>
     
   );

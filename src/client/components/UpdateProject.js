@@ -10,7 +10,7 @@ const UpdateProject = (props) => {
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h3>Update Project</h3>
+        <h1>Update Project</h1>
         <TextField 
           placeholder='(optional) enter new name'
           style={{ width: 300 }}

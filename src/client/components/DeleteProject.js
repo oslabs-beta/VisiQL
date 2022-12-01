@@ -6,7 +6,7 @@ const DeleteProject = (props) => {
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h3>Are you sure you want to delete this project?</h3>
+        <h1>Are you sure you want to delete this project?</h1>
         <div className='project-save-cancel-buttons'>
           <Button
             variant='contained'

@@ -26,13 +26,11 @@ projectController.saveProject = async (req, res, next) => {
 };
 
 projectController.getProjects = async (req, res, next) => {
-  console.log('in get projects');
   const { id } = req.params;
-  console.log('id in getprojects:', id)
   try{
     const projectQuery = `SELECT * FROM projects WHERE user_id = ${id}`
     const { rows } = await userDb.query(projectQuery);
-    console.log('the data', rows);
+    // console.log('the data', rows);
     res.locals.projects = rows;
     return next();
   }
@@ -51,8 +49,6 @@ projectController.updateProject = async (req, res, next) => {
   const values = [name, schema, date, resolver];
   try{
     const { rowCount, rows } = await userDb.query(updateQuery, values);
-    // console.log(rowCount);
-    // console.log(rows[0]);
     res.locals.updated = rows[0];
     res.locals.success = rowCount === 1 ? true : false;
     return next();

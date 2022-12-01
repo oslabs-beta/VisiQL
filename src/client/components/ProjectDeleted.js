@@ -16,7 +16,7 @@ const ProjectDeleted = (props) => {
           }}
           onClick={() => {
             props.close(false);
-            navigate('/myprojects');
+            props.setGetData(true);
         }}
         >
           Back to Projects

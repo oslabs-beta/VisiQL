@@ -8,40 +8,34 @@ const ProjectsPage = (props) => {
     const [projects, updateProjects] = useState([]);
     const [deletePopup, setDeletePopup] = useState(false);
     const {currentUserId, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName} = props;
-  
-    useEffect(() =>{
+    const [getData, setGetData] = useState(true)
+
+    
     const fetchData = async () => {
-        console.log('id:', currentUserId)
-    const data = await fetch(`/projects/${currentUserId}`, {
-        headers: {'Content-Type': 'application/json'},
-    });
-    const projectList = await data.json();
-    updateProjects(projectList);  
-};
+      if (!getData) return;
+      console.log('id:', currentUserId)
+      const data = await 
+      fetch(`/projects/${currentUserId}`, {
+          headers: {'Content-Type': 'application/json'},
+      });
+      const projectList = await data.json();
+      updateProjects(projectList); 
+      setGetData(false); 
+    };
+
 fetchData();
 // setProjectId(null); //reset projectid and projectname each time the projects page is loaded
 // setProjectName(null);
-}, []);
 
 
-console.log('projects:', projects); //need to pass navbar props?
 
     return (
-       
-           
+          
         <div id='project-page'> 
-            <Navbar isLoggedIn={loggedIn}
-        setCurrentUserId={setCurrentUserId}
-        notSignedInPop={notSignedInPop}
-        setNotSignedInPop={setNotSignedInPop}
-        setTreeData={setTreeData}
-        dbSchemaDataOnChange={dbSchemaDataOnChange}
-        setResolverData={setResolverData}
-        blankTree={blankTree}/> 
           <div id='projectTable'>
             <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
             setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName}
-            deletePopup={deletePopup} setDeletePopup={setDeletePopup}/>
+            deletePopup={deletePopup} setDeletePopup={setDeletePopup} setGetData={setGetData}/>
           </div>
         </div>  
        
