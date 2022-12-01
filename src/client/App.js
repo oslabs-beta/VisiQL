@@ -32,6 +32,7 @@ const App = () => {
   };
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(''); //should we set this to null to by typesafe?
+  const [notSignedInPop, setNotSignedInPop] = useState(false);
 
   //starting treedata from top
   const [dbSchemaData, dbSchemaDataOnChange] = useState(
@@ -79,11 +80,23 @@ const App = () => {
               setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
             />
           }
         />
 
-        <Route path='/about' element={<About />} />
+        <Route
+          path='/about'
+          element={
+            <About
+              loggedIn={loggedIn}
+              setCurrentUserId={setCurrentUserId}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
+            />
+          }
+        />
         <Route
           path='/login'
           element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
@@ -98,6 +111,8 @@ const App = () => {
               dbSchemaDataOnChange={dbSchemaDataOnChange}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
+              resolverData={resolverData}
+              dbSchemaData={dbSchemaData}
             />
           }
         />

@@ -32,6 +32,7 @@ router.post(
   schemaGen.genSchema,
   resolverController.genResolver,
   mutationController.mutationSchema,
+  mutationController.mutationResolver,
   (req, res) => {
     return res.status(202).json(res.locals);
   }

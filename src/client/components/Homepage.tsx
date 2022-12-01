@@ -17,6 +17,8 @@ type HomepageProps = {
   setTreeData: Function;
   resolverData: String;
   setResolverData: Function;
+  notSignedInPop: Boolean;
+  setNotSignedInPop: Function;
 };
 
 const Homepage = ({
@@ -28,18 +30,27 @@ const Homepage = ({
   treeData,
   setTreeData,
   resolverData,
-  setResolverData
+  setResolverData,
+  notSignedInPop,
+  setNotSignedInPop,
 }: HomepageProps) => {
-  const [notSignedInPop, setNotSignedInPop] = useState(false);
   return (
     <div id='homepage-container'>
       <Navbar
-        isLoggedIn={loggedIn}
+        loggedIn={loggedIn}
         setCurrentUserId={setCurrentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
       />
-      <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} />
+      <DBInput
+        currentUserId={currentUserId}
+        dbSchemaData={dbSchemaData}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        treeData={treeData}
+        setTreeData={setTreeData}
+        resolverData={resolverData}
+        setResolverData={setResolverData}
+      />
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
       {/* <ProjectSide /> */}
     </div>

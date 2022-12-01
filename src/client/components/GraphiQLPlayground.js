@@ -5,11 +5,17 @@ import { createGraphiQLFetcher } from '@graphiql/toolkit';
 import 'graphiql/graphiql.css';
 import Navbar from './Navbar';
 
-const GraphiQLPlayground = ({ dbSchemaData, resolverData }) => {
+const GraphiQLPlayground = ({
+  dbSchemaData,
+  resolverData,
+  loggedIn,
+  setCurrentUserId,
+  notSignedInPop,
+  setNotSignedInPop,
+}) => {
   const fetcher = createGraphiQLFetcher({
     url: '/request',
   });
-
   // const generatedGQL = () => {
   //   // const body = { dbSchemaData, resolverData };
   //   fetch('/graphql', {
@@ -27,8 +33,16 @@ const GraphiQLPlayground = ({ dbSchemaData, resolverData }) => {
   // };
   // generatedGQL();
   return (
-    <div className='graphiql-container'>
-      <GraphiQL fetcher={fetcher} />
+    <div>
+      <Navbar
+        loggedIn={loggedIn}
+        setCurrentUserId={setCurrentUserId}
+        notSignedInPop={notSignedInPop}
+        setNotSignedInPop={setNotSignedInPop}
+      />
+      <div className='graphiql-container'>
+        <GraphiQL fetcher={fetcher} />
+      </div>
     </div>
   );
 };

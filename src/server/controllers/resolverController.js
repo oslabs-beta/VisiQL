@@ -18,7 +18,10 @@ resolverController.genResolver = (req, res, next) => {
     // below: add resolver for singular of table name (if plural)
 
     // if table name ends in consonant + "s"
-    if (/[^aeiou]/i.test(table[table.length - 2]) && /s/i.test(table[table.length - 1])) {
+    if (
+      /[^aeiou]/i.test(table[table.length - 2]) &&
+      /s/i.test(table[table.length - 1])
+    ) {
       const tableSingular = table.slice(0, -1);
       let singLogic = '  try {\n';
       singLogic += `      const queryStr = \`SELECT * FROM ${table} WHERE _id = $1\`;\n      const values = [ args._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0];\n`;
@@ -50,7 +53,7 @@ resolverController.genResolver = (req, res, next) => {
       resolverString += `  ${tableSingular}: async (parent, args, context) => {\n  ${singLogic}\n  },\n`;
     }
   }
-  resolverString += '},\n\n'
+  resolverString += '},\n\n';
 
   // logic for foreign keys to primary tables --------------------------------------------
   for (const foreignTable in fnKeys) {
@@ -58,34 +61,37 @@ resolverController.genResolver = (req, res, next) => {
     //logic to format table name type
     const upperCamelCase = (table) => {
       const changeCase = Array.from(table);
-    for (let i = 0; i < changeCase.length; i++){
-      // table names: make snake case into camel case
-      if (changeCase[i] === '_' && changeCase[i+1]) {
-          changeCase[i+1] = changeCase[i+1].toUpperCase();
+      for (let i = 0; i < changeCase.length; i++) {
+        // table names: make snake case into camel case
+        if (changeCase[i] === '_' && changeCase[i + 1]) {
+          changeCase[i + 1] = changeCase[i + 1].toUpperCase();
           changeCase[i] = '';
-       } else if (changeCase[i] === '_' && !changeCase[i+1]) {
-          changeCase[i] = ''
-      };
-      // table names: changing plural to singular
-          if( /[^aeiou]/i.test(changeCase[changeCase.length-2]) && /s/i.test(changeCase[changeCase.length-1])){
-           changeCase[changeCase.length-1] = '';
-          };
+        } else if (changeCase[i] === '_' && !changeCase[i + 1]) {
+          changeCase[i] = '';
+        }
+        // table names: changing plural to singular
+        if (
+          /[^aeiou]/i.test(changeCase[changeCase.length - 2]) &&
+          /s/i.test(changeCase[changeCase.length - 1])
+        ) {
+          changeCase[changeCase.length - 1] = '';
+        }
       }
       changeCase[0] = changeCase[0].toUpperCase();
       //final version of formatted table type
       return changeCase.join('');
-    }
-    exportString += ` ${upperCamelCase(foreignTable)},`
+    };
+    exportString += ` ${upperCamelCase(foreignTable)},`;
     resolverString += `${upperCamelCase(foreignTable)}: {\n`;
     for (const foreignKey in fnKeys[foreignTable]) {
       const primaryTable = Object.keys(fnKeys[foreignTable][foreignKey]);
-      const primaryColumn = Object.values(foreignKey);     
+      const primaryColumn = Object.values(foreignKey);
       resolverString += `  ${foreignKey}_info: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${primaryTable[0]} WHERE _id = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
 
       // matches from foreign keys
       // ????/ not WHERE _id = $1 but need WHERE species_id = $1
       if (primKeys.hasOwnProperty(foreignTable)) {
-        primKeys[foreignTable].forEach(ele => {
+        primKeys[foreignTable].forEach((ele) => {
           const fnColumns = Object.keys(fnKeys[ele]);
           // console.log('fnColumns: ', fnColumns);
           // console.log('foreignTable: ', foreignTable);
@@ -98,10 +104,12 @@ resolverController.genResolver = (req, res, next) => {
             }
           }
 
-          resolverString += `  ${ele}: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${ele} WHERE ${fnColumnName || '_id'} = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
-        })
+          resolverString += `  ${ele}: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${ele} WHERE ${
+            fnColumnName || '_id'
+          } = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
+        });
         delete primKeys[foreignTable];
-      };
+      }
     }
     resolverString += '},\n';
   }
@@ -130,10 +138,8 @@ resolverController.genResolver = (req, res, next) => {
       return changeCase.join('');
     };
 
-    exportString += ` ${upperCamelCase(prim)},`
+    exportString += ` ${upperCamelCase(prim)},`;
     resolverString += `${upperCamelCase(prim)}: {\n`;
-
-    
 
     primKeys[prim].forEach((ele) => {
       const fnColumns = Object.keys(fnKeys[ele]);
@@ -146,14 +152,22 @@ resolverController.genResolver = (req, res, next) => {
         }
       }
 
-      resolverString += `  ${ele}: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${ele} WHERE ${fnColumnName || '_id'} = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
+      resolverString += `  ${ele}: async (parent, args, context) => {\n    try {\n      const queryStr = 'SELECT * FROM ${ele} WHERE ${
+        fnColumnName || '_id'
+      } = $1';\n      const values = [ parent._id ]\n      const { rows } = await ${databaseName}.query(queryStr, values);\n      return rows[1] ? rows : rows[0]\n    } catch (err) {\n      console.log(err);\n    }\n  },\n`;
     });
     resolverString += '},\n\n';
   }
   exportString += ' Mutation }';
   res.locals.exportString = exportString;
   res.locals.resolverString = resolverString || 'Resolver Creation Error';
+  // for resolver logic for graphiQL server @4000
+  const resolverLogic = resolverString.replace('\n', '');
+  // res.locals.resolverLogic = { resolverLogic };
+  // console.log(res.locals.resolverLogic);
+  // for extracting just names of each resolver
+  // res.locals.resolverNames = exportString.slice(19, -2);
   return next();
-}
+};
 
 module.exports = resolverController;

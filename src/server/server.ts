@@ -47,7 +47,7 @@ app.use('/projects', projectRouter);
 
 // send database link to appropriate router
 app.use('/db', dbLinkRouter, (req, res) => {
-  res.status(200);
+  res.status(200).json('success');
 });
 
 // catch all error handler

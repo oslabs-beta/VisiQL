@@ -1,4 +1,7 @@
-const { ApolloServer } = require('apollo-server');
+import { NextFunction } from 'express';
+
+const { ApolloServer, gql } = require('apollo-server');
+
 const { typeDefs } = require('./schema');
 const {
   Query,
@@ -35,24 +38,8 @@ const server = new ApolloServer({
   },
 });
 
-/*
 // server will be listening at 4000
 //@ts-ignore
 server.listen().then(({ url }) => {
   console.log('Server listening at ' + url);
 });
-
-// this would be one middleware
-const server = new ApolloServer({
-  typeDefs,
-  resolvers: {
-    ...res.local.resolverNames,
-  },
-});
-
-// server will be listening at 4000
-//@ts-ignore
-server.listen().then(({ url }) => {
-  console.log('Server listening at ' + url);
-});
-*/
