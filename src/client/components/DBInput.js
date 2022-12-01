@@ -18,14 +18,20 @@ const DBInput = (props) => {
   const [dataReceived, setDataReceived] = useState(false);
 
   const {
-    loggedIn,
-    setLoggedIn,
+    projectId,
+    setProjectId,
+    projectName,
+    setProjectName,
+    showTree,
+    setShowTree,
     dbSchemaData,
     dbSchemaDataOnChange,
     treeData,
     setTreeData,
     resolverData,
     setResolverData,
+    loggedIn,
+    setLoggedIn,
     setNotSignedInPop,
     notSignedInPop,
   } = props;
@@ -52,6 +58,8 @@ const DBInput = (props) => {
           setDataReceived(true);
           setTreeData(data.tree);
           console.log(dbSchemaData);
+          setProjectId(null); //reset projectid and projectname after new submission so data from update isn't overwritten
+          setProjectName(null);
         })
         .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
     }
@@ -91,8 +99,14 @@ const DBInput = (props) => {
           dbSchemaDataOnChange={dbSchemaDataOnChange}
           resolverData={resolverData}
           setResolverData={setResolverData}
+          showTree={showTree}
+          setShowTree={setShowTree}
         />
-        <VisualizerContainer data={treeData} />
+        <VisualizerContainer
+          data={treeData}
+          showTree={showTree}
+          setShowTree={setShowTree}
+        />
         <ProjectToolbar
           loggedIn={loggedIn}
           setLoggedIn={setLoggedIn}
@@ -101,6 +115,11 @@ const DBInput = (props) => {
           currentUserId={props.currentUserId}
           setNotSignedInPop={setNotSignedInPop}
           notSignedInPop={notSignedInPop}
+          resolverData={resolverData}
+          projectId={projectId}
+          setProjectId={setProjectId}
+          projectName={projectName}
+          setProjectName={setProjectName}
         />
       </div>
     </div>

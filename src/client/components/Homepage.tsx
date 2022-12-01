@@ -18,8 +18,15 @@ type HomepageProps = {
   setTreeData: Function;
   resolverData: String;
   setResolverData: Function;
+  blankTree: Object;
+  projectId: Number;
+  setProjectId: Function;
+  projectName: String;
+  setProjectName: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
+  showTree: boolean;
+  setShowTree: Function;
 };
 
 const Homepage = ({
@@ -32,8 +39,15 @@ const Homepage = ({
   setTreeData,
   resolverData,
   setResolverData,
+  blankTree,
+  projectId,
+  setProjectId,
+  projectName,
+  setProjectName,
   notSignedInPop,
   setNotSignedInPop,
+  showTree,
+  setShowTree,
 }: HomepageProps) => {
   return (
     <div id='homepage-container'>
@@ -45,6 +59,12 @@ const Homepage = ({
         setTreeData={setTreeData}
         resolverData={resolverData}
         setResolverData={setResolverData}
+        projectId={projectId}
+        setProjectId={setProjectId}
+        projectName={projectName}
+        setProjectName={setProjectName}
+        showTree={showTree}
+        setShowTree={setShowTree}
         loggedIn={loggedIn}
         setLoggedIn={setLoggedIn}
         notSignedInPop={notSignedInPop}

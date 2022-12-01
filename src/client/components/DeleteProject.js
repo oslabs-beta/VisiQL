@@ -1,17 +1,12 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 
-const SaveProject = (props) => {
+const DeleteProject = (props) => {
+
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h1>Save Your Project</h1>
-        <TextField 
-          placeholder='Enter your project name...'
-          style={{ width: 300 }}
-          value={props.projectName}
-          onChange={props.useInput}
-        />
+        <h1>Are you sure you want to delete this project?</h1>
         <div className='project-save-cancel-buttons'>
           <Button
             variant='contained'
@@ -19,9 +14,11 @@ const SaveProject = (props) => {
               backgroundColor: '#ed6a5a',
               ':hover': { backgroundColor: '#f1887b' },
             }}
-            onClick={() => props.saveProjectFunc()}
+            onClick={() => {
+                props.deleteProjectFunc();
+            }}
           >
-            Save
+            Delete
           </Button>
           <Button
             sx={{
@@ -43,4 +40,4 @@ const SaveProject = (props) => {
   );
 };
 
-export default SaveProject;
+export default DeleteProject;

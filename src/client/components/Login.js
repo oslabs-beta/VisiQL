@@ -81,6 +81,7 @@ const Login = (props) => {
       }).then((response) => {
         if (response.status === 200) {
           props.setLoggedIn(true);
+          props.tokenChecker();
           navigate('/');
         } else alert('Username or password is incorrect.');
         resetUsername();

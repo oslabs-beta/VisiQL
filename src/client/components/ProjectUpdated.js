@@ -1,13 +1,13 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ProjectSaved = (props) => {
+const ProjectUpdated = (props) => {
   const navigate = useNavigate();
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h1>Project Saved!</h1>
+        <h2>Project Updated!</h2>
         <Button
           variant='contained'
           sx={{
@@ -37,4 +37,4 @@ const ProjectSaved = (props) => {
   );
 };
 
-export default ProjectSaved;
+export default ProjectUpdated;

@@ -19,9 +19,9 @@ userController.checkUsernameExistence = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in userController.checkUsernameExistence',
+      log: `error occured in userController.checkUsernameExistence: ${err}`,
       status: 400,
+      message: {err: 'error checking credentials'},
     });
   }
 };
@@ -41,9 +41,9 @@ userController.signUp = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in userController.signUp',
+      log: `error occured in userController.signUp: ${err}`,
       status: 400,
+      message: 'error in signup',
     });
   }
 };
@@ -69,9 +69,9 @@ userController.login = async (req, res, next) => {
     next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in userController.login',
+      log: `error occured in userController.login: ${err}`,
       status: 400,
+      message: {err: 'error in login'},
     });
   }
 };

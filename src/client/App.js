@@ -35,15 +35,18 @@ const App = () => {
   const [currentUserId, setCurrentUserId] = useState(''); //should we set this to null to by typesafe?
   const [notSignedInPop, setNotSignedInPop] = useState(false);
 
-  //starting treedata from top
   const [dbSchemaData, dbSchemaDataOnChange] = useState(
     'Enter a Postgres DB link to generate your schema...'
   );
   const [treeData, setTreeData] = useState(initialData);
-
   const [resolverData, setResolverData] = useState(
     'Enter a Postgres DB link to generate your resolvers...'
   );
+  const [projectId, setProjectId] = useState(null);
+
+  const [projectName, setProjectName] = useState('');
+
+  const [showTree, setShowTree] = useState(true);
 
   const tokenChecker = async () => {
     try {
@@ -74,6 +77,10 @@ const App = () => {
         currentUserId={currentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        setTreeData={setTreeData}
+        blankTree={initialData}
       />
       <Routes>
         <Route
@@ -90,8 +97,15 @@ const App = () => {
               setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
+              blankTree={initialData}
+              projectId={projectId}
+              setProjectId={setProjectId}
+              projectName={projectName}
+              setProjectName={setProjectName}
               notSignedInPop={notSignedInPop}
               setNotSignedInPop={setNotSignedInPop}
+              showTree={showTree}
+              setShowTree={setShowTree}
             />
           }
         />
@@ -109,7 +123,28 @@ const App = () => {
         />
         <Route
           path='/login'
-          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
+          element={
+            <Login
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              tokenChecker={tokenChecker}
+            />
+          }
+        />
+        <Route path='/resolver' element={<Resolver />} />
+        <Route
+          path='/myprojects'
+          element={
+            <ProjectsPage
+              currentUserId={currentUserId}
+              setTreeData={setTreeData}
+              dbSchemaDataOnChange={dbSchemaDataOnChange}
+              setResolverData={setResolverData}
+              projectId={projectId}
+              setProjectId={setProjectId}
+              setProjectName={setProjectName}
+            />
+          }
         />
         <Route path='/resolver' element={<Resolver />} />
         <Route

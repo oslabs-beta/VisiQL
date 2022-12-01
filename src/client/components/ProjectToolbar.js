@@ -9,23 +9,35 @@ import {
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import UpgradeIcon from '@mui/icons-material/Upgrade'; //for update
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
+import UpdateProject from './UpdateProject';
+import ProjectUpdated from './ProjectUpdated';
 import NotSignedIn from './NotSignedIn';
 
-const useInput = (init) => {
-  const [value, setValue] = useState(init);
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
-  return [value, onChange];
-};
-
 const ProjectToolbar = (props) => {
-  const [projectName, setProjectName] = useInput('');
+  const {
+    currentUserId,
+    schemaData,
+    treeData,
+    resolverData,
+    projectId,
+    projectName,
+    setProjectName,
+  } = props;
+
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
   const navigate = useNavigate();
+
+  const [updateProjExpand, setUpdateProjExpand] = useState(false);
+  const [projectUpdated, setProjectUpdated] = useState(false);
+
+  const useInput = (e) => {
+    //click event from saveproject
+    setProjectName(e.target.value);
+  };
 
   const saveProjectFunc = () => {
     if (projectName === '') return alert('Please enter a project name');
@@ -36,13 +48,14 @@ const ProjectToolbar = (props) => {
     if (!props.currentUserId)
       return alert('You must be signed in to save a project');
 
-    const date = new Date().toString(); //date variable
+    const date = new Date().toString();
     const body = {
-      user: props.currentUserId,
+      user: currentUserId,
       projectName: projectName,
-      schemaData: props.schemaData,
-      treeData: props.treeData,
-      date: date, //add date column to table
+      schemaData: schemaData,
+      treeData: treeData,
+      date: date,
+      resolverData: resolverData,
     };
     console.log('post body', body);
     fetch('/projects/save', {
@@ -59,7 +72,33 @@ const ProjectToolbar = (props) => {
       .catch((err) => console.log('dbLink fetch /project/save: ERROR:', err));
     setProjectSaved(true);
     setSaveProjExpand(false);
+    setProjectName(''); //clear projectname after save. not necessary?
   };
+
+  const updateProjectFunc = async (newName) => {
+    if (newName === '' || newName === ' ') {
+      newName = projectName;
+    }
+    const date = new Date().toString();
+    const body = {
+      id: projectId,
+      name: newName,
+      schema: schemaData,
+      date: date,
+      resolver: resolverData,
+    };
+    const request = await fetch('/projects/update', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const response = await request.json();
+    console.log(response.success);
+    if (response.success) setProjectUpdated(true);
+    else alert("couldn't update project");
+    setUpdateProjExpand(false);
+  };
+
   const actions = [
     {
       icon: <SaveIcon fontSize='large' />,
@@ -88,8 +127,15 @@ const ProjectToolbar = (props) => {
         }
       },
     },
-  ];
-
+    {
+      icon: <UpgradeIcon fontSize='large' />,
+      name: 'Upate Project',
+      function: function () {
+        if (!projectId) return alert('Plese load a saved project.');
+        return setUpdateProjExpand(true);
+      },
+    },
+  ]; //figure out how to add update project func to this
   const actionSize = {
     width: 90,
     height: 90,
@@ -138,9 +184,16 @@ const ProjectToolbar = (props) => {
         close={setSaveProjExpand}
         saveProjectFunc={saveProjectFunc}
         projectName={projectName}
-        setProjectName={setProjectName}
+        useInput={useInput}
       />
       <ProjectSaved trigger={projectSaved} close={setProjectSaved} />
+      <UpdateProject
+        trigger={updateProjExpand}
+        close={setUpdateProjExpand}
+        updateProjectFunc={updateProjectFunc}
+        projectName={projectName}
+      />
+      <ProjectUpdated trigger={projectUpdated} close={setProjectUpdated} />
       <NotSignedIn
         trigger={props.notSignedInPop}
         close={props.setNotSignedInPop}

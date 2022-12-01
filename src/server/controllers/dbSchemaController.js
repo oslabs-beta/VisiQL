@@ -75,9 +75,9 @@ dbSchemaController.getSchema = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in dbSchemaController.getSchema',
+      log: `error occured in dbSchemaController.getSchema: ${err}`,
       status: 400,
+      message: {err: 'error generating schema'},
     });
   }
 };
