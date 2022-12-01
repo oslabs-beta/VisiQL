@@ -5,6 +5,7 @@ import About from './components/About';
 import Login from './components/Login';
 import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
+import GraphiQLPlayground from './components/GraphiQLPlayground';
 
 const App = () => {
   const initialData = {
@@ -31,6 +32,7 @@ const App = () => {
   };
   const [loggedIn, setLoggedIn] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(''); //should we set this to null to by typesafe?
+  const [notSignedInPop, setNotSignedInPop] = useState(false);
 
   //starting treedata from top
   const [dbSchemaData, dbSchemaDataOnChange] = useState(
@@ -38,28 +40,21 @@ const App = () => {
   );
   const [treeData, setTreeData] = useState(initialData);
 
-  
-  
-  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...')
-
-
-  
-  
+  const [resolverData, setResolverData] = useState(
+    'Enter a Postgres DB link to generate your resolvers...'
+  );
 
   const tokenChecker = async () => {
     try {
       const token = await fetch('/user/checkToken', {
         headers: { 'Content-Type': 'application/json' },
       });
-      console.log('fetching in tokenChecker');
+
       const tokenCheck = await token.json();
-      console.log('tokenCheck:', tokenCheck);
+
       if (tokenCheck.status === 'success') {
-        console.log('tokenCheck.id', tokenCheck.id);
         setLoggedIn(true);
-        console.log(tokenCheck.id)
         setCurrentUserId(tokenCheck.id);
-        console.log('current id', currentUserId);
       } else {
         setLoggedIn(false);
       }
@@ -68,7 +63,7 @@ const App = () => {
     }
   };
   tokenChecker();
-  
+
   return (
     <div className='router'>
       <Routes>
@@ -85,17 +80,53 @@ const App = () => {
               setResolverData={setResolverData}
               treeData={treeData}
               setTreeData={setTreeData}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
             />
           }
         />
 
-        <Route path='/about' element={<About />} />
+        <Route
+          path='/about'
+          element={
+            <About
+              loggedIn={loggedIn}
+              setCurrentUserId={setCurrentUserId}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
+            />
+          }
+        />
         <Route
           path='/login'
           element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}
         />
         <Route path='/resolver' element={<Resolver />} />
-        <Route path='/myprojects' element={<ProjectsPage id={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange}/>} />
+        <Route
+          path='/myprojects'
+          element={
+            <ProjectsPage
+              id={currentUserId}
+              setTreeData={setTreeData}
+              dbSchemaDataOnChange={dbSchemaDataOnChange}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              resolverData={resolverData}
+              dbSchemaData={dbSchemaData}
+            />
+          }
+        />
+        <Route
+          path='/gqlplayground'
+          element={
+            <GraphiQLPlayground
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              resolverData={resolverData}
+              dbSchemaData={dbSchemaData}
+            />
+          }
+        />
       </Routes>
     </div>
   );

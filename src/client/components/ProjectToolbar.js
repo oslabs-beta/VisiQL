@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   SpeedDial,
   SpeedDialAction,
@@ -24,6 +25,7 @@ const ProjectToolbar = (props) => {
   const [projectName, setProjectName] = useInput('');
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
+  const navigate = useNavigate();
 
   const saveProjectFunc = () => {
     if (projectName === '') return alert('Please enter a project name');
@@ -34,13 +36,13 @@ const ProjectToolbar = (props) => {
     if (!props.currentUserId)
       return alert('You must be signed in to save a project');
 
-    const date = (new Date()).toString();//date variable 
+    const date = new Date().toString(); //date variable
     const body = {
       user: props.currentUserId,
       projectName: projectName,
       schemaData: props.schemaData,
       treeData: props.treeData,
-      date: date //add date column to table
+      date: date, //add date column to table
     };
     console.log('post body', body);
     fetch('/projects/save', {
@@ -59,13 +61,29 @@ const ProjectToolbar = (props) => {
     setSaveProjExpand(false);
   };
   const actions = [
-    { icon: <DownloadIcon fontSize='large' />, name: 'Download' },
+    // {
+    //   icon: <DownloadIcon fontSize='large' />,
+    //   name: 'Download',
+    //   function: function () {
+    //     insert download functionality
+    //   },
+    // },
     {
       icon: <SaveIcon fontSize='large' />,
       name: 'Save Project',
+      function: function () {
+        return setSaveProjExpand(true);
+      },
     },
-    { icon: <FolderOpenIcon fontSize='large' />, name: 'View Projects' },
+    {
+      icon: <FolderOpenIcon fontSize='large' />,
+      name: 'View Projects',
+      function: function () {
+        navigate('/myprojects');
+      },
+    },
   ];
+
   const actionSize = {
     width: 90,
     height: 90,
@@ -104,7 +122,7 @@ const ProjectToolbar = (props) => {
             tooltipTitle={action.name}
             TooltipClasses={classes}
             onClick={() => {
-              setSaveProjExpand(true);
+              return action.function();
             }}
           />
         ))}

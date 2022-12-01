@@ -5,7 +5,6 @@ import SchemaContainer from './SchemaContainer';
 import VisualizerContainer from './VisualizerContainer';
 import ProjectToolbar from './ProjectToolbar';
 
-
 const useInput = (init) => {
   const [value, setValue] = useState(init);
   const onChange = (e) => {
@@ -17,8 +16,15 @@ const useInput = (init) => {
 const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
-  
-  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, resolverData, setResolverData } = props;
+
+  const {
+    dbSchemaData,
+    dbSchemaDataOnChange,
+    treeData,
+    setTreeData,
+    resolverData,
+    setResolverData,
+  } = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {

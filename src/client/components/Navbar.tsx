@@ -8,14 +8,14 @@ import styles from './scss/_index.scss';
 const ProjectsPage = require('./ProjectsPage');
 
 type NavbarProps = {
-  isLoggedIn: Boolean;
+  loggedIn: Boolean;
   setCurrentUserId: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
 };
 
 const Navbar = ({
-  isLoggedIn,
+  loggedIn,
   setCurrentUserId,
   notSignedInPop,
   setNotSignedInPop,
@@ -23,7 +23,7 @@ const Navbar = ({
   const navigate = useNavigate();
 
   const thisOrThat = () => {
-    if (isLoggedIn) {
+    if (loggedIn) {
       return <Link to='/myprojects'>Projects</Link>;
     } else {
       return (
@@ -39,13 +39,13 @@ const Navbar = ({
       setCurrentUserId('');
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      navigate('/logink');
+      navigate('/login');
     } catch (err) {
       console.log('error');
     }
   };
   const signInOut = () => {
-    if (!isLoggedIn) {
+    if (!loggedIn) {
       return <Link to='/login'>Sign In</Link>;
     } else {
       return (
@@ -55,7 +55,7 @@ const Navbar = ({
       );
     }
   };
-  // thisOrThat();
+
   return (
     <div id='navbar'>
       <img id='logo' src={logo} width='275px' height='92px' />
@@ -66,6 +66,9 @@ const Navbar = ({
           </li>
           <li>
             <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/gqlplayground'>GraphiQL Playground</Link>
           </li>
           <li>{thisOrThat()}</li>
           <li>

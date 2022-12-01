@@ -23,6 +23,8 @@ const config = {
       '/user': 'http://localhost:3000',
       '/db': 'http://localhost:3000',
       '/projects': 'http://localhost:3000',
+      '/graphiql': 'http://localhost:3000',
+      '/request': 'http://localhost:4000',
     },
     compress: true,
     port: 8080,
