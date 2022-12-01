@@ -55,6 +55,7 @@ const App = () => {
 
       if (tokenCheck.status === 'success') {
         setLoggedIn(true);
+        setNotSignedInPop(false);
         setCurrentUserId(tokenCheck.id);
       } else {
         setLoggedIn(false);
