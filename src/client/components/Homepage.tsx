@@ -24,6 +24,8 @@ type HomepageProps = {
   setProjectName: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
+  showTree: boolean;
+  setShowTree: Function;
 };
 
 const Homepage = ({
@@ -42,13 +44,15 @@ const Homepage = ({
   projectName,
   setProjectName,
   notSignedInPop,
-  setNotSignedInPop
+  setNotSignedInPop,
+  showTree,
+  setShowTree,
 }: HomepageProps) => {
-  
+
   return (
     <div id='homepage-container'>
       <Navbar
-        isLoggedIn={loggedIn}
+        loggedIn={loggedIn}
         setCurrentUserId={setCurrentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
@@ -59,7 +63,7 @@ const Homepage = ({
       />
       <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
       treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} 
-      projectId={projectId} setProjectId={setProjectId} projectName={projectName} setProjectName={setProjectName}/>
+      projectId={projectId} setProjectId={setProjectId} projectName={projectName} setProjectName={setProjectName}showTree={showTree} setShowTree={setShowTree}/>
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
       {/* <ProjectSide /> */}
     </div>

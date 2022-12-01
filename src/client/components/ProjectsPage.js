@@ -1,5 +1,5 @@
 import { dividerClasses } from '@mui/material';
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import DeleteProject from './DeleteProject';
 import Navbar from './Navbar';
 import ProjectsGrid from './ProjectsGrid';

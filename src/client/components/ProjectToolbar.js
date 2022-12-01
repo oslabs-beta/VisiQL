@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   SpeedDial,
   SpeedDialAction,
@@ -21,6 +22,7 @@ const ProjectToolbar = (props) => {
 
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
+  const navigate = useNavigate();
 
   const [updateProjExpand, setUpdateProjExpand] = useState(false);
   const [projectUpdated, setProjectUpdated] = useState(false);
@@ -28,6 +30,7 @@ const ProjectToolbar = (props) => {
 const useInput = e => { //click event from saveproject
 setProjectName(e.target.value);
 };
+
 
   const saveProjectFunc = () => {
     if (projectName === '') return alert('Please enter a project name');

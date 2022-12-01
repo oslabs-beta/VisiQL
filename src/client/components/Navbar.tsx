@@ -8,7 +8,7 @@ import styles from './scss/_index.scss';
 const ProjectsPage = require('./ProjectsPage');
 
 type NavbarProps = {
-  isLoggedIn: Boolean;
+  loggedIn: Boolean;
   setCurrentUserId: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
@@ -19,7 +19,7 @@ type NavbarProps = {
 };
 
 const Navbar = ({
-  isLoggedIn,
+  loggedIn,
   setCurrentUserId,
   notSignedInPop,
   setNotSignedInPop,
@@ -31,7 +31,7 @@ const Navbar = ({
 
 
   const thisOrThat = () => {
-    if (isLoggedIn) {
+    if (loggedIn) {
       return <Link to='/myprojects'>Projects</Link>;
     } else {
       return (
@@ -48,14 +48,14 @@ const Navbar = ({
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       setResolverData('Enter a Postgres DB link to generate your resolvers...');
-      dbSchemaDataOnChange('Enter a Postgres DB link to generate your schema...');
+      dbSchemaDataOnChange('Enter a Postgres DB lin to generate your schema...');
       setTreeData(blankTree);
     } catch (err) {
       console.log('error');
     }
   };
   const signInOut = () => {
-    if (!isLoggedIn) {
+    if (!loggedIn) {
       return <Link to='/login'>Sign In</Link>;
     } else {
       return (
@@ -65,7 +65,7 @@ const Navbar = ({
       );
     }
   };
-  // thisOrThat();
+
   return (
     <div id='navbar'>
       <img id='logo' src={logo} width='275px' height='92px' />
@@ -76,6 +76,9 @@ const Navbar = ({
           </li>
           <li>
             <Link to='/about'>About</Link>
+          </li>
+          <li>
+            <Link to='/gqlplayground'>GraphiQL Playground</Link>
           </li>
           <li>{thisOrThat()}</li>
           <li>

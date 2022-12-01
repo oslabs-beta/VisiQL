@@ -1,0 +1,65 @@
+.team-container {
+  display: inline;
+  font-family: 'Kumbh Sans', sans-serif;
+  text-align: center;
+  padding-bottom: 10rem;
+}
+
+.headshots-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  padding-bottom: 10rem;
+}
+
+.team-title {
+  font-size: 5rem;
+}
+.team-name {
+  font-weight: normal;
+}
+li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.title {
+  font-weight: bold;
+}
+
+.intro-paragraph {
+  color: rgb(88, 88, 88);
+  font-size: 2em;
+  font-weight: normal;
+}
+
+.docs-title {
+  text-align: center;
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 5rem;
+}
+
+.visiql-statement {
+  font-size: 3rem;
+  text-align: center;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.generating-docs-title {
+  font-family: 'Kumbh Sans', sans-serif;
+  font-size: 3rem;
+  color: black;
+}
+
+.generating-docs {
+  color: rgb(88, 88, 88);
+  font-size: 1.4em;
+  font-weight: normal;
+}
+
+.doc-container {
+  margin: 4rem;
+}
