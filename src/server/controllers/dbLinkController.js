@@ -23,9 +23,9 @@ dbLinkController.extractFnKeys = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      error: err,
-      message: 'error occured in dbLinkController.test',
+      log: `error occured in dbLinkController.test: ${err}`,
       status: 400,
+      message: {err: 'error extracting foreign keys'},
     });
   }
 };

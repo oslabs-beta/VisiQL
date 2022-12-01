@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, TextField } from '@mui/material';
 
-const SaveProject = (props) => {
+const UpdateProject = (props) => {
+    const [newName, setNewName] = useState(props.projectName)
+    const updateProjName = e => {
+        setNewName(e.target.value)
+    };
+    //const placeholderString = `current name: ${props.projectName}`
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h1>Save Your Project</h1>
+        <h1>Update Project</h1>
         <TextField 
-          placeholder='Enter your project name...'
+          placeholder='(optional) enter new name'
           style={{ width: 300 }}
-          value={props.projectName}
-          onChange={props.useInput}
+          onChange={updateProjName} 
         />
         <div className='project-save-cancel-buttons'>
           <Button
@@ -19,9 +23,9 @@ const SaveProject = (props) => {
               backgroundColor: '#ed6a5a',
               ':hover': { backgroundColor: '#f1887b' },
             }}
-            onClick={() => props.saveProjectFunc()}
+            onClick={() => props.updateProjectFunc(newName)}
           >
-            Save
+            Update
           </Button>
           <Button
             sx={{
@@ -43,4 +47,4 @@ const SaveProject = (props) => {
   );
 };
 
-export default SaveProject;
+export default UpdateProject;

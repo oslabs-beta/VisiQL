@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 //@ts-ignore
-// import Diagram from './Diagram';
 import Tree from './Tree';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import { IconButton, Tooltip } from '@mui/material';

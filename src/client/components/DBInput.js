@@ -17,7 +17,8 @@ const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
   
-  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, resolverData, setResolverData, showTree, setShowTree} = props;
+  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, 
+    resolverData, setResolverData, projectId, setProjectId, projectName, setProjectName, showTree, setShowTree} = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {
@@ -41,6 +42,8 @@ const DBInput = (props) => {
           setDataReceived(true);
           setTreeData(data.tree);
           console.log(dbSchemaData);
+          setProjectId(null); //reset projectid and projectname after new submission so data from update isn't overwritten
+          setProjectName(null);
         })
         .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
     }
@@ -88,6 +91,11 @@ const DBInput = (props) => {
           schemaData={dbSchemaData}
           treeData={treeData}
           currentUserId={props.currentUserId}
+          resolverData={resolverData}
+          projectId={projectId}
+          setProjectId={setProjectId}
+          projectName={projectName}
+          setProjectName={setProjectName}
         />
       </div>
     </div>

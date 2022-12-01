@@ -1,22 +1,25 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const ProjectSaved = (props) => {
+const ProjectDeleted = (props) => {
   const navigate = useNavigate();
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h1>Project Saved!</h1>
+        <h2>Project Deleted</h2>
         <Button
           variant='contained'
           sx={{
             backgroundColor: '#ed6a5a',
             ':hover': { backgroundColor: '#f1887b' },
           }}
-          onClick={() => navigate('/myprojects')}
+          onClick={() => {
+            props.close(false);
+            props.setGetData(true);
+        }}
         >
-          View Your Saved Projects
+          Back to Projects
         </Button>
         <Button
           sx={{
@@ -26,9 +29,10 @@ const ProjectSaved = (props) => {
           variant='contained'
           onClick={() => {
             props.close(false);
+            navigate('/');
           }}
         >
-          Back to Current Project
+          Home
         </Button>
       </div>
     </div>
@@ -37,4 +41,4 @@ const ProjectSaved = (props) => {
   );
 };
 
-export default ProjectSaved;
+export default ProjectDeleted;

@@ -17,10 +17,15 @@ type HomepageProps = {
   setTreeData: Function;
   resolverData: String;
   setResolverData: Function;
-  showTree: boolean;
-  setShowTree: Function;
+  blankTree: Object;
+  projectId: Number;
+  setProjectId: Function;
+  projectName: String;
+  setProjectName: Function;
   notSignedInPop: Boolean;
   setNotSignedInPop: Function;
+  showTree: boolean;
+  setShowTree: Function;
 };
 
 const Homepage = ({
@@ -33,11 +38,17 @@ const Homepage = ({
   setTreeData,
   resolverData,
   setResolverData,
-  showTree,
-  setShowTree,
+  blankTree,
+  projectId,
+  setProjectId,
+  projectName,
+  setProjectName,
   notSignedInPop,
   setNotSignedInPop,
+  showTree,
+  setShowTree,
 }: HomepageProps) => {
+
   return (
     <div id='homepage-container'>
       <Navbar
@@ -45,8 +56,14 @@ const Homepage = ({
         setCurrentUserId={setCurrentUserId}
         notSignedInPop={notSignedInPop}
         setNotSignedInPop={setNotSignedInPop}
+        setTreeData={setTreeData}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        blankTree={blankTree}
       />
-      <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} showTree={showTree} setShowTree={setShowTree}/>
+      <DBInput currentUserId={currentUserId} dbSchemaData={dbSchemaData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
+      treeData={treeData} setTreeData={setTreeData} resolverData={resolverData} setResolverData={setResolverData} 
+      projectId={projectId} setProjectId={setProjectId} projectName={projectName} setProjectName={setProjectName}showTree={showTree} setShowTree={setShowTree}/>
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
       {/* <ProjectSide /> */}
     </div>
@@ -54,3 +71,5 @@ const Homepage = ({
 };
 
 export default Homepage;
+
+

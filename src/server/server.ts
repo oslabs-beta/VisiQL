@@ -55,15 +55,13 @@ app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // global error handler
 app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
+  console.log(err)
   const defaultErr = {
     log: 'Global Error handler triggered',
     status: 500,
     message: { err: 'Error occurred' },
   };
-  const errorObj = {
-    ...defaultErr,
-    err,
-  };
+  const errorObj = Object.assign(defaultErr, err)
   console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
