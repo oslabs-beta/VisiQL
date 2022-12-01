@@ -16,15 +16,8 @@ const useInput = (init) => {
 const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
-
-  const {
-    dbSchemaData,
-    dbSchemaDataOnChange,
-    treeData,
-    setTreeData,
-    resolverData,
-    setResolverData,
-  } = props;
+  
+  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, resolverData, setResolverData, showTree, setShowTree} = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {
@@ -87,8 +80,10 @@ const DBInput = (props) => {
           dbSchemaDataOnChange={dbSchemaDataOnChange}
           resolverData={resolverData}
           setResolverData={setResolverData}
+          showTree={showTree}
+          setShowTree={setShowTree}
         />
-        <VisualizerContainer data={treeData} />
+        <VisualizerContainer data={treeData} showTree={showTree} setShowTree={setShowTree}/>
         <ProjectToolbar
           schemaData={dbSchemaData}
           treeData={treeData}

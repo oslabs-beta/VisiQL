@@ -9,6 +9,8 @@ import { Button, IconButton, Tooltip, Typography, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DoneOutlineIcon from '@mui/icons-material/DoneOutline';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import EditorPopOutHandler from './EditorPopOutHandler';
 
 
 
@@ -17,6 +19,8 @@ type SchemaContainerProps = {
   dbSchemaDataOnChange: Function;
   resolverData: string;
   setResolverData: Function;
+  showTree: boolean;
+  setShowTree: Function;
 };
 
 
@@ -26,7 +30,8 @@ const SchemaContainer = ({
   dbSchemaDataOnChange,
   resolverData,
   setResolverData,
-  
+  showTree,
+  setShowTree
 }: SchemaContainerProps) => {
   const [currIcon, setCurrIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
@@ -36,6 +41,13 @@ const SchemaContainer = ({
   const [currClick, setCurrClick] = useState(false);
 //handle state of current tab
   const [tab, setTab] = useState('1');
+  const [editorExpand, setEditorExpand] = useState(false);
+  
+
+  const changeDisplay = () => { 
+    setEditorExpand(true);
+    setShowTree(false);
+  }
 
 //handle changing of tabs
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -94,6 +106,23 @@ const SchemaContainer = ({
           {currIcon}
         </IconButton>
       </Tooltip>
+      <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
+        <IconButton
+          className='expand-button'
+          onClick={changeDisplay}
+        >
+          {<OpenInNewIcon style={{ fontSize: 45 }} />}
+        </IconButton>
+      </Tooltip>
+      <EditorPopOutHandler
+        dbSchemaData={dbSchemaData}
+        resolverData={resolverData}
+        close={setEditorExpand}
+        trigger={editorExpand}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        setShowTree={setShowTree}
+      />
       
         </TabPanel>
         <TabPanel value='2' sx={{paddingTop: '0'}}>
@@ -118,6 +147,23 @@ const SchemaContainer = ({
           {currIcon}
         </IconButton>
       </Tooltip>
+      <Tooltip title={<h1>Open in New Window</h1>} placement='top' arrow>
+        <IconButton
+          className='expand-button'
+          onClick={changeDisplay}
+        >
+          {<OpenInNewIcon style={{ fontSize: 50 }} />}
+        </IconButton>
+      </Tooltip>
+      <EditorPopOutHandler
+        dbSchemaData={dbSchemaData}
+        resolverData={resolverData}
+        close={setEditorExpand}
+        trigger={editorExpand}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        setShowTree={setShowTree}
+      />
         </TabPanel>
      
       </TabContext>
