@@ -3,7 +3,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import About from './components/About';
 import Login from './components/Login';
-import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
 import GraphiQLPlayground from './components/GraphiQLPlayground';
 import Navbar from './components/Navbar';
@@ -131,7 +130,7 @@ const App = () => {
             />
           }
         />
-        <Route path='/resolver' element={<Resolver />} />
+  
         <Route
           path='/myprojects'
           element={
@@ -146,7 +145,7 @@ const App = () => {
             />
           }
         />
-        <Route path='/resolver' element={<Resolver />} />
+        
         <Route
           path='/myprojects'
           element={
