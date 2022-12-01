@@ -28,11 +28,34 @@ On the left hand side, you will see a tree graph generated from your PostgresQL 
 
 ![Visualizer Step 3](https://user-images.githubusercontent.com/13178363/205099466-7b426d96-dca6-4107-987e-60add8674f26.gif)
 
+Projects Page
+
+On the Projects page, you will find a table with information about your saved projects. There are columns for the project name, the date it was most recently updated, and buttons for viewing or deleting the projects. Projects can be ordered alphabetically by Project Name, or by the date they were Last Updated.
+
+![ProjectsPageVisiql](https://user-images.githubusercontent.com/104098416/205107467-b4a2bb12-0e6a-4448-818d-ed3f73f51070.gif)
+
 Saving your Project
 
 For users that are signed in, you will have the ability to save your projects to your projects folder.
 
 ![Save Project Step 4](https://user-images.githubusercontent.com/13178363/205096108-d40ba8fa-7768-43be-ab2d-d1b3bc0a3d1b.gif)
+
+Updating your Project
+
+While a saved project is loaded to the Home page, clicking the ‘Update Project’ icon from the toolbar will open a popover with a field for optionally changing the name of your project. Click ‘UPDATE’ to save your changes to the database. A popover will alert you of a successful update. 
+
+![UpdateProjectVisiql](https://user-images.githubusercontent.com/104098416/205108184-0a76f0bf-1972-48f6-ac0d-af2dfb8539f0.gif)
+Opening Projects from Toolbar
+
+Deleting a Project
+
+On the projects page, clicking the ‘Delete Project’ button will prompt you to confirm the deletion of the associated project. A popover will notify you of a successful deletion. 
+
+![DeleteProjectVisiql](https://user-images.githubusercontent.com/104098416/205109109-287e5624-d721-44dc-a303-cd68e4cc3b35.gif)
+
+If logged in, clicking the ‘View Projects’ folder icon from the toolbar will navigate to the Projects page. 
+
+![ToolbarProjectsVisiql](https://user-images.githubusercontent.com/104098416/205107994-318ec565-fd76-46dc-8af0-669a322facee.gif)
 
 GraphiQL Playground
 
