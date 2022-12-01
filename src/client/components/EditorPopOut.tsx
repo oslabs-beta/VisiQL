@@ -80,7 +80,7 @@ const EditorPopOut = ({
         >
           {currSchIcon}
         </IconButton>
-      </Tooltip><div>
+      </Tooltip>
         <Editor
         className='resolver'
           padding='20'
@@ -91,7 +91,7 @@ const EditorPopOut = ({
             fontFamily: '"Fira code", "Fira Mono", monospace',
             fontSize: 20,
           }} />
-      </div><Tooltip title={currTooltip} placement='top' arrow>
+      <Tooltip title={currTooltip} placement='top' arrow>
         <IconButton
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
           onClick={handleClickRes}
