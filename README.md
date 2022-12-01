@@ -8,7 +8,7 @@ Generating your GraphQL Code
 
 Upon logging in or continuing as a guest, enter your desired PostgresQL database link in the textbox and click submit. Note that at this time, VisiQL was created to only support generating code for PostgresQL databases, but we welcome the Open Source community to add support for additional database types. Upon submission, you will see your database visualization and GraphQL schema generated and displayed instantly.
 
-![EnterDBLink Step 1](https://user-images.githubusercontent.com/13178363/205095938-2821b754-e139-4f96-a150-f12afe3a99be.gif)
+![EnterDB Link Step1](https://user-images.githubusercontent.com/13178363/205097233-7d40234b-a249-4fdd-85aa-7283d377cd49.gif)
 
 Toggle on the left hand side between the Schema and Resolvers tabs to review the code, or click the open button on the code editor to see both the generated Schema and Resolver in one view. You can also edit this generated code, right from within the editors and easily copy your changes.
 
