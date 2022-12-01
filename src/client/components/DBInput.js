@@ -18,12 +18,16 @@ const DBInput = (props) => {
   const [dataReceived, setDataReceived] = useState(false);
 
   const {
+    loggedIn,
+    setLoggedIn,
     dbSchemaData,
     dbSchemaDataOnChange,
     treeData,
     setTreeData,
     resolverData,
     setResolverData,
+    setNotSignedInPop,
+    notSignedInPop,
   } = props;
 
   const saveDBLink = (event) => {
@@ -90,9 +94,13 @@ const DBInput = (props) => {
         />
         <VisualizerContainer data={treeData} />
         <ProjectToolbar
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
           schemaData={dbSchemaData}
           treeData={treeData}
           currentUserId={props.currentUserId}
+          setNotSignedInPop={setNotSignedInPop}
+          notSignedInPop={notSignedInPop}
         />
       </div>
     </div>

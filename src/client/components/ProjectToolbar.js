@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   SpeedDial,
   SpeedDialAction,
@@ -7,11 +7,11 @@ import {
   TextField,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
+import NotSignedIn from './NotSignedIn';
 
 const useInput = (init) => {
   const [value, setValue] = useState(init);
@@ -61,25 +61,31 @@ const ProjectToolbar = (props) => {
     setSaveProjExpand(false);
   };
   const actions = [
-    // {
-    //   icon: <DownloadIcon fontSize='large' />,
-    //   name: 'Download',
-    //   function: function () {
-    //     insert download functionality
-    //   },
-    // },
     {
       icon: <SaveIcon fontSize='large' />,
       name: 'Save Project',
       function: function () {
-        return setSaveProjExpand(true);
+        if (props.loggedIn) {
+          return setSaveProjExpand(true);
+        } else {
+          props.setNotSignedInPop(true);
+          return;
+        }
       },
     },
     {
       icon: <FolderOpenIcon fontSize='large' />,
       name: 'View Projects',
       function: function () {
-        navigate('/myprojects');
+        console.log(props.loggedIn);
+        if (props.loggedIn) {
+          console.log('in true');
+          navigate('/myprojects');
+        } else {
+          console.log('in false');
+          props.setNotSignedInPop(true);
+          return;
+        }
       },
     },
   ];
@@ -135,6 +141,10 @@ const ProjectToolbar = (props) => {
         setProjectName={setProjectName}
       />
       <ProjectSaved trigger={projectSaved} close={setProjectSaved} />
+      <NotSignedIn
+        trigger={props.notSignedInPop}
+        close={props.setNotSignedInPop}
+      />
     </div>
   );
 };

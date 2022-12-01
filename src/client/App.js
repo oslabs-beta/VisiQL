@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
 import GraphiQLPlayground from './components/GraphiQLPlayground';
+import Navbar from './components/Navbar';
 
 const App = () => {
   const initialData = {
@@ -66,12 +67,20 @@ const App = () => {
 
   return (
     <div className='router'>
+      <Navbar
+        loggedIn={loggedIn}
+        setCurrentUserId={setCurrentUserId}
+        currentUserId={currentUserId}
+        notSignedInPop={notSignedInPop}
+        setNotSignedInPop={setNotSignedInPop}
+      />
       <Routes>
         <Route
           path='/'
           element={
             <Homepage
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               setCurrentUserId={setCurrentUserId}
               currentUserId={currentUserId}
               dbSchemaData={dbSchemaData}
@@ -113,6 +122,8 @@ const App = () => {
               setLoggedIn={setLoggedIn}
               resolverData={resolverData}
               dbSchemaData={dbSchemaData}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
             />
           }
         />

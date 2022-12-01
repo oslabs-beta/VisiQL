@@ -9,6 +9,7 @@ import ProjectSide from './ProjectSide';
 
 type HomepageProps = {
   loggedIn: Boolean;
+  setLoggedIn: Function;
   setCurrentUserId: Function;
   currentUserId: Number;
   dbSchemaData: String;
@@ -23,7 +24,7 @@ type HomepageProps = {
 
 const Homepage = ({
   loggedIn,
-  setCurrentUserId,
+  setLoggedIn,
   currentUserId,
   dbSchemaData,
   dbSchemaDataOnChange,
@@ -36,12 +37,6 @@ const Homepage = ({
 }: HomepageProps) => {
   return (
     <div id='homepage-container'>
-      <Navbar
-        loggedIn={loggedIn}
-        setCurrentUserId={setCurrentUserId}
-        notSignedInPop={notSignedInPop}
-        setNotSignedInPop={setNotSignedInPop}
-      />
       <DBInput
         currentUserId={currentUserId}
         dbSchemaData={dbSchemaData}
@@ -50,9 +45,12 @@ const Homepage = ({
         setTreeData={setTreeData}
         resolverData={resolverData}
         setResolverData={setResolverData}
+        loggedIn={loggedIn}
+        setLoggedIn={setLoggedIn}
+        notSignedInPop={notSignedInPop}
+        setNotSignedInPop={setNotSignedInPop}
       />
       <NotSignedIn trigger={notSignedInPop} close={setNotSignedInPop} />
-      {/* <ProjectSide /> */}
     </div>
   );
 };

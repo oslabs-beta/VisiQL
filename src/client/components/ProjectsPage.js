@@ -21,7 +21,6 @@ const ProjectsPage = (props) => {
   console.log('projects:', projects);
   return (
     <div>
-      <Navbar />
       <div id='projectTable'>
         <ProjectsGrid
           projects={projects}
