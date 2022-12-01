@@ -57,7 +57,6 @@ const DBInput = (props) => {
           setResolverData(data.resolverString);
           setDataReceived(true);
           setTreeData(data.tree);
-          console.log(dbSchemaData);
           setProjectId(null); //reset projectid and projectname after new submission so data from update isn't overwritten
           setProjectName(null);
         })

@@ -1,6 +1,4 @@
 import React from 'react';
-import Team from './Team';
-import Navbar from './Navbar';
 import '../scss/about.scss';
 
 const Documentation = () => {

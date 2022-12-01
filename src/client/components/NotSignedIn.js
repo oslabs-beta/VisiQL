@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, TextField } from '@mui/material';
+import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 const NotSignedIn = (props) => {
@@ -31,7 +31,7 @@ const NotSignedIn = (props) => {
       </div>
     </div>
   ) : (
-    ' '
+    null
   );
 };
 

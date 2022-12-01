@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-import Navbar from './Navbar';
 //@ts-ignore
 import DBInput from './DBInput';
 //@ts-ignore
@@ -18,7 +16,6 @@ type HomepageProps = {
   setTreeData: Function;
   resolverData: String;
   setResolverData: Function;
-  blankTree: Object;
   projectId: Number;
   setProjectId: Function;
   projectName: String;
@@ -39,7 +36,6 @@ const Homepage = ({
   setTreeData,
   resolverData,
   setResolverData,
-  blankTree,
   projectId,
   setProjectId,
   projectName,

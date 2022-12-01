@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   SpeedDial,
   SpeedDialAction,
   SpeedDialIcon,
-  TextField,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import UpgradeIcon from '@mui/icons-material/Upgrade'; //for update
+import UpgradeIcon from '@mui/icons-material/Upgrade'; 
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
 import UpdateProject from './UpdateProject';
@@ -135,7 +134,7 @@ const ProjectToolbar = (props) => {
         return setUpdateProjExpand(true);
       },
     },
-  ]; //figure out how to add update project func to this
+  ]; 
   const actionSize = {
     width: 90,
     height: 90,

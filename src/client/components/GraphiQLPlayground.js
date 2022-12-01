@@ -1,9 +1,8 @@
 import React from 'react';
-import { GraphiQLInterface, GraphiQL } from 'graphiql';
+import { GraphiQL } from 'graphiql';
 import { createGraphiQLFetcher } from '@graphiql/toolkit';
 
 import 'graphiql/graphiql.css';
-import Navbar from './Navbar';
 
 const GraphiQLPlayground = ({
   dbSchemaData,
@@ -15,7 +14,10 @@ const GraphiQLPlayground = ({
 }) => {
   const fetcher = createGraphiQLFetcher({
     url: '/request',
-  });
+  }); 
+
+  //----> post request for sending schema and resolver data to backend for dynamic graphiql playground functionality
+
   // const generatedGQL = () => {
   //   // const body = { dbSchemaData, resolverData };
   //   fetch('/graphql', {
@@ -32,6 +34,7 @@ const GraphiQLPlayground = ({
   //     .catch((err) => console.log('dbLink fetch /graphql: ERROR:', err));
   // };
   // generatedGQL();
+
   return (
     <div>
       <div className='graphiql-container'>
