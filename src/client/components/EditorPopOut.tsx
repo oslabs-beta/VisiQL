@@ -27,13 +27,17 @@ const EditorPopOut = ({
   setResolverData, 
   close,
 }: EditorPopOutProps) => {
-  const [currIcon, setCurrIcon] = useState(
+  const [currSchIcon, setCurrSchIcon] = useState(
+    <ContentCopyIcon sx={{ fontSize: 40 }} />
+  );
+  const [currResIcon, setCurrResIcon] = useState(
     <ContentCopyIcon sx={{ fontSize: 40 }} />
   );
   const [currTooltip, setCurrTooltip] = useState(<h1>Copy</h1>);
   const resetIcons = () => {
     setCurrTooltip(<h1>Copy</h1>);
-    setCurrIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
+    setCurrSchIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
+    setCurrResIcon(<ContentCopyIcon sx={{ fontSize: 40 }} />);
   };
 
   function delay(callback: Function, waitTime: number) {
@@ -41,19 +45,19 @@ const EditorPopOut = ({
       return setTimeout(callback, waitTime);
     };
   }
-  const delayedFunc = delay(() => resetIcons(), 3000);
+  const delayedFunc = delay(() => resetIcons(), 1000);
 
   const handleClickSch = () => {
     navigator.clipboard.writeText(dbSchemaData);
     setCurrTooltip(<h1>Copied</h1>);
-    setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
+    setCurrSchIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
     delayedFunc();
   };
 
   const handleClickRes = () => {
     navigator.clipboard.writeText(resolverData);
     setCurrTooltip(<h1>Copied</h1>);
-    setCurrIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
+    setCurrResIcon(<DoneOutlineIcon sx={{ fontSize: 40 }} />);
     delayedFunc();
   };
 
@@ -71,11 +75,10 @@ const EditorPopOut = ({
           fontSize: 20,
         }} /><Tooltip title={currTooltip} placement='top' arrow>
         <IconButton
-          className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
           onClick={handleClickSch}
         >
-          {currIcon}
+          {currSchIcon}
         </IconButton>
       </Tooltip><div>
         <Editor
@@ -90,11 +93,10 @@ const EditorPopOut = ({
           }} />
       </div><Tooltip title={currTooltip} placement='top' arrow>
         <IconButton
-          className='copy-button'
           style={{ fontSize: 100, backgroundColor: 'rgb(127, 127, 127)' }}
           onClick={handleClickRes}
         >
-          {currIcon}
+          {currResIcon}
         </IconButton>
       </Tooltip>
      
