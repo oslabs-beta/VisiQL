@@ -43,6 +43,8 @@ const DBInput = (props) => {
           setDataReceived(true);
           setTreeData(data.tree);
           console.log(dbSchemaData);
+          setProjectId(null); //reset projectid and projectname after new submission so data from update isn't overwritten
+          setProjectName(null);
         })
         .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
     }

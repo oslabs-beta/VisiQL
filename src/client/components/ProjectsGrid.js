@@ -3,26 +3,37 @@ import Button from '@mui/material/Button';
 import { DataGrid } from '@mui/x-data-grid';
 import { useNavigate } from 'react-router-dom';
 import DeleteProject from './DeleteProject';
+import ProjectDeleted from './ProjectDeleted';
 const ProjectsGrid = props => {
 
     const { projects, setTreeData, dbSchemaDataOnChange, setResolverData, projectId, setProjectId, setProjectName, deletePopup, setDeletePopup } = props;
+    const [projectDeleted, setProjectDeleted ] = useState(false);
     const navigate = useNavigate();
     // const [deletePopup, setDeletePopup] = useState(false);
 
+    const deleteProjectFunc = async () => {
+      console.log('projectid in deletefunc', projectId);
+      const request = await fetch(`/projects/delete/${projectId}`, {
+          method: 'DELETE',
+          headers: {'Content-Type': 'application/json'}
+      })
+      const response = await request.json();
+      if (response.success) setProjectDeleted(true)
+      else alert('unable to delete project');
+      props.setDeletePopup(false);
+  }  
+
 const columns = [
-  { field: 'name', headerName: 'Project Name', minWidth: 250 },
-  { field: 'date', headerName: 'Last Updated', minWidth: 500 },
+  { field: 'name', headerName: 'Project Name', width: 300 },
+  { field: 'date', headerName: 'Last Updated', width: 500 },
   {
     field: 'open',
     headerName: '',
     sortable: false,
-    width: 250,
+    width: 200,
     renderCell: (params) => {
-        console.log(params);
       const openProject = (e) => {
         e.stopPropagation(); // don't select this row after clicking
-        // console.log('schema', params.row.schema)
-        // console.log('tree', JSON.parse(params.row.tree))
         setTreeData(JSON.parse(params.row.tree));
         dbSchemaDataOnChange(params.row.schema);
         setResolverData(params.row.resolver);
@@ -41,14 +52,11 @@ const columns = [
     sortable: false,
     width: 250,
     renderCell: (params) => {
-        console.log(params);
-      const deletePop = (e) => {
+      const deletePop = async (e) => {
+        console.log('params',params);
         e.stopPropagation(); // don't select this row after clicking
-        const id = params.row.id;
+        setProjectId(params.id);
         setDeletePopup(true);
-        // return (
-        //   <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} id={id} />
-        // )
       };
 
       return <Button onClick={deletePop}>Delete Project</Button>;
@@ -74,10 +82,13 @@ projects.forEach(proj => {
   return (
    
     <div>
-      <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} id={projectId}/>
-      <DataGrid sx={{ height: 1000, width: '90%' }} rows={rows} columns={columns} pageSize={20} />
+      <h1 id='projectTitle'>My Projects</h1>
+      <DeleteProject trigger={deletePopup} close={setDeletePopup} id={projectId} deleteProjectFunc={deleteProjectFunc} />
+      <ProjectDeleted trigger={projectDeleted} close={setProjectDeleted} />
+      <DataGrid sx={{ m: 2, border: 2, width:'100em', borderColor: '#ed6a5a', height: 1000, }} rows={rows} columns={columns} pageSize={20} />
     </div>
     
   );
+  
   };
   export default ProjectsGrid;

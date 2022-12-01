@@ -19,7 +19,10 @@ const ProjectsPage = (props) => {
     updateProjects(projectList);  
 };
 fetchData();
+// setProjectId(null); //reset projectid and projectname each time the projects page is loaded
+// setProjectName(null);
 }, []);
+
 
 console.log('projects:', projects); //need to pass navbar props?
 
@@ -27,12 +30,15 @@ console.log('projects:', projects); //need to pass navbar props?
        
            
         <div id='project-page'> 
-            <Navbar /> 
-          <div>
-          {/* <DeleteProject trigger={deletePopup} setDeletePopup={setDeletePopup} deleteProjectFunc={deleteProjectFunc} id={projectId}/> */}
-          </div>
+            <Navbar isLoggedIn={loggedIn}
+        setCurrentUserId={setCurrentUserId}
+        notSignedInPop={notSignedInPop}
+        setNotSignedInPop={setNotSignedInPop}
+        setTreeData={setTreeData}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        blankTree={blankTree}/> 
           <div id='projectTable'>
-          
             <ProjectsGrid projects={projects} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
             setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName}
             deletePopup={deletePopup} setDeletePopup={setDeletePopup}/>

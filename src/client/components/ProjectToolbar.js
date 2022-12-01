@@ -12,7 +12,8 @@ import FolderOpenIcon from '@mui/icons-material/FolderOpen';
 import UpgradeIcon from '@mui/icons-material/Upgrade' //for update 
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
-
+import UpdateProject from './UpdateProject';
+import ProjectUpdated from './ProjectUpdated';
 
 
 const ProjectToolbar = (props) => {
@@ -21,8 +22,11 @@ const ProjectToolbar = (props) => {
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
 
+  const [updateProjExpand, setUpdateProjExpand] = useState(false);
+  const [projectUpdated, setProjectUpdated] = useState(false);
+
 const useInput = e => { //click event from saveproject
-  setProjectName(e.target.value);
+setProjectName(e.target.value);
 };
 
   const saveProjectFunc = () => {
@@ -58,17 +62,18 @@ const useInput = e => { //click event from saveproject
       .catch((err) => console.log('dbLink fetch /project/save: ERROR:', err));
     setProjectSaved(true);
     setSaveProjExpand(false);
-    setProjectName(''); //clear projectname after save
+    setProjectName(''); //clear projectname after save. not necessary?
   };
-const updateProjectFunc = async () => {
-  if (!projectId) return alert('Please load a saved project.')
+
+const updateProjectFunc = async (newName) => {
+if (newName === '' || newName === ' '){
+  newName = projectName;
+};
   const date = (new Date()).toString();
   const body = {
     id: projectId,
-    // user: currentUserId,
-    name: projectName,
+    name: newName,
     schema: schemaData,
-    // tree: treeData,
     date: date, 
     resolver: resolverData,
   };
@@ -77,18 +82,44 @@ const updateProjectFunc = async () => {
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body),
   });
-  const response = request.json();
-}
+  const response = await request.json();
+  console.log(response.success)
+  if (response.success) setProjectUpdated(true)
+  else alert("couldn't update project")
+  setUpdateProjExpand(false);
+};
 
-  const actions = [
-    { icon: <DownloadIcon fontSize='large' />, name: 'Download' },
-    {
-      icon: <SaveIcon fontSize='large' />,
-      name: 'Save Project',
+const actions = [
+  // {
+  //   icon: <DownloadIcon fontSize='large' />,
+  //   name: 'Download',
+  //   function: function () {
+  //    insert download functionality
+  //   },
+  // },
+  {
+    icon: <SaveIcon fontSize='large' />,
+    name: 'Save Project',
+    function: function () {
+      return setSaveProjExpand(true);
     },
-    { icon: <FolderOpenIcon fontSize='large' />, name: 'View Projects' },
-    { icon: <UpgradeIcon fontSize='large' />, name: 'Update Project'}, //figure out how to add save project func to this
-  ];
+  },
+  {
+    icon: <FolderOpenIcon fontSize='large' />,
+    name: 'View Projects',
+    function: function () {
+      navigate('/myprojects');
+    },
+  },
+  {
+    icon: <UpgradeIcon fontSize='large' />,
+    name: 'Upate Project',
+    function: function () {
+      if (!projectId) return alert('Plese load a saved project.');
+      return setUpdateProjExpand(true);
+    },
+  },
+]; //figure out how to add update project func to this
   const actionSize = {
     width: 90,
     height: 90,
@@ -127,7 +158,7 @@ const updateProjectFunc = async () => {
             tooltipTitle={action.name}
             TooltipClasses={classes}
             onClick={() => {
-              setSaveProjExpand(true);
+              return action.function();
             }}
           />
         ))}
@@ -140,6 +171,13 @@ const updateProjectFunc = async () => {
         useInput={useInput}
       />
       <ProjectSaved trigger={projectSaved} close={setProjectSaved} />
+      <UpdateProject
+        trigger={updateProjExpand}
+        close={setUpdateProjExpand}
+        updateProjectFunc={updateProjectFunc}
+        projectName={projectName}
+        />
+      <ProjectUpdated trigger={projectUpdated} close={setProjectUpdated} /> 
     </div>
   );
 };

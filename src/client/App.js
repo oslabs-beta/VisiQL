@@ -42,7 +42,7 @@ const App = () => {
 
   const [projectName, setProjectName] = useState('');
   
-
+  const [notSignedInPop, setNotSignedInPop] = useState(false);
 
   
   
@@ -91,6 +91,8 @@ const App = () => {
               setProjectId={setProjectId}
               projectName={projectName}
               setProjectName={setProjectName}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
             />
           }
         />
@@ -104,7 +106,8 @@ const App = () => {
         path='/resolver' element={<Resolver />} />
         <Route 
         path='/myprojects' element={<ProjectsPage currentUserId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
-        setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName}/>} />
+        setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName} />} 
+        />
 
       </Routes>
     </div>

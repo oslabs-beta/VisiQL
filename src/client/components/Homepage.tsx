@@ -22,6 +22,8 @@ type HomepageProps = {
   setProjectId: Function;
   projectName: String;
   setProjectName: Function;
+  notSignedInPop: Boolean;
+  setNotSignedInPop: Function;
 };
 
 const Homepage = ({
@@ -39,8 +41,10 @@ const Homepage = ({
   setProjectId,
   projectName,
   setProjectName,
+  notSignedInPop,
+  setNotSignedInPop
 }: HomepageProps) => {
-  const [notSignedInPop, setNotSignedInPop] = useState(false);
+  
   return (
     <div id='homepage-container'>
       <Navbar

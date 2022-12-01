@@ -5,7 +5,7 @@ const SaveProject = (props) => {
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h1>Save Your Project</h1>
+        <h3>Save Your Project</h3>
         <TextField 
           placeholder='Enter your project name...'
           style={{ width: 300 }}
@@ -39,7 +39,7 @@ const SaveProject = (props) => {
       </div>
     </div>
   ) : (
-    ' '
+    null
   );
 };
 

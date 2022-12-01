@@ -1,12 +1,21 @@
-import React from 'react';
-import { Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Button, TextField } from '@mui/material';
 
-const DeleteProject = (props) => {
-
+const UpdateProject = (props) => {
+    const [newName, setNewName] = useState(props.projectName)
+    const updateProjName = e => {
+        setNewName(e.target.value)
+    };
+    //const placeholderString = `current name: ${props.projectName}`
   return props.trigger ? (
     <div className='save-project-popover-parent'>
       <div className='save-project-popover'>
-        <h3>Are you sure you want to delete this project?</h3>
+        <h3>Update Project</h3>
+        <TextField 
+          placeholder='(optional) enter new name'
+          style={{ width: 300 }}
+          onChange={updateProjName} 
+        />
         <div className='project-save-cancel-buttons'>
           <Button
             variant='contained'
@@ -14,11 +23,9 @@ const DeleteProject = (props) => {
               backgroundColor: '#ed6a5a',
               ':hover': { backgroundColor: '#f1887b' },
             }}
-            onClick={() => {
-                props.deleteProjectFunc();
-            }}
+            onClick={() => props.updateProjectFunc(newName)}
           >
-            Delete
+            Update
           </Button>
           <Button
             sx={{
@@ -40,4 +47,4 @@ const DeleteProject = (props) => {
   );
 };
 
-export default DeleteProject;
+export default UpdateProject;

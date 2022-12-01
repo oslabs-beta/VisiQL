@@ -54,7 +54,7 @@ projectController.updateProject = async (req, res, next) => {
     // console.log(rowCount);
     // console.log(rows[0]);
     res.locals.updated = rows[0];
-    res.locals.success = rowCount === 1 ? 'succesfully updated project' : 'did not update';
+    res.locals.success = rowCount === 1 ? true : false;
     return next();
   }
   catch(err){
@@ -73,6 +73,7 @@ projectController.deleteProject = async (req, res, next) => {
   try{
     const { rowCount } = await userDb.query(deleteQuery);
     res.locals.deleted = `${rowCount} project(s) deleted.`
+    res.locals.success = rowCount === 1 ? true : false;
     console.log(res.locals.deleted)
     return next();
   }
