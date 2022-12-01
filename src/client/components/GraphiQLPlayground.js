@@ -34,12 +34,6 @@ const GraphiQLPlayground = ({
   // generatedGQL();
   return (
     <div>
-      <Navbar
-        loggedIn={loggedIn}
-        setCurrentUserId={setCurrentUserId}
-        notSignedInPop={notSignedInPop}
-        setNotSignedInPop={setNotSignedInPop}
-      />
       <div className='graphiql-container'>
         <GraphiQL fetcher={fetcher} />
       </div>

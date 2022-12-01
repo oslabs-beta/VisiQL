@@ -26,10 +26,9 @@ const Navbar = ({
   dbSchemaDataOnChange,
   setTreeData,
   blankTree,
-  setResolverData
+  setResolverData,
 }: NavbarProps) => {
-
-
+  const navigate = useNavigate();
   const thisOrThat = () => {
     if (loggedIn) {
       return <Link to='/myprojects'>Projects</Link>;
@@ -48,8 +47,12 @@ const Navbar = ({
       document.cookie =
         'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       setResolverData('Enter a Postgres DB link to generate your resolvers...');
-      dbSchemaDataOnChange('Enter a Postgres DB lin to generate your schema...');
+      dbSchemaDataOnChange(
+        'Enter a Postgres DB lin to generate your schema...'
+      );
       setTreeData(blankTree);
+      navigate('/login');
+      return;
     } catch (err) {
       console.log('error');
     }

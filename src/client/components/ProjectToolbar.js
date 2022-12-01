@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import {
   SpeedDial,
   SpeedDialAction,
@@ -7,18 +7,25 @@ import {
   TextField,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-import DownloadIcon from '@mui/icons-material/Download';
 import SaveIcon from '@mui/icons-material/Save';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import UpgradeIcon from '@mui/icons-material/Upgrade' //for update 
+import UpgradeIcon from '@mui/icons-material/Upgrade'; //for update
 import SaveProject from './SaveProject';
 import ProjectSaved from './ProjectSaved';
 import UpdateProject from './UpdateProject';
 import ProjectUpdated from './ProjectUpdated';
-
+import NotSignedIn from './NotSignedIn';
 
 const ProjectToolbar = (props) => {
-  const { currentUserId, schemaData, treeData, resolverData, projectId, projectName, setProjectName } = props;
+  const {
+    currentUserId,
+    schemaData,
+    treeData,
+    resolverData,
+    projectId,
+    projectName,
+    setProjectName,
+  } = props;
 
   const [saveProjExpand, setSaveProjExpand] = useState(false);
   const [projectSaved, setProjectSaved] = useState(false);
@@ -27,10 +34,10 @@ const ProjectToolbar = (props) => {
   const [updateProjExpand, setUpdateProjExpand] = useState(false);
   const [projectUpdated, setProjectUpdated] = useState(false);
 
-const useInput = e => { //click event from saveproject
-setProjectName(e.target.value);
-};
-
+  const useInput = (e) => {
+    //click event from saveproject
+    setProjectName(e.target.value);
+  };
 
   const saveProjectFunc = () => {
     if (projectName === '') return alert('Please enter a project name');
@@ -41,13 +48,13 @@ setProjectName(e.target.value);
     if (!props.currentUserId)
       return alert('You must be signed in to save a project');
 
-    const date = (new Date()).toString(); 
+    const date = new Date().toString();
     const body = {
       user: currentUserId,
       projectName: projectName,
       schemaData: schemaData,
       treeData: treeData,
-      date: date, 
+      date: date,
       resolverData: resolverData,
     };
     console.log('post body', body);
@@ -68,61 +75,67 @@ setProjectName(e.target.value);
     setProjectName(''); //clear projectname after save. not necessary?
   };
 
-const updateProjectFunc = async (newName) => {
-if (newName === '' || newName === ' '){
-  newName = projectName;
-};
-  const date = (new Date()).toString();
-  const body = {
-    id: projectId,
-    name: newName,
-    schema: schemaData,
-    date: date, 
-    resolver: resolverData,
+  const updateProjectFunc = async (newName) => {
+    if (newName === '' || newName === ' ') {
+      newName = projectName;
+    }
+    const date = new Date().toString();
+    const body = {
+      id: projectId,
+      name: newName,
+      schema: schemaData,
+      date: date,
+      resolver: resolverData,
+    };
+    const request = await fetch('/projects/update', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const response = await request.json();
+    console.log(response.success);
+    if (response.success) setProjectUpdated(true);
+    else alert("couldn't update project");
+    setUpdateProjExpand(false);
   };
-  const request = await fetch('/projects/update', {
-    method: 'PATCH',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(body),
-  });
-  const response = await request.json();
-  console.log(response.success)
-  if (response.success) setProjectUpdated(true)
-  else alert("couldn't update project")
-  setUpdateProjExpand(false);
-};
 
-const actions = [
-  // {
-  //   icon: <DownloadIcon fontSize='large' />,
-  //   name: 'Download',
-  //   function: function () {
-  //    insert download functionality
-  //   },
-  // },
-  {
-    icon: <SaveIcon fontSize='large' />,
-    name: 'Save Project',
-    function: function () {
-      return setSaveProjExpand(true);
+  const actions = [
+    {
+      icon: <SaveIcon fontSize='large' />,
+      name: 'Save Project',
+      function: function () {
+        if (props.loggedIn) {
+          return setSaveProjExpand(true);
+        } else {
+          props.setNotSignedInPop(true);
+          return;
+        }
+      },
     },
-  },
-  {
-    icon: <FolderOpenIcon fontSize='large' />,
-    name: 'View Projects',
-    function: function () {
-      navigate('/myprojects');
+    {
+      icon: <FolderOpenIcon fontSize='large' />,
+      name: 'View Projects',
+      function: function () {
+        console.log(props.loggedIn);
+        if (props.loggedIn) {
+          console.log('in true');
+          navigate('/myprojects');
+        } else {
+          console.log('in false');
+          props.setNotSignedInPop(true);
+          return;
+        }
+      },
     },
-  },
-  {
-    icon: <UpgradeIcon fontSize='large' />,
-    name: 'Upate Project',
-    function: function () {
-      if (!projectId) return alert('Plese load a saved project.');
-      return setUpdateProjExpand(true);
+    {
+      icon: <UpgradeIcon fontSize='large' />,
+      name: 'Upate Project',
+      function: function () {
+        if (!projectId) return alert('Plese load a saved project.');
+        return setUpdateProjExpand(true);
+      },
     },
-  },
-]; //figure out how to add update project func to this
+  ]; //figure out how to add update project func to this
   const actionSize = {
     width: 90,
     height: 90,
@@ -179,8 +192,12 @@ const actions = [
         close={setUpdateProjExpand}
         updateProjectFunc={updateProjectFunc}
         projectName={projectName}
-        />
-      <ProjectUpdated trigger={projectUpdated} close={setProjectUpdated} /> 
+      />
+      <ProjectUpdated trigger={projectUpdated} close={setProjectUpdated} />
+      <NotSignedIn
+        trigger={props.notSignedInPop}
+        close={props.setNotSignedInPop}
+      />
     </div>
   );
 };

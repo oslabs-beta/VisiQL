@@ -13,12 +13,6 @@ const About = ({
   console.log(loggedIn);
   return (
     <div className='about-container'>
-      <Navbar
-        loggedIn={loggedIn}
-        setCurrentUserId={setCurrentUserId}
-        notSignedInPop={notSignedInPop}
-        setNotSignedInPop={setNotSignedInPop}
-      />
       <Documentation />
       <Team />
     </div>

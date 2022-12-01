@@ -16,9 +16,25 @@ const useInput = (init) => {
 const DBInput = (props) => {
   const [dbLink, dbLinkOnChange] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
-  
-  const { dbSchemaData, dbSchemaDataOnChange, treeData, setTreeData, 
-    resolverData, setResolverData, projectId, setProjectId, projectName, setProjectName, showTree, setShowTree} = props;
+
+  const {
+    projectId,
+    setProjectId,
+    projectName,
+    setProjectName,
+    showTree,
+    setShowTree,
+    dbSchemaData,
+    dbSchemaDataOnChange,
+    treeData,
+    setTreeData,
+    resolverData,
+    setResolverData,
+    loggedIn,
+    setLoggedIn,
+    setNotSignedInPop,
+    notSignedInPop,
+  } = props;
 
   const saveDBLink = (event) => {
     if (dbLink === '') {
@@ -86,11 +102,19 @@ const DBInput = (props) => {
           showTree={showTree}
           setShowTree={setShowTree}
         />
-        <VisualizerContainer data={treeData} showTree={showTree} setShowTree={setShowTree}/>
+        <VisualizerContainer
+          data={treeData}
+          showTree={showTree}
+          setShowTree={setShowTree}
+        />
         <ProjectToolbar
+          loggedIn={loggedIn}
+          setLoggedIn={setLoggedIn}
           schemaData={dbSchemaData}
           treeData={treeData}
           currentUserId={props.currentUserId}
+          setNotSignedInPop={setNotSignedInPop}
+          notSignedInPop={notSignedInPop}
           resolverData={resolverData}
           projectId={projectId}
           setProjectId={setProjectId}

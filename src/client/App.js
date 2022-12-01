@@ -6,9 +6,9 @@ import Login from './components/Login';
 import Resolver from './components/Resolver';
 import ProjectsPage from './components/ProjectsPage';
 import GraphiQLPlayground from './components/GraphiQLPlayground';
+import Navbar from './components/Navbar';
 
 const App = () => {
-  
   const initialData = {
     name: 'Database',
     children: [
@@ -39,14 +39,14 @@ const App = () => {
     'Enter a Postgres DB link to generate your schema...'
   );
   const [treeData, setTreeData] = useState(initialData);
-  const [resolverData, setResolverData] = useState('Enter a Postgres DB link to generate your resolvers...');
+  const [resolverData, setResolverData] = useState(
+    'Enter a Postgres DB link to generate your resolvers...'
+  );
   const [projectId, setProjectId] = useState(null);
 
   const [projectName, setProjectName] = useState('');
-  
+
   const [showTree, setShowTree] = useState(true);
-  
-  
 
   const tokenChecker = async () => {
     try {
@@ -58,6 +58,7 @@ const App = () => {
 
       if (tokenCheck.status === 'success') {
         setLoggedIn(true);
+        setNotSignedInPop(false);
         setCurrentUserId(tokenCheck.id);
       } else {
         setLoggedIn(false);
@@ -70,12 +71,24 @@ const App = () => {
 
   return (
     <div className='router'>
+      <Navbar
+        loggedIn={loggedIn}
+        setCurrentUserId={setCurrentUserId}
+        currentUserId={currentUserId}
+        notSignedInPop={notSignedInPop}
+        setNotSignedInPop={setNotSignedInPop}
+        dbSchemaDataOnChange={dbSchemaDataOnChange}
+        setResolverData={setResolverData}
+        setTreeData={setTreeData}
+        blankTree={initialData}
+      />
       <Routes>
         <Route
           path='/'
           element={
             <Homepage
               loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
               setCurrentUserId={setCurrentUserId}
               currentUserId={currentUserId}
               dbSchemaData={dbSchemaData}
@@ -110,12 +123,28 @@ const App = () => {
         />
         <Route
           path='/login'
-          element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} tokenChecker={tokenChecker}/>}/>
-        <Route 
-        path='/resolver' element={<Resolver />} />
-        <Route 
-        path='/myprojects' element={<ProjectsPage currentUserId={currentUserId} setTreeData={setTreeData} dbSchemaDataOnChange={dbSchemaDataOnChange} 
-        setResolverData={setResolverData} projectId={projectId} setProjectId={setProjectId} setProjectName={setProjectName} />} 
+          element={
+            <Login
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
+              tokenChecker={tokenChecker}
+            />
+          }
+        />
+        <Route path='/resolver' element={<Resolver />} />
+        <Route
+          path='/myprojects'
+          element={
+            <ProjectsPage
+              currentUserId={currentUserId}
+              setTreeData={setTreeData}
+              dbSchemaDataOnChange={dbSchemaDataOnChange}
+              setResolverData={setResolverData}
+              projectId={projectId}
+              setProjectId={setProjectId}
+              setProjectName={setProjectName}
+            />
+          }
         />
         <Route path='/resolver' element={<Resolver />} />
         <Route
@@ -129,6 +158,8 @@ const App = () => {
               setLoggedIn={setLoggedIn}
               resolverData={resolverData}
               dbSchemaData={dbSchemaData}
+              notSignedInPop={notSignedInPop}
+              setNotSignedInPop={setNotSignedInPop}
             />
           }
         />

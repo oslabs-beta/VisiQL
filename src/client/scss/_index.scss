@@ -4,11 +4,19 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  // box-sizing: border-box;
 }
-
-body {
+html {
   margin: 0;
+  padding: 0;
+}
+body {
+  margin-top: 9em;
+  padding: 0;
+}
+head {
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -21,8 +29,10 @@ a {
 
 #navbar {
   font-family: 'Kumbh Sans', sans-serif;
+  position: fixed;
   display: flex;
   flex-direction: row;
+  top: 0;
   padding-top: 1rem;
   padding-bottom: 1rem;
   padding-left: 1rem;
