@@ -1,0 +1,303 @@
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import '_variables';
+
+* {
+  margin: 0;
+  padding: 0;
+  // box-sizing: border-box;
+}
+html {
+  margin: 0;
+  padding: 0;
+}
+body {
+  margin-top: 9em;
+  padding: 0;
+}
+head {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: $darkteal;
+  &:hover {
+    color: $lightteal;
+  }
+}
+
+#navbar {
+  font-family: 'Kumbh Sans', sans-serif;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  background-color: $paleteal;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+li {
+  list-style: none;
+  font-size: 30px;
+  margin-right: 2rem;
+}
+
+#vis-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-content: center;
+  justify-content: center;
+  overflow: scroll;
+}
+
+#tree-svg {
+  font-family: 'Kumbh Sans', sans-serif;
+  height: 70vh;
+  width: 55vw;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  align-self: center;
+  justify-self: center;
+}
+
+.db-input {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3rem;
+}
+
+#homepage {
+  display: flex;
+  flex-direction: row;
+}
+
+.schema-editor-container {
+  background-color: rgb(127, 127, 127);
+  border-radius: 10px;
+  margin-top: 2rem;
+  height: 70vh;
+  width: 20vw;
+  // overflow-x: scroll;
+  overflow-y: auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+
+
+
+.combined-editor-container {
+  background-color: rgb(127, 127, 127);
+  border-radius: 10px;
+  margin-top: 3rem;
+  overflow-y: auto;
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  align-content: space-between;
+  justify-content: space-evenly;
+  gap: 10px;
+  height: 80vh;
+  width: 80vw;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+ 
+}
+// below is for resolver component
+.schema-editor-container2 {
+  background-color: rgb(127, 127, 127);
+  border-radius: 10px;
+  margin-top: 2rem;
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+// above is for resolver component
+
+#diagram {
+  font-family: 'Kumbh Sans', sans-serif;
+  border-radius: 10px;
+  height: 70vh;
+  width: 55vw;
+  margin-top: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  overflow: auto;
+
+}
+
+.schema-vis-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.tree-vis-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+  position: relative;
+  top: 48px;
+  left: 0;
+}
+.editor-container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.copy-button {
+  position: absolute;
+  float: right;
+  top: -130px;
+  left: -30px;
+}
+
+.expand-button {
+  position: absolute;
+  float: right;
+  top: -80px;
+  left: 30px;
+}
+
+.tree-expand-button {
+  position: absolute;
+  float: right;
+  top: -100px;
+  left: -30px;
+  
+}
+
+.tree-pop-out,
+.editor-pop-out {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.tree-pop-out-container,
+.editor-pop-out-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+  gap: 10px;
+  margin-top: 50px;
+  background-color: rgb(251, 247, 242);
+  height: 80vh;
+  width: 80vw;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+}
+
+.tree-pop-out-close {
+  position: absolute;
+  z-index: 999;
+  top: .1rem;
+  right: .1rem;
+  color: #fff;
+}
+
+.editor-pop-out-close {
+  position: fixed;
+  top: .1rem;
+  right: .1rem;
+  color: #fff;
+  height: 5rem;
+  width: 5rem;
+}
+.save-project-popover-parent {
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  position: fixed;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.save-project-popover {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  align-items: center;
+  align-content: space-between;
+  gap: 20px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background-color: rgb(251, 247, 242);
+  height: 20em;
+  width: 35em;
+  padding: 50px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 10px;
+  font-family: 'Kumbh Sans', sans-serif;
+  color: $darkteal;
+  z-index: 1;
+}
+
+.project-save-cancel-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+#projectTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+    position: relative;
+    top: 0;
+    left: 0;
+  }
+  
+  #projectTitle {
+    color: $orange;
+    font-size: 3rem;
+    margin-top: 25px;
+    margin-bottom: 0;
+    font-family: 'Kumbh Sans', sans-serif;
+    text-align: center;
+  }
+  
+
+  
+  
