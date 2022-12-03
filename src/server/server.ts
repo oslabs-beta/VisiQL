@@ -28,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // app.use(express.static(path.resolve(__dirname, './src/client')));
+app.use(express.static(path.resolve(__dirname, './dist')));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');

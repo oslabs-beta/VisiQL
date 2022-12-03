@@ -13,6 +13,7 @@ const config = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    host: '0.0.0.0',
     historyApiFallback: true,
     hot: true,
     static: {

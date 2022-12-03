@@ -5,7 +5,7 @@
   "main": "index.js",
   "proxy": "http//localhost:3000",
   "scripts": {
-    "start": "NODE_ENV=production node src/server/server.ts",
+    "start": "NODE_ENV=production ts-node src/server/server.ts",
     "build": "NODE_ENV=production webpack",
     "dev": "NODE_ENV=development webpack serve --open --hot & nodemon src/server/server.ts src/server/routes/graphqlRouter.ts",
     "test": "jest --forceExit",
