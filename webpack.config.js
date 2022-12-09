@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -16,7 +16,7 @@ const config = {
     historyApiFallback: true,
     hot: true,
     static: {
-      directory: path.join(__dirname, './build'),
+      directory: path.join(__dirname, './dist'),
       publicPath: '/',
     },
     proxy: {

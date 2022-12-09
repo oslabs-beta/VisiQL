@@ -14,6 +14,7 @@ const graphqlController = require('./routes/graphqlRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
 
+
 type ServerError = {
   log: string;
   status: number;
@@ -27,7 +28,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// app.use(express.static(path.resolve(__dirname, './src/client')));
+app.use(express.static(path.resolve(__dirname, './src/client')));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -52,6 +53,18 @@ app.use('/db', dbLinkRouter, (req, res) => {
 
 // catch all error handler
 app.use((req, res) => res.status(404).send('This page does not exist.'));
+
+// statically serve everything in the build folder on the route '/build'
+if('NODE_ENV=production') {
+  console.log('made it to server')
+  app.use('/', express.static(path.join(__dirname, '../../dist')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    console.log('made it to app.get')
+    return res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'));
+  });
+}
+
 
 // global error handler
 app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
