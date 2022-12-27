@@ -51,6 +51,12 @@ app.use('/db', dbLinkRouter, (req, res) => {
   res.status(200).json('success');
 });
 
+app.use(express.static(path.join(__dirname, '../../dist')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../dist', 'index.html'))
+})
+
 // catch all error handler
 app.use((req, res) => res.status(404).send('This page does not exist.'));
 

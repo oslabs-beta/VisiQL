@@ -14,6 +14,7 @@ const config = {
   mode: process.env.NODE_ENV,
   devtool: 'source-map',
   devServer: {
+    host: '0.0.0.0',
     historyApiFallback: true,
     hot: true,
     static: {
