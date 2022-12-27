@@ -28,7 +28,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // app.use(express.static(path.resolve(__dirname, './src/client')));
-app.use(express.static(path.resolve(__dirname, './dist')));
 
 // app.use((req, res, next) => {
 //   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -50,6 +49,12 @@ app.use('/projects', projectRouter);
 app.use('/db', dbLinkRouter, (req, res) => {
   res.status(200).json('success');
 });
+
+app.use(express.static(path.join(__dirname, '../../dist')));
+
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, '../../dist', 'index.html'))
+})
 
 // catch all error handler
 app.use((req, res) => res.status(404).send('This page does not exist.'));
