@@ -55,14 +55,14 @@ app.use('/db', dbLinkRouter, (req, res) => {
 app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // statically serve everything in the build folder on the route '/build'
-if('NODE_ENV=production') {
+if(process.env.NODE_ENV === 'production') {
   console.log('made it to server')
-  app.use('/build', express.static(path.join(__dirname, '../../dist')));
+  app.use(express.static(path.join(__dirname, '../../dist')));
   // serve index.html on the route '/'
   console.log('made it past build')
-  app.get('/', (req, res) => {
+  app.get('/*', (req, res) => {
     console.log('made it to app.get')
-    return res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'));
+    return res.status(200).sendFile(path.join(__dirname, '../../dist', 'index.html'));
   });
 }
 
