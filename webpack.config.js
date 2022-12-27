@@ -8,18 +8,21 @@ const config = {
   entry: './src/client/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js',
+    filename: '[name][contenthash].js',
     publicPath: '/',
+    clean: true,
   },
   mode: process.env.NODE_ENV,
+  devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
     hot: true,
     static: {
-      directory: path.join(__dirname, './dist'),
+      directory: path.resolve(__dirname, 'dist'),
       publicPath: '/',
     },
     proxy: {
+      '/': 'http://localhost:3000',
       '/user': 'http://localhost:3000',
       '/db': 'http://localhost:3000',
       '/projects': 'http://localhost:3000',
