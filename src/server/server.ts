@@ -51,14 +51,6 @@ app.use('/db', dbLinkRouter, (req, res) => {
   res.status(200).json('success');
 });
 
-app.use(express.static(path.join(__dirname, '../../dist')));
-
-app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname, '../../dist', 'index.html'))
-})
-
-// catch all error handler
-app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // statically serve everything in the build folder on the route '/build'
 if(process.env.NODE_ENV === 'production') {
@@ -68,10 +60,12 @@ if(process.env.NODE_ENV === 'production') {
   console.log('made it past build')
   app.get('/*', (req, res) => {
     console.log('made it to app.get')
-    return res.status(200).sendFile(path.join(__dirname, '../../dist', 'index.html'));
+    res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'));
   });
 }
 
+// catch all error handler
+app.use((req, res) => res.status(404).send('This page does not exist.'));
 
 // global error handler
 app.use((err: ServerError, req: Request, res: Response, next: NextFunction) => {
