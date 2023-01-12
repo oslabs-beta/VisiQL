@@ -5,9 +5,27 @@ import Kelly from '../assets/Kelly.jpg';
 import Jordan from '../assets/Jordan.jpg';
 import Cavin from '../assets/Cavin.jpg';
 import Rebecca from '../assets/Rebecca.png';
+import { info } from 'console';
 
-const TeamCards = (props) => {
-  const { teammembername, title, headshot, linkedin, github } = props.info;
+type TeamCardsProps = {
+  info: {
+    teammembername: string;
+    title: string;
+    headshot: string;
+    linkedin: string;
+    github: string; 
+  }
+}
+const TeamCards = ({
+  info: {
+    teammembername,
+    title,
+    headshot,
+    linkedin,
+    github
+  }
+}: TeamCardsProps) => {
+  
   return (
     <div className='team-member-card'>
       <h2 className='team-name'>{teammembername}</h2>

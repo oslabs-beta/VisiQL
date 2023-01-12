@@ -1,7 +1,10 @@
 declare module '*.png';
 declare module '*.svg';
 declare module '*.jpeg';
-declare module '*.jpg';
 declare module '*.scss';
 declare module 'prismjs/components/prism-core';
 declare module '*.ts';
+declare module '*.jpg' {
+  const value: any;
+  export = value;
+};
