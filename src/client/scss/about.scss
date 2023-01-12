@@ -63,3 +63,15 @@ li {
 .doc-container {
   margin: 4rem;
 }
+
+@media (max-width: 800px) {
+  .headshots-links {
+    flex-direction: column;
+  }
+  html {
+    font-size: 12px;
+  }
+  .doc-container {
+    margin-top: 425px;
+  }
+}

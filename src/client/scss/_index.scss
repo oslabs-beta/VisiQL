@@ -299,5 +299,9 @@ li {
   }
   
 
-  
+  @media (max-width: 800px) {
+    #navbar, ul {
+      flex-direction: column;
+    }
+  }
   

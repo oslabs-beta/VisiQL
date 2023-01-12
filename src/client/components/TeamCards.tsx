@@ -29,7 +29,7 @@ const TeamCards = ({
   return (
     <div className='team-member-card'>
       <h2 className='team-name'>{teammembername}</h2>
-      <img src={headshot} width='450px' height='450px' />
+      <img src={headshot} width='350px' height='350px' />
       <div>
         <li className='title'>{title}</li>
         <br />
