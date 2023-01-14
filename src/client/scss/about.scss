@@ -9,16 +9,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5rem;
+  gap: 1.5rem;
   padding-bottom: 10rem;
 }
 
 .team-title {
-  font-size: 5rem;
+  font-size: 4rem;
 }
 .team-name {
   font-weight: normal;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
 }
+
+.team-member-card a {
+  font-size: 1.5rem;
+}
+
 li {
   display: flex;
   align-items: center;
@@ -27,22 +34,23 @@ li {
 }
 .title {
   font-weight: bold;
+  font-size: 1.75rem;
 }
 
 .intro-paragraph {
   color: rgb(88, 88, 88);
-  font-size: 2em;
+  font-size: 1.5rem;
   font-weight: normal;
 }
 
 .docs-title {
   text-align: center;
   font-family: 'Kumbh Sans', sans-serif;
-  font-size: 5rem;
+  font-size: 4rem;
 }
 
 .visiql-statement {
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
   font-style: italic;
   font-weight: normal;
@@ -50,13 +58,13 @@ li {
 
 .generating-docs-title {
   font-family: 'Kumbh Sans', sans-serif;
-  font-size: 3rem;
+  font-size: 2rem;
   color: black;
 }
 
 .generating-docs {
   color: rgb(88, 88, 88);
-  font-size: 1.4em;
+  font-size: 1.5rem;
   font-weight: normal;
 }
 
@@ -64,7 +72,8 @@ li {
   margin: 4rem;
 }
 
-@media (max-width: 800px) {
+
+@media (max-width: 900px) {
   .headshots-links {
     flex-direction: column;
   }

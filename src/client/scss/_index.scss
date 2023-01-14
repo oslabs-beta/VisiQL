@@ -40,6 +40,7 @@ a {
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  z-index: 5;
 }
 
 ul {
@@ -207,6 +208,7 @@ li {
   position: fixed;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.2);
+  z-index: 999;
 }
 
 .tree-pop-out-container,
@@ -228,7 +230,6 @@ li {
 
 .tree-pop-out-close {
   position: absolute;
-  z-index: 999;
   top: .1rem;
   right: .1rem;
   color: #fff;
@@ -299,7 +300,7 @@ li {
   }
   
 
-  @media (max-width: 800px) {
+  @media (max-width: 900px) {
     #navbar, ul {
       flex-direction: column;
     }

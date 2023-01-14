@@ -178,7 +178,7 @@ const Login = (props) => {
      <> 
     <div className='login-body'>
       <header className='login-logo'>
-      <img id='login-img' src={logo} width='275px' height='92px' />
+      {/* <img id='login-img' src={logo} width='275px' height='92px' /> */}
        <h2>Welcome Back!</h2>
       </header>
        
@@ -275,7 +275,7 @@ const Login = (props) => {
     <>
     <div className='signin-body'>
     <header className='login-logo'>
-    <img id='signin-img' src={logo} width='275px' height='92px' marginbottom='1vh'/>
+    {/* <img id='signin-img' src={logo} width='275px' height='92px' marginbottom='1vh'/> */}
      <h2>Welcome - Let's Get VisiQL!</h2>
     </header>
      

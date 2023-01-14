@@ -29,19 +29,19 @@ const TeamCards = ({
   return (
     <div className='team-member-card'>
       <h2 className='team-name'>{teammembername}</h2>
-      <img src={headshot} width='350px' height='350px' />
+      <img src={headshot} width='325px' height='325px' />
       <div>
         <li className='title'>{title}</li>
         <br />
         <li>
-          <LinkedIn fontSize='large' />
+          <LinkedIn fontSize='medium' />
           <a href={linkedin} target='_blank'>
             LinkedIn
           </a>
         </li>
         <br />
         <li>
-          <GitHub fontSize='large' />
+          <GitHub fontSize='medium' />
           <a href={github} target='_blank'>
             GitHub
           </a>
