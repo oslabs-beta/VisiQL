@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -9,11 +9,11 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/',
+    clean: true,
   },
   mode: process.env.NODE_ENV,
+  devtool: 'source-map',
   devServer: {
-    host: '0.0.0.0',
     historyApiFallback: true,
     hot: true,
     static: {

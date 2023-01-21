@@ -10,7 +10,9 @@
  .login-body, .signin-body {
   background-color: $paleteal;
   min-height: 100vh;
+  margin-top: -20px;
 }
+
 
 .login-logo {
   display: flex;
@@ -19,22 +21,30 @@
   align-items: center;
  
 }
-#login-img {
-  margin-top: 10vh;
+// #login-img {
+//   margin-top: 10vh;
+//   display: hidden;
 
-}
+// }
 
-#signin-img {
-  margin-top: 5vh;
 
-}
+
+// #signin-img {
+//   margin-top: 5vh;
+
+// }
 
 h2 {
   color: $orange;
   font-size: 3rem;
   margin-top: 25px;
-  margin-bottom: 0;
+  margin-bottom: 30px;
   font-family: 'Kumbh Sans', sans-serif;
+}
+
+.login-body h2 {
+  font-size: 4rem;
+  margin-top: 50px;
 }
 
 .signin-body h2 {
@@ -50,3 +60,12 @@ h2 {
   color: rgb(78, 74, 74);
 }
 
+@media (max-width: 900px) {
+  .signin-body h2, .login-body h2 {
+    margin-top: 375px;
+  }
+
+  .signin-body h2 {
+    text-align: center;
+  }
+}
