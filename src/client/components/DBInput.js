@@ -69,6 +69,21 @@ const DBInput = (props) => {
    
   };
 
+  const displayDemo = () => {
+    fetch('/db', {
+      method: 'GET',
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+        dbSchemaDataOnChange(data.schemaString);
+        setResolverData(data.resolverString);
+        setDataReceived(true);
+        setTreeData(data.tree);
+      })
+      .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
+  }
+
   return (
     <div className='input-and-visualizer'>
       <div className='db-input'>
@@ -94,7 +109,20 @@ const DBInput = (props) => {
             {' '}
             Submit{' '}
           </Button>
+          <Button
+            className='demo-button'
+            variant='contained'
+            onClick={displayDemo}
+            sx={{
+              backgroundColor: '#ed6a5a',
+              ':hover': { backgroundColor: '#f1887b' },
+            }}
+          >
+            {' '}
+            Demo{' '}
+          </Button>
         </form>
+        
       </div>
       <div className='schema-vis-container'>
         <SchemaContainer
