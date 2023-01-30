@@ -7,8 +7,6 @@ import logo from '../assets/VisiQLLogo.png';
 import '../scss/login.scss';
 
 
-
-
 const useInput = (init) => {
   const [value, setValue] = useState(init);
   const reset = () => {
@@ -94,30 +92,6 @@ const Login = (props) => {
     }
   };
 
-
-
-    // on signup page: as user types into username input field, check if currently typed value is already taken and let user know based on input field background color
-    // const checkExistence = async (e) => {
-    //   //need to possibly pass helper function that calls useInput and then checkExistence for each onChange
-  
-    //   // const username = usernameField.current.value;
-    //   const checkExistence = await fetch('/user/check', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ username }),
-    //   });
-    //   const parsedCheckExistence = await checkExistence.json();
-    //   const inputColor = document.getElementById('username-input');
-    //   console.log('username: ', username);
-    //   if (parsedCheckExistence === 'exists') {
-    //     inputColor.style.backgroundColor = 'red';
-    //   } else if (username === '') {
-    //     inputColor.style.backgroundColor = 'white';
-    //   } else {
-    //     inputColor.style.backgroundColor = 'green';
-    //   }
-    //   // console.log('checkExistence: ', parsedCheckExistence)
-    // };
   
     const signUserUp = async (e) => {
       try {
@@ -178,7 +152,6 @@ const Login = (props) => {
      <> 
     <div className='login-body'>
       <header className='login-logo'>
-      {/* <img id='login-img' src={logo} width='275px' height='92px' /> */}
        <h2>Welcome Back!</h2>
       </header>
        
@@ -195,7 +168,7 @@ const Login = (props) => {
                     <TextField 
                     type='username' 
                     fullWidth 
-                    label='Username' 
+                    aria-label='Username' 
                     placeholder='Username' 
                     variant='outlined'
                     value={username}
@@ -207,7 +180,7 @@ const Login = (props) => {
                     id='password'
                     type={passwordVis? 'text' : 'password'}
                     fullWidth 
-                    label='Password'
+                    aria-label='Password'
                     placeholder='Password'
                     variant='outlined'
                     value={password}
@@ -275,7 +248,6 @@ const Login = (props) => {
     <>
     <div className='signin-body'>
     <header className='login-logo'>
-    {/* <img id='signin-img' src={logo} width='275px' height='92px' marginbottom='1vh'/> */}
      <h2>Welcome - Let's Get VisiQL!</h2>
     </header>
      
@@ -292,7 +264,7 @@ const Login = (props) => {
                     <TextField 
                       type='firstName' 
                       fullWidth 
-                      label='First Name' 
+                      aria-label='First Name' 
                       placeholder='First Name' 
                       variant='outlined'
                       value={firstName}
@@ -303,7 +275,7 @@ const Login = (props) => {
                     <TextField 
                       type='lastName' 
                       fullWidth 
-                      label='Last Name' 
+                      aria-label='Last Name' 
                       placeholder='Last Name' 
                       variant='outlined'
                       value={lastName}
@@ -314,7 +286,7 @@ const Login = (props) => {
                     <TextField 
                       type='email' 
                       fullWidth 
-                      label='Email' 
+                      aria-label='Email' 
                       placeholder='Email' 
                       variant='outlined'
                       value={email}
@@ -326,7 +298,7 @@ const Login = (props) => {
                   <TextField 
                   type='username' 
                   fullWidth 
-                  label='Username' 
+                  aria-label='Username' 
                   placeholder='Username' 
                   variant='outlined'
                   value={username}
@@ -338,7 +310,7 @@ const Login = (props) => {
                   id='password'
                   type={passwordVis? 'text' : 'password'}
                   fullWidth 
-                  label='Password'
+                  aria-label='Password'
                   placeholder='Password'
                   variant='outlined'
                   value={password}
@@ -365,7 +337,7 @@ const Login = (props) => {
                   id='password2'
                   type={passwordVis? 'text' : 'password'}
                   fullWidth 
-                  label='Retype Your Password'
+                  aria-label='Retype Your Password'
                   placeholder='Password2'
                   variant='outlined'
                   value={password2}
