@@ -6,7 +6,7 @@ import express, {
 } from 'express';
 const path = require('path');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const dbLinkRouter = require('./routes/dbLink');
 const userRouter = require('./routes/userRouter');
 const projectRouter = require('./routes/projectRouter');
