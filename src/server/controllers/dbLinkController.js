@@ -3,6 +3,17 @@ const db = require('../models/models');
 
 const dbLinkController = {};
 
+dbLinkController.connectDemo = async (req, res, next) => {
+  try {
+    // insert database link into .env file for use to connect database and make queries
+    process.env.PG_URI = 'postgres://xstskucd:HUMKg1LzALryqlQM26N5uKLWF5ol1fbT@peanut.db.elephantsql.com/xstskucd';
+    db.newPool();
+    return next();
+  } catch (err) {
+    return next({ err });
+  }
+};
+
 dbLinkController.connectDb = async (req, res, next) => {
   try {
     // insert database link into .env file for use to connect database and make queries

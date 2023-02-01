@@ -10,11 +10,14 @@ const useInput = (init) => {
   const onChange = (e) => {
     setValue(e.target.value);
   };
-  return [value, onChange];
+  const reset = () => {
+    setValue(init);
+  };
+  return [value, onChange, reset];
 };
 
 const DBInput = (props) => {
-  const [dbLink, dbLinkOnChange] = useInput('');
+  const [dbLink, dbLinkOnChange, resetdbLink] = useInput('');
   const [dataReceived, setDataReceived] = useState(false);
 
   const {
@@ -43,6 +46,7 @@ const DBInput = (props) => {
       return alert('Please enter a postgres database link');
     } else {
       const body = { dbLink };
+      resetdbLink();
       fetch('/db', {
         method: 'POST',
         headers: {
@@ -62,7 +66,23 @@ const DBInput = (props) => {
         })
         .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
     }
+   
   };
+
+  const displayDemo = () => {
+    fetch('/db', {
+      method: 'GET',
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+        dbSchemaDataOnChange(data.schemaString);
+        setResolverData(data.resolverString);
+        setDataReceived(true);
+        setTreeData(data.tree);
+      })
+      .catch((err) => console.log('dbLink fetch /db: ERROR:', err));
+  }
 
   return (
     <div className='input-and-visualizer'>
@@ -90,7 +110,20 @@ const DBInput = (props) => {
             {' '}
             Submit{' '}
           </Button>
+          <Button
+            className='demo-button'
+            variant='contained'
+            onClick={displayDemo}
+            sx={{
+              backgroundColor: '#ed6a5a',
+              ':hover': { backgroundColor: '#f1887b' },
+            }}
+          >
+            {' '}
+            Demo{' '}
+          </Button>
         </form>
+        
       </div>
       <div className='schema-vis-container'>
         <SchemaContainer

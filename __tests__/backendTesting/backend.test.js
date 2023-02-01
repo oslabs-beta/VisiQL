@@ -18,7 +18,7 @@ describe('server tests', () => {
       expect(response.body).toHaveProperty('accessToken');
     });
 
-    it('does not log in if incorrect creditials', async () => {
+    it('does not log in if incorrect credentials', async () => {
       const response = await request(app)
         .post('/user/login')
         .send({

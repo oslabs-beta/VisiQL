@@ -14,6 +14,7 @@ const graphqlController = require('./routes/graphqlRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
 
+
 type ServerError = {
   log: string;
   status: number;
@@ -49,6 +50,19 @@ app.use('/projects', projectRouter);
 app.use('/db', dbLinkRouter, (req, res) => {
   res.status(200).json('success');
 });
+
+
+// statically serve everything in the build folder on the route '/build'
+if(process.env.NODE_ENV === 'production') {
+  console.log('made it to server')
+  app.use(express.static(path.join(__dirname, '../../dist')));
+  // serve index.html on the route '/'
+  console.log('made it past build')
+  app.get('/*', (req, res) => {
+    console.log('made it to app.get')
+    res.status(200).sendFile(path.join(__dirname, '../../dist/index.html'));
+  });
+}
 
 // catch all error handler
 app.use((req, res) => res.status(404).send('This page does not exist.'));
