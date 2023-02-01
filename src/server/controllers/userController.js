@@ -3,6 +3,7 @@ const userDb = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
+const { LocalFireDepartmentSharp } = require('@mui/icons-material');
 
 const userController = {};
 
@@ -21,7 +22,7 @@ userController.checkUsernameExistence = async (req, res, next) => {
     return next({
       log: `error occured in userController.checkUsernameExistence: ${err}`,
       status: 400,
-      message: {err: 'error checking credentials'},
+      message: { err: 'error checking credentials' },
     });
   }
 };
@@ -71,7 +72,7 @@ userController.login = async (req, res, next) => {
     return next({
       log: `error occured in userController.login: ${err}`,
       status: 400,
-      message: {err: 'error in login'},
+      message: { err: 'error in login' },
     });
   }
 };

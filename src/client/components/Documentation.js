@@ -6,10 +6,12 @@ const Documentation = () => {
     <div className='doc-container'>
       <div>
         <h1 className='docs-title'>About VisiQL</h1>
+        <br /> <br />
       </div>
       <div>
         <h2 className='intro-paragraph'>
           <div className='visiql-statement'>
+            <br /> <br />
             VisiQL was created by a small team of engineers who are passionate
             about encouraging other developers to get started with using
             GraphQL’s powerful abilities in their own projects.
@@ -55,9 +57,9 @@ const Documentation = () => {
         <div className='generating-docs'>
           <div className='generating-docs-title'>Visualize your Database</div>
           <h2 className='generating-docs'>
-            On the right hand side, you will see a tree graph generated from your
-            PostgreSQL database. Click on the nodes to collapse and expand the
-            table data and focus on only one part of your database.
+            On the right hand side, you will see a tree graph generated from
+            your PostgreSQL database. Click on the nodes to collapse and expand
+            the table data and focus on only one part of your database.
             <br />
             <br />
             Or, use your trackpad or mouse to zoom in on your tree graph,

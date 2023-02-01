@@ -84,6 +84,7 @@ const DBInput = (props) => {
             sx={{
               backgroundColor: '#ed6a5a',
               ':hover': { backgroundColor: '#f1887b' },
+              justifyContent: 'center',
             }}
           >
             {' '}
