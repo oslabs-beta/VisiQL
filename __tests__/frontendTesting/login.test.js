@@ -4,6 +4,10 @@ import { render, screen, waitFor } from '@testing-library/react';
 
 import Login from '../../src/client/components/Login';
 
+/*
+ * This is the test file for unit and integration tests of the Login component 
+ * using Jest and React Testing Library
+ */
 const mockedUsedNavigate = jest.fn();
 
 jest.mock("react-router-dom", () => ({
