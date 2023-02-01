@@ -7,11 +7,13 @@ module.exports = async () => {
           '<rootDir>/__mocks__/fileMock.js',
         '\\.(css|less|scss)$': 'identity-obj-proxy',
     },
-    testEnvironment: 'jsdom',
+    // testEnvironment: 'jsdom',
     testPathIgnorePatterns: [
       "<rootDir>/node_modules/",
-      "<rootDir>/src/client/scss/"
+      "<rootDir>/src/client/scss/",
+      "<rootDir>/dist"
     ],
-    setupFilesAfterEnv: ['<rootDir>/jest-setup.js']
+    setupFilesAfterEnv: ['<rootDir>/jest-setup.js'],
+    preset: 'jest-puppeteer'
   };
 };
