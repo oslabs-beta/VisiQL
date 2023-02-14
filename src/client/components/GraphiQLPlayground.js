@@ -13,7 +13,7 @@ const GraphiQLPlayground = ({
   setNotSignedInPop,
 }) => {
   const fetcher = createGraphiQLFetcher({
-    url: 'https://visiql-apollo.onrender.com',
+    url: 'https://visiql-apollo-02hi.onrender.com',
   }); 
 
   //----> post request for sending schema and resolver data to backend for dynamic graphiql playground functionality
