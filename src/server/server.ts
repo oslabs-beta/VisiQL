@@ -13,6 +13,7 @@ const projectRouter = require('./routes/projectRouter');
 const graphqlController = require('./routes/graphqlRouter');
 const authController = require('./controllers/authController');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 
 type ServerError = {
@@ -23,10 +24,15 @@ type ServerError = {
   };
 };
 
+//allow cross-origin requests
+app.use(cors());
+
 // parse incoming request body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+
 
 // app.use(express.static(path.resolve(__dirname, './src/client')));
 
