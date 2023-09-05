@@ -24,4 +24,4 @@ router.post('/login', userController.login, (req: Request, res: Response) => {
   return res.status(200).json(res.locals.loggedIn);
 });
 
-module.exports = router;
+export default router;

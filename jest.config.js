@@ -7,7 +7,7 @@ module.exports = async () => {
           '<rootDir>/__mocks__/fileMock.js',
         '\\.(css|less|scss)$': 'identity-obj-proxy',
     },
-    // testEnvironment: 'jsdom',
+    testEnvironment: 'jsdom',
     testPathIgnorePatterns: [
       "<rootDir>/node_modules/",
       "<rootDir>/src/client/scss/",

@@ -18,4 +18,4 @@ router.delete('/delete/:id', projectController.deleteProject, (req, res) => {
   return res.status(200).json(res.locals);
 });
 
-module.exports = router;
+export default router;

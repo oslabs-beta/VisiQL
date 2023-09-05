@@ -4,16 +4,16 @@ import express, {
   NextFunction,
   RequestHandler,
 } from 'express';
-const path = require('path');
+import path from 'path';
 const app = express();
 const PORT = process.env.PORT || 3000;
-const dbLinkRouter = require('./routes/dbLink');
-const userRouter = require('./routes/userRouter');
-const projectRouter = require('./routes/projectRouter');
-const graphqlController = require('./routes/graphqlRouter');
-const authController = require('./controllers/authController');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
+import dbLinkRouter from './routes/dbLink';
+import userRouter from './routes/userRouter';
+import projectRouter from './routes/projectRouter';
+// import graphqlController from './routes/graphqlRouter';
+// import authController from './controllers/authController';
+import cookieParser from 'cookie-parser';
+import cors from 'cors';
 
 
 type ServerError = {

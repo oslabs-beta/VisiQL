@@ -1,4 +1,4 @@
-import { NextFunction } from 'express';
+// import { NextFunction } from 'express';
 
 const { ApolloServer, gql } = require('apollo-server');
 

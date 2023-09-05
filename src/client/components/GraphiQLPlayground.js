@@ -14,6 +14,7 @@ const GraphiQLPlayground = ({
 }) => {
   const fetcher = createGraphiQLFetcher({
     url: 'https://visiql-apollo-02hi.onrender.com',
+  // url: "http://localhost:4000"
   }); 
 
   //----> post request for sending schema and resolver data to backend for dynamic graphiql playground functionality
