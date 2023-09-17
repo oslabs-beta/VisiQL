@@ -1,6 +1,6 @@
 // import { NextFunction } from 'express';
 
-const { ApolloServer, gql } = require('apollo-server');
+const { ApolloServer, gql } = require('@apollo/server');
 
 const { typeDefs } = require('./schema');
 const {
