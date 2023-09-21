@@ -5,8 +5,16 @@ import Cavin from '../assets/Cavin.jpg';
 import Rebecca from '../assets/Rebecca.png';
 import TeamCards from './TeamCards';
 
+type Bio = {
+  teammembername: string,
+  title: string,
+  headshot: string,
+  github: string,
+  linkedin: string
+}
+
 const Team = () => {
-  const bios = [
+  const bios: Bio[] = [
     {
       teammembername: 'Kelly Cuevas',
       title: 'Software Engineer',
